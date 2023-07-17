@@ -1,0 +1,64 @@
+.auth-section{
+    display: flex;
+}
+.bg-start{
+    background:#d0e1f96b ;
+    text-align: center;
+    align-items: center;
+    width: 50%;
+    padding: 180px 70px;
+}
+.bg-end{
+    background:#d0e1f954 ;
+    text-align: center;
+    align-items: center;
+    width: 50%;
+    padding: 180px 70px;
+}
+.owner-tag{
+    margin: 0 auto;
+    background: #42ED17;
+    width: 70px;
+    height: 15px;
+    font-size: 12px;
+    color: azure;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px ;
+}
+.staff-tag{
+    margin: 0 auto;
+    background: #17C6ED;
+    width: 70px;
+    height: 15px;
+    font-size: 12px;
+    color: azure;
+    text-align: center;
+    align-items: center;
+    box-sizing: content-box;
+    border-radius: 5px ;
+}
+.btn{
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background: #283655;
+    color: #D0E1F9;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: none;
+}
+.btn:hover{
+    background: #4D648D;
+}
+.quesstion{
+    color: #283655;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
