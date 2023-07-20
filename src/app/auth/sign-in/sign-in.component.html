@@ -1,1 +1,18 @@
-<p>sign-in works!</p>
+
+<form action="" class="login-form">
+    <div class="username">
+        <span class="p-float-label">
+            <input pInputText id="username" [(ngModel)]="username" />
+            <label htmlFor="username">Username</label>
+        </span>
+    </div>
+    <div class="password">
+        <span class="p-float-label">
+            <p-password [(ngModel)]="password"  [toggleMask]="true" class="p-password-lg"></p-password>
+            <label for="password">Password</label>
+        </span>
+    </div>
+    <div class="submit">
+        <button type="submit" class="btn">Log in</button>
+    </div>
+</form>

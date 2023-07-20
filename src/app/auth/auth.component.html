@@ -8,7 +8,7 @@
         <a class="quesstion" href="#">Don’t have an account?</a>
     </div>
   </div>
-  <div *ngIf="isStaffMode">
+  <div *ngIf="isStaffMode" class="login">
     <app-sign-in></app-sign-in>
   </div>
   <div class="bg-end" *ngIf="!isOwnerMode">
@@ -17,7 +17,8 @@
     <p>We are the market–leading technical interview platform to identify and hire developers with the right skills.</p>
     <button type="button" class="btn" (click)="onSwitchStaffMode()">Login</button>
   </div>
-  <div *ngIf="isOwnerMode">
+  <div *ngIf="isOwnerMode" class="login">
+    <h2>Owner Login</h2>
     <app-sign-in></app-sign-in>
   </div>
 </section>

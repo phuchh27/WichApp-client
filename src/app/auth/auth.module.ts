@@ -8,6 +8,8 @@ import { AuthRoutingModule } from "./auth-routing.module";
 import { RouterModule } from "@angular/router";
 import { SplitterModule } from 'primeng/splitter';
 import { TooltipModule } from 'primeng/tooltip';
+import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
     declarations: [AuthComponent,SignInComponent,SignUpComponent],
@@ -17,8 +19,9 @@ import { TooltipModule } from 'primeng/tooltip';
         FormsModule,
         AuthRoutingModule,
         SplitterModule,
-        TooltipModule
-        
+        TooltipModule,
+        PasswordModule,
+        InputTextModule
     ]
 })
 export class AuthModule {}

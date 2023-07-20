@@ -1,0 +1,38 @@
+.login-form{
+    align-items: center;
+    width: 100%;
+}
+.btn{
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background: #283655;
+    color: #D0E1F9;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: none;
+}
+.btn:hover{
+    background: #4D648D;
+}
+.username{
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.password{
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submit{
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
