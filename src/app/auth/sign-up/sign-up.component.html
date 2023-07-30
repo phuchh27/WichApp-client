@@ -1,1 +1,53 @@
-<p>sign-up works!</p>
+
+<section class="bg-blue-50 h-screen border-round-sm">
+    <div class="pt-8">
+        <h1 class="m-0 text-center ">Sign up</h1>
+    </div>
+    <div class="mt-5 flex flex-wrap align-items-center justify-content-center">
+        <form action class="max-w-30rem" #authForm="ngForm"  (ngSubmit)="onSubmit(authForm)">
+            <div class=" flex gap-2 mt-5 max-w-full ">
+                <span class="p-float-label w-auto flex-1">
+                    <input pInputText id="username" style="width: 100%;" />
+                    <label htmlFor="username">Username</label>
+                </span>
+                <span class="p-float-label w-auto flex-1">
+                    <input pInputText id="username" style="width: 100%;" />
+                    <label htmlFor="username">Phone</label>
+                </span>
+            </div>
+            <span class="p-float-label w-auto mt-4">
+                <input pInputText type="email"  (input)="onEmailChange($event)" id="email" name="email" [(ngModel)]="email" required pattern="^[a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$"
+                    style="width: 100%;" required email  />
+                <label htmlFor="email">email</label>
+                
+            </span>
+            <div class="  mt-4 borderbox">
+                <span class="p-float-label flex gap-2">
+                    <p-password [toggleMask]="true">
+                        <ng-template pTemplate="header">
+                            <h6>Pick a password</h6>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <p class="mt-2">Suggestions</p>
+                            <ul class="pl-2 ml-2 mt-0 " style="line-height: 1.5">
+                                <li>At least one lowercase</li>
+                                <li>At least one uppercase</li>
+                                <li>At least one numeric</li>
+                                <li>Minimum 8 characters</li>
+                            </ul>
+                        </ng-template>
+                    </p-password>
+                    <label htmlFor="password"> Password</label>
+                    <span class="p-float-label">
+                        <p-password [toggleMask]="true" [feedback]="false"></p-password>
+                        <label htmlFor="password"> Password Confirm</label>
+                    </span>
+                </span>
+
+            </div>
+            <div class="submit">
+                <button type="submit" class="btn" [disabled]="!authForm.valid">Log in</button>
+            </div>
+        </form>
+    </div>
+</section>

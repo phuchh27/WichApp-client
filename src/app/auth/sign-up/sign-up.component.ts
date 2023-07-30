@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AbstractControl, Form, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class SignUpComponent {
 
+  email: string = ''
+
+  onEmailChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.email = inputElement.value;
+    console.log('Email changed:', this.email);
+  }
+  
+  onSubmit(form: NgForm){
+
+  }
 }

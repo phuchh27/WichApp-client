@@ -10,6 +10,7 @@ import { SplitterModule } from 'primeng/splitter';
 import { TooltipModule } from 'primeng/tooltip';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     declarations: [AuthComponent,SignInComponent,SignUpComponent],
@@ -21,7 +22,8 @@ import { InputTextModule } from 'primeng/inputtext';
         SplitterModule,
         TooltipModule,
         PasswordModule,
-        InputTextModule
+        InputTextModule,
+        CalendarModule
     ]
 })
 export class AuthModule {}

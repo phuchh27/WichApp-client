@@ -10,6 +10,14 @@ import { HeaderComponent } from './header/header.component';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
+import { StoreModule } from '@ngrx/store';
+import * as fromAuth from '../app/auth/store/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth/store/auth.effects';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core.module';
+
+
 
 @NgModule({
   declarations: [
@@ -17,6 +25,7 @@ import { InputTextModule } from 'primeng/inputtext';
     HeaderComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     PrimeModule,
@@ -25,6 +34,10 @@ import { InputTextModule } from 'primeng/inputtext';
     MegaMenuModule,
     MenubarModule,
     InputTextModule,
+    StoreModule.forRoot(),
+    EffectsModule.forRoot([AuthEffects]),
+    CoreModule,
+    
     
   ],
   providers: [],
