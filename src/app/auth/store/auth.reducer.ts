@@ -25,6 +25,8 @@ const _authReducer = createReducer(
   })),
   on(AuthActions.authenticateSuccess, (state, action) => ({
     ...state,
+    authError: null,
+    loading: false,
     user: new User(
       action.id,
       action.email,

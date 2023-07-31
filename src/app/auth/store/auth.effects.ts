@@ -103,6 +103,49 @@ export class AuthEffects {
     { dispatch: false }
   );
 
+  autoLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.autoLogin),
+      switchMap(() => {
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        if (!userData || !userData._tokens) {
+          return of({ type: 'DUMMY_ACTION' }); // Dispatch a dummy action to do nothing if no user data in local storage
+        }
+
+        const user = new User(
+          userData.id,
+          userData.email,
+          userData.username,
+          userData._tokens,
+          userData.expiresIn,
+          new Date(userData.__tokenExpirationDate)
+        );
+
+        if (user.token) {
+          // Token is not expired, dispatch the authenticateSuccess action
+          const expirationDuration =
+            new Date(userData.__tokenExpirationDate).getTime() -
+            new Date().getTime();
+          return of(
+            AuthActions.authenticateSuccess({
+              id: user.id,
+              email: user.email,
+              username: user.username,
+              token: user.token,
+              expiresIn: expirationDuration / 1000, // Convert to seconds
+              expirationDate: new Date(userData.__tokenExpirationDate),
+              redirrect: false,
+            })
+          );
+        } else {
+          const refreshToken = userData._tokens.refresh;
+          // Token is expired, dispatch the logout action
+          return of(AuthActions.logout(refreshToken));
+        }
+      })
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private http: HttpClient,

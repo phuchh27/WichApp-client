@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core.module';
+import { reducers } from './store/app.reducer';
 
 
 
@@ -34,7 +35,7 @@ import { CoreModule } from './core.module';
     MegaMenuModule,
     MenubarModule,
     InputTextModule,
-    StoreModule.forRoot(),
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
     CoreModule,
     
