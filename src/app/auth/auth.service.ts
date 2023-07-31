@@ -41,7 +41,7 @@ export class AuthService {
   const tokensJSON = authData._tokens.replace(/'/g, '"');
   const tokensObject = JSON.parse(tokensJSON);
   const access = tokensObject.access;
-  return { access };
+  return  access ;
   }
 
   getRefresh(): { refresh: string } | null {
@@ -58,7 +58,7 @@ export class AuthService {
     const tokensJSON = authData._tokens.replace(/'/g, '"');
     const tokensObject = JSON.parse(tokensJSON);
     const refresh = tokensObject.refresh;
-    return { refresh };
+    return  refresh ;
   }
 }
 
