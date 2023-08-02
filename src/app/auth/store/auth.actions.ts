@@ -23,6 +23,8 @@ export const authenticateSuccess = createAction(
     expiresIn: number;
     expirationDate: Date;
     redirrect: boolean;
+    is_owner: boolean;
+    is_staff: boolean;
   }>()
 );
 
@@ -41,5 +43,3 @@ export const logout = createAction(
   '[Auth] Logout',
   props<{ refresh: string }>()
 );
-
-

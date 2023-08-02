@@ -9,7 +9,9 @@ export class User {
         access: string;
       },
       public expiresIn: number,
-      private __tokenExpirationDate: Date
+      private __tokenExpirationDate: Date,
+      public is_owner: boolean,
+      public is_staff: boolean,
     ) {}
   
     get token() {

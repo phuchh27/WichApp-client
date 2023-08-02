@@ -18,6 +18,8 @@ export interface AuthResponseData {
   };
   expiresIn: number;
   id: number;
+  is_owner: boolean;
+  is_staff: boolean;
 }
 
 const handleAuthentication = (
@@ -25,11 +27,22 @@ const handleAuthentication = (
   id: number,
   username: string,
   token: any,
-  expiresIn: number
+  expiresIn: number,
+  is_owner: boolean,
+  is_staff: boolean
 ) => {
   const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
   console.log(expirationDate);
-  const user = new User(id, email, username, token, expiresIn, expirationDate);
+  const user = new User(
+    id,
+    email,
+    username,
+    token,
+    expiresIn,
+    expirationDate,
+    is_owner,
+    is_staff
+  );
   localStorage.setItem('userData', JSON.stringify(user));
   return AuthActions.authenticateSuccess({
     id,
@@ -39,13 +52,13 @@ const handleAuthentication = (
     expiresIn,
     expirationDate,
     redirrect: true,
+    is_owner,
+    is_staff,
   });
 };
 
 @Injectable()
 export class AuthEffects {
- 
-
   authSignin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginStart),
@@ -63,7 +76,9 @@ export class AuthEffects {
                 resData.id,
                 resData.username,
                 resData.tokens,
-                resData.expiresIn
+                resData.expiresIn,
+                resData.is_owner,
+                resData.is_staff
               );
             }),
             catchError((errorRes) => {
@@ -118,7 +133,9 @@ export class AuthEffects {
           userData.username,
           userData._tokens,
           userData.expiresIn,
-          new Date(userData.__tokenExpirationDate)
+          new Date(userData.__tokenExpirationDate),
+          userData.is_owner,
+          userData.is_staff
         );
 
         if (user.token) {
@@ -135,6 +152,27 @@ export class AuthEffects {
               expiresIn: expirationDuration / 1000, // Convert to seconds
               expirationDate: new Date(userData.__tokenExpirationDate),
               redirrect: false,
+              is_owner: user.is_owner,
+              is_staff: user.is_staff,
+            })
+          );
+        }
+        if (user.token) {
+          // Token is not expired, dispatch the authenticateSuccess action
+          const expirationDuration =
+            new Date(userData.__tokenExpirationDate).getTime() -
+            new Date().getTime();
+          return of(
+            AuthActions.authenticateSuccess({
+              id: user.id,
+              email: user.email,
+              username: user.username,
+              token: user.token,
+              expiresIn: expirationDuration / 1000, // Convert to seconds
+              expirationDate: new Date(userData.__tokenExpirationDate),
+              redirrect: false,
+              is_owner: user.is_owner,
+              is_staff: user.is_staff,
             })
           );
         } else {

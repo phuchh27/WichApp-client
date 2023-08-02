@@ -33,7 +33,9 @@ const _authReducer = createReducer(
       action.username,
       action.token,
       action.expiresIn,
-      action.expirationDate
+      action.expirationDate,
+      action.is_owner,
+      action.is_staff
     ),
   })),
   on(AuthActions.authenticateFail, (state, action) => ({
