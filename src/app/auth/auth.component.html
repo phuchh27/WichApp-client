@@ -5,7 +5,7 @@
     <p>We are the market–leading technical interview platform to identify and hire developers with the right skills.</p>
     <button type="button" class="btn" (click)="onSwitchOWnerMode()">Login</button>
     <div class="">
-        <a class="quesstion" href="#">Don’t have an account?</a>
+        <a class="quesstion" routerLink="/auth/signup">Don’t have an account?</a>
     </div>
   </div>
   <div *ngIf="isStaffMode" class="login">

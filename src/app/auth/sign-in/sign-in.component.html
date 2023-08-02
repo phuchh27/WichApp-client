@@ -1,14 +1,14 @@
 
-<form action="" class="login-form">
+<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="login-form">
     <div class="username">
         <span class="p-float-label">
-            <input pInputText id="username" [(ngModel)]="username" />
+            <input pInputText type="email" id="email" ngModel name="email" required email />
             <label htmlFor="username">Username</label>
         </span>
     </div>
     <div class="password">
         <span class="p-float-label">
-            <p-password [(ngModel)]="password"  [toggleMask]="true" class="p-password-lg"></p-password>
+            <p-password id="password" ngModel name="password" required minlength="6"  [toggleMask]="true" class="p-password-lg"></p-password>
             <label for="password">Password</label>
         </span>
     </div>
