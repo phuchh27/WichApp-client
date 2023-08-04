@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FilterMatchMode, PrimeNGConfig } from 'primeng/api';
 import { Store } from '@ngrx/store';
 import { AppState } from './store/app.reducer';
+import *  as AuthActions from './auth/store/auth.actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'WichApp-client';
   constructor(private primengConfig: PrimeNGConfig,private store: Store<AppState>) {}
   ngOnInit() {
+    this.store.dispatch(AuthActions.autoLogin())
     this.primengConfig.ripple = true;
     this.primengConfig.zIndex = {
       modal: 1100, // dialog, sidebar

@@ -9,7 +9,7 @@ import { SideBarModule } from "../navbar/navbar.module";
     imports:[
         RouterModule,
         OwnerRoutingModule,
-        SideBarModule
+        SideBarModule,
     ]
 })
 export class OwnerHomeModule { }

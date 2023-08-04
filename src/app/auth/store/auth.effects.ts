@@ -5,9 +5,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { HttpClient } from '@angular/common/http';
 
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, map, of, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Action } from '@ngrx/store';
 
 export interface AuthResponseData {
   email: string;
@@ -32,7 +33,6 @@ const handleAuthentication = (
   is_staff: boolean
 ) => {
   const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-  console.log(expirationDate);
   const user = new User(
     id,
     email,
@@ -118,71 +118,38 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  autoLogin$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.autoLogin),
-      switchMap(() => {
-        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-        if (!userData || !userData._tokens) {
-          return of({ type: 'DUMMY_ACTION' }); // Dispatch a dummy action to do nothing if no user data in local storage
-        }
+  utoLogin$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(AuthActions.autoLogin),
+    switchMap(() => {
+      const userDataString = localStorage.getItem('userData');
+      if (!userDataString) {
+        return EMPTY; // If userData doesn't exist in Local Storage, do nothing
+      }
 
-        const user = new User(
-          userData.id,
-          userData.email,
-          userData.username,
-          userData._tokens,
-          userData.expiresIn,
-          new Date(userData.__tokenExpirationDate),
-          userData.is_owner,
-          userData.is_staff
+      const userData: AuthResponseData = JSON.parse(userDataString);
+      const expirationDate = new Date(new Date().getTime() + userData.expiresIn * 1000);
+      this.authService.setLogoutTimer(userData.expiresIn * 1000);
+      // If the token is expired, dispatch logout action
+        // If the token is not expired yet, dispatch authenticateSuccess action
+        return of(
+          AuthActions.authenticateSuccess({
+            id: userData.id,
+            email: userData.email,
+            username: userData.username,
+            token: userData.tokens,
+            expiresIn: userData.expiresIn,
+            expirationDate: expirationDate,
+            redirrect: false,
+            is_owner: userData.is_owner,
+            is_staff: userData.is_staff,
+          })
         );
-
-        if (user.token) {
-          // Token is not expired, dispatch the authenticateSuccess action
-          const expirationDuration =
-            new Date(userData.__tokenExpirationDate).getTime() -
-            new Date().getTime();
-          return of(
-            AuthActions.authenticateSuccess({
-              id: user.id,
-              email: user.email,
-              username: user.username,
-              token: user.token,
-              expiresIn: expirationDuration / 1000, // Convert to seconds
-              expirationDate: new Date(userData.__tokenExpirationDate),
-              redirrect: false,
-              is_owner: user.is_owner,
-              is_staff: user.is_staff,
-            })
-          );
-        }
-        if (user.token) {
-          // Token is not expired, dispatch the authenticateSuccess action
-          const expirationDuration =
-            new Date(userData.__tokenExpirationDate).getTime() -
-            new Date().getTime();
-          return of(
-            AuthActions.authenticateSuccess({
-              id: user.id,
-              email: user.email,
-              username: user.username,
-              token: user.token,
-              expiresIn: expirationDuration / 1000, // Convert to seconds
-              expirationDate: new Date(userData.__tokenExpirationDate),
-              redirrect: false,
-              is_owner: user.is_owner,
-              is_staff: user.is_staff,
-            })
-          );
-        } else {
-          const refreshToken = userData._tokens.refresh;
-          // Token is expired, dispatch the logout action
-          return of(AuthActions.logout(refreshToken));
-        }
-      })
-    )
-  );
+      
+    }),
+    map((result) => result as Action) // Transform the result into the expected type Action
+  )
+);
 
   constructor(
     private actions$: Actions,
