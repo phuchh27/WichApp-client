@@ -17,18 +17,18 @@ export class AuthInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService,private store: Store<fromApp.AppState>) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.authService.getAccess();
-    console.log('startinter:'+ authToken);
+    console.log('Start Interceptor');
     if (authToken) {
       const modifiedRequest = req.clone({
         setHeaders: {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      console.log('endinter:'+ authToken);
+      console.log('Done InterCeptor:');
       return next.handle(modifiedRequest);
       
     }else{
-      console.log('non user:');
+      console.log('InterCeptor Not Done:');
       return next.handle(req);
     }
   }

@@ -9,6 +9,7 @@ export class AuthService {
 
   constructor(private store: Store<fromApp.AppState>) {}
   setLogoutTimer(expirationDuration: number) {
+    console.log('Setting timer: ' + expirationDuration);
     this.tokenExpirationTimer = setTimeout(() => {
       const refreshData = this.getRefresh();
       if (refreshData) {
