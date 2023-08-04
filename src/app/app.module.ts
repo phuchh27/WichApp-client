@@ -17,13 +17,15 @@ import { AuthEffects } from './auth/store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core.module';
 import { reducers } from './store/app.reducer';
+import { FooterComponent } from './footer/footer.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     HttpClientModule,
