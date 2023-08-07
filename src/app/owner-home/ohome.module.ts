@@ -3,6 +3,7 @@ import { OwnerHomeComponent } from "./owner-home.component";
 import { RouterModule } from "@angular/router";
 import { OwnerRoutingModule } from "./ohome-routing.module";
 import { SideBarModule } from "../navbar/navbar.module";
+import { StoreComModule } from "../store-com/store.module";
 
 @NgModule({
     declarations: [OwnerHomeComponent],
@@ -10,6 +11,7 @@ import { SideBarModule } from "../navbar/navbar.module";
         RouterModule,
         OwnerRoutingModule,
         SideBarModule,
+        StoreComModule,
     ]
 })
 export class OwnerHomeModule { }
