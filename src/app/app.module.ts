@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { PrimeModule } from './primeNg.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './layouts/header/header.component';
 import { MegaMenuModule } from 'primeng/megamenu';
 import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
@@ -17,8 +17,8 @@ import { AuthEffects } from './auth/store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core.module';
 import { reducers } from './store/app.reducer';
-import { FooterComponent } from './footer/footer.component';
-
+import { FooterComponent } from './layouts/footer/footer.component';
+import { CategoryEffects } from './store/category/cactegory.effects';
 
 
 @NgModule({
@@ -38,7 +38,7 @@ import { FooterComponent } from './footer/footer.component';
     MenubarModule,
     InputTextModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects,CategoryEffects]),
     CoreModule,
     
     

@@ -1,1 +1,35 @@
-<p>create-store works!</p>
+<section>
+    <div>
+        <div></div>
+        <div>
+            <form #storeForm="ngForm" (ngSubmit)="onSubmit(storeForm)">
+                <span class="p-float-label">
+                    <input pInputText type="text" id="shopname" ngModel
+                        name="shopname" required shopname />
+                    <label htmlFor="shopname">Shop name</label>
+                </span>
+                <label htmlFor="description">Description</label>
+                <textarea name="description" id="description" cols="30" rows="5"
+                    description>Description</textarea>
+                <span class="p-float-label">
+                    <input pInputText type="number" id="phone" ngModel
+                        name="phone" required phone />
+                    <label htmlFor="shopname">Shop phone</label>
+                </span>
+                <span class="p-float-label">
+                    <input pInputText type="text" id="shopname" ngModel
+                        name="shopname" required shopname />
+                    <label htmlFor="shopname">Shop name</label>
+                </span>
+
+                <div>
+                    <label>Category:</label>
+                    <select>
+                      <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                    </select>
+                  </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
