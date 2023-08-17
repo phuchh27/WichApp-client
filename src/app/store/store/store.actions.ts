@@ -1,9 +1,10 @@
 import { createAction, props } from '@ngrx/store';
+import { Store } from '../../models/store.model';
 
 export const CreateStoreStart = createAction(
   '[Store] Create  Store',
   props<{
-    storeName: string;
+    shopname: string;
     description: string;
     address: string;
     phone: string;
@@ -20,4 +21,16 @@ export const createStoreSuccess = createAction(
 export const createStoreFail = createAction(
   '[Store] Create Store Fail',
   props<{ error: any }>()
+);
+
+export const fetchUserStores = createAction('[Store] Fetch User Stores');
+
+export const setUserStores = createAction(
+  '[Store] Set User Stores',
+  props<{ stores: Store[] }>()
+);
+
+export const fetchUserStoresFail = createAction(
+  '[Store] Fetch User Stores Fail',
+  props<{ error: string }>()
 );

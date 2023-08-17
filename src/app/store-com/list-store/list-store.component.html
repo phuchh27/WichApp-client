@@ -1,1 +1,17 @@
-<p>list-store works!</p>
+
+<section class>
+    <div *ngFor="let store of userStores$ | async ; let i = index" (click)="onStoreClick(i)"
+        class=" border-1 border-bluegray-100 m-3 border-round-2xl bg-bluegray-600">
+        <a class=" no-underline flex cursor-pointer text-white">
+            <div class="m-3">
+                <h3 class="uppercase">{{ store.shopname }}</h3>
+                <p>Category: {{ store.category }}</p>
+            </div>
+            <div class="m-3">
+                <p class="capitalize text-gray-500">{{ store.description }}</p>
+                <p>Phone: {{ store.phone }}</p>
+                <p class="capitalize">Address: {{ store.address }}</p>
+            </div>
+        </a>
+    </div>
+</section>

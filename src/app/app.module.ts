@@ -19,6 +19,7 @@ import { CoreModule } from './core.module';
 import { reducers } from './store/app.reducer';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { CategoryEffects } from './store/category/cactegory.effects';
+import { StoreEffects } from './store/store/srore.effects';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { CategoryEffects } from './store/category/cactegory.effects';
     MenubarModule,
     InputTextModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects,CategoryEffects]),
+    EffectsModule.forRoot([AuthEffects,CategoryEffects, StoreEffects]),
     CoreModule,
     
     

@@ -1,3 +1,12 @@
 .create-bg{
     max-height: 800px;
 }
+
+.button-dis{
+ cursor: pointer;
+}
+
+.button-dis:disabled{
+    cursor:not-allowed ;
+}
+
