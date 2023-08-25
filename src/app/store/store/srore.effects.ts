@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as StoreActions from './store.actions';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { StoreServices } from '../../services/store.service';
 
 export interface StoreResponseData {
@@ -18,7 +18,7 @@ export class StoreEffects {
   $storeCreate = createEffect(() =>
     this.actions$.pipe(
       ofType(StoreActions.CreateStoreStart),
-      switchMap((action) => {
+      mergeMap((action) => {
         return this.http
           .post<{ message: string; data: any }>(
             'http://127.0.0.1:8000/stores/create/',
@@ -31,19 +31,31 @@ export class StoreEffects {
             }
           )
           .pipe(
-            map((responseData) => {
-              return {
-                type: 'STORE_CREATED_SUCCESSFULLY',
-                payload: responseData,
-              };
-            }),
-            catchError((error) => {
-              return of({ type: 'STORE_CREATE_ERROR', payload: error });
+            map(() => StoreActions.createNewStoreSuccess()),
+            catchError(error => {
+              if (error.status === 402) {
+                const storeData = {
+                  shopname: action.shopname,
+                  description: action.description,
+                  phone: action.phone,
+                  address: action.address,
+                  category: action.category,
+                  cost: 20,
+                  title: 'Payment Required',
+                  message: 'Please pay to create a new store',
+                };
+                localStorage.setItem('failedStoreData', JSON.stringify(storeData));
+                return of(StoreActions.paymentRequired()); // Dispatch payment required action
+              } else {
+                return of(StoreActions.createNewStoreFailure({ error }));
+              }
             })
           );
       })
     )
   );
+
+  
 
   fetchUserStores$ = createEffect(() =>
     this.actions$.pipe(

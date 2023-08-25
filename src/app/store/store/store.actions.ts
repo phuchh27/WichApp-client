@@ -12,16 +12,16 @@ export const CreateStoreStart = createAction(
   }>()
 );
 
-export const createStoreSuccess = createAction(
-  '[Store] Create Store Success',
-  props<{ message: string, data: any }>()
+export const createNewStoreSuccess = createAction(
+  '[Store] Create New Store Success'
 );
 
-
-export const createStoreFail = createAction(
-  '[Store] Create Store Fail',
-  props<{ error: any }>()
+export const createNewStoreFailure = createAction(
+  '[Store] Create New Store Failure',
+  props<{ error: string }>()
 );
+
+export const paymentRequired = createAction('[Store] Payment Required');
 
 export const fetchUserStores = createAction('[Store] Fetch User Stores');
 

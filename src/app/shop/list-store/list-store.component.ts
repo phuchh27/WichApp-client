@@ -34,6 +34,5 @@ export class ListStoreComponent implements OnInit {
       this.store.dispatch(StoreActions.setUserStores({ stores: parsedStores }));
     }
     this.userStores$ = this.store.select(state => state.store.Stores);
-
   }
 }

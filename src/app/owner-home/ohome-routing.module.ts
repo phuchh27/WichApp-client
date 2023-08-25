@@ -2,8 +2,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { OwnerHomeComponent } from "./owner-home.component";
 import { NgModule } from "@angular/core";
 import { AuthGuard } from "../auth/auth.guard";
-import { StoreComComponent } from "../store-com/store-com.component";
-import { CreateStoreComponent } from "../store-com/create-store/create-store.component";
+import { StoreComComponent } from "../shop/store-com.component";
+import { CreateStoreComponent } from "../shop/create-store/create-store.component";
 
 const routes : Routes =[
     {
@@ -13,7 +13,7 @@ const routes : Routes =[
         children : [
             {
                 path: 'store',
-                loadChildren: () => import('../store-com/store.module').then(m => m.StoreComModule)
+                loadChildren: () => import('../shop/store.module').then(m => m.StoreComModule)
             }
 
         ]

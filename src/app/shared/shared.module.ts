@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
 
 @NgModule({
-  declarations: [PaymentsComponent],
+  declarations: [],
   imports: [CommonModule, SharedRoutingModule],
-  exports: [PaymentsComponent],
+  exports: [],
 })
 export class SharedModule {}

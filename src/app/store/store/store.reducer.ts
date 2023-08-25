@@ -3,39 +3,22 @@ import * as StoreActions from './store.actions';
 import { Store } from '../../models/store.model';
 export interface State {
   Stores: Store[];
-  message: string;
-  data: any;
-  error: any;
+  loading: boolean;
+  error: string | null;
+  paymentRequired: boolean;
 }
 
 const initialState: State = {
   Stores: [],
-  message: '',
-  data: null,
+  loading: false,
   error: null,
+  paymentRequired: false
 };
 
 export const storeReducer = createReducer(
   initialState,
-  on(StoreActions.createStoreSuccess, (state, action) => ({
-    ...state,
-    message: action.message,
-    data: action.data,
-    error: null,
-  })),
-  on(StoreActions.createStoreFail, (state, action) => ({
-    ...state,
-    message: '',
-    data: null,
-    error: action.error,
-  })),
-  on(StoreActions.setUserStores, (state, action) => ({
-    ...state,
-    Stores: action.stores,
-    error: ''
-  })),
-  on(StoreActions.fetchUserStoresFail, (state, action) => ({
-    ...state,
-    error: action.error
-  }))
+  on(StoreActions.CreateStoreStart, state => ({ ...state, loading: true, error: null })),
+  on(StoreActions.createNewStoreSuccess, state => ({ ...state, loading: false, error: null })),
+  on(StoreActions.createNewStoreFailure, (state, { error }) => ({ ...state, loading: false, error })),
+  on(StoreActions.paymentRequired, state => ({ ...state, paymentRequired: true }))
 );

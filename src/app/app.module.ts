@@ -20,6 +20,7 @@ import { reducers } from './store/app.reducer';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { CategoryEffects } from './store/category/cactegory.effects';
 import { StoreEffects } from './store/store/srore.effects';
+import { PaymentsComponent } from './payments/payments.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { StoreEffects } from './store/store/srore.effects';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    PaymentsComponent
   ],
   imports: [
     HttpClientModule,
