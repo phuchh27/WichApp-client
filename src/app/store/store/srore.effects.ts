@@ -21,7 +21,7 @@ export class StoreEffects {
       switchMap((action) => {
         return this.http
           .post<{ message: string; data: any }>(
-            'http://127.0.0.1:8000/stores/',
+            'http://127.0.0.1:8000/stores/create/',
             {
               shopname: action.shopname,
               description: action.description,
