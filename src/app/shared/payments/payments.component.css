@@ -1,0 +1,19 @@
+.space-between{
+    justify-content: space-between;
+}
+.border{
+    border-radius: 5px;
+    border-top-color: blue;
+    border-left-color: blue;
+    border-right-color: rgb(0, 166, 255);
+    border-bottom-color: rgb(0, 166, 255);
+}
+.pay{
+    margin-top: 10px;
+    border: 0px;
+    background-color: #f9c446;
+    padding: 12px 6px;
+    width: 300px;
+    border-radius: 5px;
+    font-weight: bold;
+}
