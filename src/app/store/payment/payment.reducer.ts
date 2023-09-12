@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as PaymentStoreActions from './payment.actions';
+import { state } from '@angular/animations';
 
 export interface State {
   title: string;
@@ -28,5 +29,17 @@ export const paymentReducer = createReducer(
   on(PaymentStoreActions.PaymentFailure, (state, { error }) => ({
     ...state,
     error,
+  })),
+  on(PaymentStoreActions.PaidStore, (state) => ({
+    ...state,
+    error: null,
+  })),
+  on(PaymentStoreActions.PaidStoreFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
+  on(PaymentStoreActions.PaidStoreSuccess, (state) => ({
+    ...state,
+    error: null,
   }))
 );

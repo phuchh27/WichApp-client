@@ -4,7 +4,7 @@ import { State } from '../store/store/store.reducer';
 
 const selectStoreState = createFeatureSelector<State>('store');
 
-export const selectPaymentRequired = createSelector(
+export const selectPaymentLink = createSelector(
   selectStoreState,
-  state => state.paymentRequired
+  state => state.paymentLink
 );

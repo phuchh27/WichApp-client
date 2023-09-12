@@ -7,7 +7,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import * as fromApp from 'src/app/store/app.reducer';
 import * as CactegoryActrions from '../../store/category/cactegory.actions';
 import * as StoreActions from '../../store/store/store.actions';
-import { selectPaymentRequired } from '../shop.selectors';
+import { selectPaymentLink } from '../shop.selectors';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,6 +21,7 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
 
   subscriptionPayment: Subscription | undefined;
   paymentRequired$: Observable<boolean> | undefined;
+  paymentLink$ = this.store.select(selectPaymentLink);
 
   constructor(
     private categoryService: CategoryService,
@@ -35,16 +36,8 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
       .subscribe((categories: Category[]) => {
         this.categories = categories;
       });
-    console.log(this.categories);
 
-    this.paymentRequired$ = this.store.select(selectPaymentRequired);
-
-    this.subscriptionPayment = this.paymentRequired$.subscribe(paymentRequired => {
-      if (paymentRequired) {
-        this.router.navigate(['payment']); // Navigate to payment page
-      }
-    });
-    
+    // this.paymentRequired$ = this.store.select(selectPaymentRequired);
   }
 
   onSubmit(form: NgForm) {
@@ -66,10 +59,21 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
       })
     );
     // form.resetForm();
-
-    
+    this.subscriptionPayment = this.paymentLink$.subscribe((paymentLink) => {
+      if (paymentLink) {
+        const storeData = {
+          shopname: shopname,
+          description: description,
+          address: address,
+          phone: phone,
+          category: category,
+        };
+        localStorage.setItem('store402', JSON.stringify(storeData));
+        console.log('Payment Link: log from component', paymentLink);
+        window.location.href = paymentLink; // Navigate to payment page
+      }
+    });
   }
-
   ngOnDestroy() {
     this.subscription?.unsubscribe();
     this.subscriptionPayment?.unsubscribe();

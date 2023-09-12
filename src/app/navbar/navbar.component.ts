@@ -12,4 +12,8 @@ export class NavbarComponent {
     this.showSidebar = !this.showSidebar;
     console.log(this.showSidebar);
   }
+
+  onlog(){
+    console.log("true");
+  }
 }

@@ -21,7 +21,10 @@ export const createNewStoreFailure = createAction(
   props<{ error: string }>()
 );
 
-export const paymentRequired = createAction('[Store] Payment Required');
+export const paymentRequired = createAction(
+  '[Store] Payment Required',
+  props<{ paymentLink: string }>()
+);
 
 export const fetchUserStores = createAction('[Store] Fetch User Stores');
 

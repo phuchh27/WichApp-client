@@ -25,3 +25,11 @@ export class Store {
     this.image_url = image_url;
   }
 }
+export interface PaidStoreData {
+  shopname: string;
+  description: string;
+  address: string;
+  phone: string;
+  category: string;
+  verify_code: string;
+}

@@ -20,7 +20,7 @@ export class StoreEffects {
       ofType(StoreActions.CreateStoreStart),
       mergeMap((action) => {
         return this.http
-          .post<{ message: string; data: any }>(
+          .post<{ message: string; data: any; payment_link: string ; status: number}>(
             'http://127.0.0.1:8000/stores/create/',
             {
               shopname: action.shopname,
@@ -31,24 +31,21 @@ export class StoreEffects {
             }
           )
           .pipe(
-            map(() => StoreActions.createNewStoreSuccess()),
+            map(response =>{
+              const status  = response.status
+              if(status ===  402)
+              {
+                console.log(status)
+                const paymentLink = response.payment_link
+                return StoreActions.paymentRequired({paymentLink})
+              }             
+              // localStorage.setItem('status', JSON.stringify(response));
+              // console.log(response.payment_link
+              //   );
+              return StoreActions.createNewStoreSuccess();
+            }),
             catchError(error => {
-              if (error.status === 402) {
-                const storeData = {
-                  shopname: action.shopname,
-                  description: action.description,
-                  phone: action.phone,
-                  address: action.address,
-                  category: action.category,
-                  cost: 20,
-                  title: 'Payment Required',
-                  message: 'Please pay to create a new store',
-                };
-                localStorage.setItem('failedStoreData', JSON.stringify(storeData));
-                return of(StoreActions.paymentRequired()); // Dispatch payment required action
-              } else {
                 return of(StoreActions.createNewStoreFailure({ error }));
-              }
             })
           );
       })
