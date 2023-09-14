@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store as StoreData } from '../models/store.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,10 +13,16 @@ export class StoreComComponent {
   selectedStoreIndex: number | undefined;
   selectedStore: StoreData | undefined;
 
+  constructor(private router: Router) {}
+
   onStoreClicked(index: number) {
     this.selectedStoreIndex = index;
     console.log(this.selectedStoreIndex);
     this.selectedStore = this.userStores[this.selectedStoreIndex];
-  
+  }
+
+  goToShop(){
+    const id = this.selectedStore?.id;
+    this.router.navigate(['/ohome/store',id]);
   }
 }

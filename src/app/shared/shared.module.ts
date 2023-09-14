@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { PaymentsComponent } from '../payments/payments.component';
 import { CommonModule } from '@angular/common';
-import { SharedRoutingModule } from './shared-routing.module';
+import { SubNavComponent } from './sub-nav/sub-nav.component';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, SharedRoutingModule],
-  exports: [],
+  declarations: [SubNavComponent],
+  imports: [CommonModule,RouterModule],
+  exports: [SubNavComponent],
 })
 export class SharedModule {}

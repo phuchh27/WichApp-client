@@ -1,0 +1,40 @@
+.sub_nav {
+    background-color: #1E1F26;
+    width: 100%;
+    height: 32px;
+    display: block;
+    justify-content: center;
+}
+
+.sub_nav ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.sub_nav a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: #1E1F26;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+}
+
+.sub_nav a:hover,
+.sub_nav a:active,
+.sub_nav a :visited {
+    background-color: #1E1F26;
+    opacity: 1;
+    /* Opacity mờ 70% khi hover hoặc active */
+}
+
+
+.sub_nav li {
+    display: flex;
+    width: 164px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

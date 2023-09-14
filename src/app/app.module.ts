@@ -21,6 +21,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { CategoryEffects } from './store/category/cactegory.effects';
 import { StoreEffects } from './store/store/srore.effects';
 import { PaymentsComponent } from './payments/payments.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -43,8 +44,7 @@ import { PaymentsComponent } from './payments/payments.component';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects,CategoryEffects, StoreEffects]),
     CoreModule,
-    
-    
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
