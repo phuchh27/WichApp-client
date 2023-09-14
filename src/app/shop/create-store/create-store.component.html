@@ -1,0 +1,41 @@
+<section class="">
+    <div class="flex bg-bluegray-50 h-full ">
+        <div class="hidden col-6  md:inline-block border-0 ">
+            <img src="../../../assets/images/108166.jpg" class="w-full grid h-screen block create-bg" alt="store image">
+        </div>
+        <div class="col col-12 mx-2 md:col-6 text-center mt-8 max-w-30rem md:mx-auto ">
+            <h2>Create new store</h2>
+            <p>pôppo pôppo pôppo pôppo pôppo pôppop ôpp</p>
+            <form #storeForm="ngForm" (ngSubmit)="onSubmit(storeForm)"
+                class="">
+                <span class="p-float-label my-5">
+                    <input pInputText type="text" id="shopname" ngModel class="py-3 px-3 w-full border-1 border-bluegray-100 border-round"
+                        name="shopname" required shopname />
+                    <label htmlFor="shopname">Shop name</label>
+                </span>
+
+                <textarea name="description" id="description" cols="40" ngModel class="w-full border-1 border-bluegray-100 border-round"
+                    rows="5"
+                    description>Description</textarea>
+                <span class="p-float-label my-5">
+                    <input pInputText type="text" id="phone" ngModel class="py-3 px-3 w-full border-1 border-bluegray-100 border-round"
+                        name="phone" required phone />
+                    <label htmlFor="shopname">Shop phone</label>
+                </span>
+                <span class="p-float-label">
+                    <input pInputText type="text" id="address" ngModel class="py-3 px-3 w-full border-1 border-bluegray-100 border-round"
+                        name="address" required shopaddress />
+                    <label htmlFor="shopname">Shop address</label>
+                </span>
+
+                <div class="mt-5">
+                    <select id="category" name="category" category  ngModel class="col col-12 py-3 px-3 w-full border-1 border-bluegray-100 border-round text-lg">
+                        <option  *ngFor="let category of categories" class="text-blue-600  text-lg"
+                            [value]="category.id">{{ category.name }}</option>
+                    </select>
+                </div>
+                <button [disabled]="!storeForm.valid" type="submit" class="w-full border-round bg-bluegray-800 text-white px-8 py-3 mt-5 hover:bg-bluegray-600 button-dis">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>

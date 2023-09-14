@@ -1,13 +1,25 @@
-<section class="h-screen flex mr-5 w-auto ">
-    <div  class=" w-auto flex flex-column justify-content-center bg-blue-200" *ngIf="showSidebar">
-        <div class="transition-colors transition-duration-500 bg-blue-200 hover:bg-bluegray-600 text-white hover:text-white hover:shadow-8
-        flex align-items-center justify-content-center font-bold cursor-pointer px-5 py-3" routerLink="">Store manage</div>
-        <div class="transition-colors transition-duration-500 bg-blue-200 hover:bg-bluegray-600 text-white hover:text-white hover:shadow-8
-        flex align-items-center justify-content-center font-bold cursor-pointer px-5 py-3" routerLink="">Staff manage</div>
-        <div class="transition-colors transition-duration-500 bg-blue-200 hover:bg-bluegray-600 text-white hover:text-white hover:shadow-8
-        flex align-items-center justify-content-center font-bold cursor-pointer px-5 py-3" routerLink="">Finalce</div>
+<section class="h-full flex w-auto ">
+    <div class=" w-auto flex flex-column justify-content-center bg-blue-200"
+        *ngIf="showSidebar">
+        <a routerLink="/ohome/store" (click)="onlog()">
+            <div
+                class="transition-colors transition-duration-500 bg-blue-200 hover:bg-bluegray-600 text-white hover:text-white hover:shadow-8
+        flex align-items-center justify-content-center font-bold cursor-pointer px-5 py-3">Store
+                manage</div>
+        </a>
+
+        <div
+            class="transition-colors transition-duration-500 bg-blue-200 hover:bg-bluegray-600 text-white hover:text-white hover:shadow-8
+        flex align-items-center justify-content-center font-bold cursor-pointer px-5 py-3"
+            routerLink>Staff manage</div>
+        <div
+            class="transition-colors transition-duration-500 bg-blue-200 hover:bg-bluegray-600 text-white hover:text-white hover:shadow-8
+        flex align-items-center justify-content-center font-bold cursor-pointer px-5 py-3"
+            routerLink>Finalce</div>
     </div>
-    <div class="w-1rem flex flex-column justify-content-center cursor-pointer bg-blue-200 text-blue-600 hover:bg-bluegray-600 hover:font-bold text-white hover:shadow-8" (click)="toggleSidebar()">
+    <div
+        class="w-1rem flex flex-column justify-content-center cursor-pointer bg-blue-200 text-blue-600 hover:bg-bluegray-600 hover:font-bold text-white hover:shadow-8"
+        (click)="toggleSidebar()">
         <div class="text-center ">{{showSidebar? '<' :'>'}}</div>
     </div>
 

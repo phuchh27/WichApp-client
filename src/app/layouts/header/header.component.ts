@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MegaMenuItem, MenuItem } from 'primeng/api';
-import * as fromApp from '../store/app.reducer';
-import { AuthService } from '../auth/auth.service';
-import * as AuthActions from '../auth/store/auth.actions';
+import * as fromApp from '../../store/app.reducer';
+import { AuthService } from '../../auth/auth.service';
+import * as AuthActions from '../../auth/store/auth.actions';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

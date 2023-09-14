@@ -118,7 +118,7 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  utoLogin$ = createEffect(() =>
+  autoLogin$ = createEffect(() =>
   this.actions$.pipe(
     ofType(AuthActions.autoLogin),
     switchMap(() => {
