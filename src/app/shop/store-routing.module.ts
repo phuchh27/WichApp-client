@@ -3,6 +3,8 @@ import { StoreComComponent } from './store-com.component';
 import { NgModule } from '@angular/core';
 import { CreateStoreComponent } from './create-store/create-store.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
+import { StaffListComponent } from './shop-detail/staff-list/staff-list.component';
+import { ItemsListComponent } from './shop-detail/items-list/items-list.component';
 
 const routes: Routes = [
   {
@@ -15,8 +17,18 @@ const routes: Routes = [
   },
   {
     path:':id',
-    component : ShopDetailComponent
-  }
+    component : ShopDetailComponent,
+    children : [
+      {
+        path: 'staffs',
+        component : StaffListComponent
+      },
+      {
+        path: 'items',
+        component : ItemsListComponent
+      }
+    ]
+  },
 ];
 
 @NgModule({

@@ -8,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { StaffListComponent } from './shop-detail/staff-list/staff-list.component';
+import { ItemsListComponent } from './shop-detail/items-list/items-list.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,8 @@ import { SharedModule } from '../shared/shared.module';
     ListStoreComponent,
     CreateStoreComponent,
     ShopDetailComponent,
+    StaffListComponent,
+    ItemsListComponent,
   ],
   imports: [
     RouterModule,
@@ -22,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
     CarouselModule,
     FormsModule,
     SharedModule,
+    CommonModule,
   ],
   exports: [StoreComComponent],
 })

@@ -20,13 +20,12 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.shopId = this.route.snapshot.params['id']
     this.menuItems = [
-      { label: 'Back', link: '/home' },
-      { label: 'Staff', link: '/store' },
-      { label: 'Items', link: '/store' },
+      { label: 'Back', link: `/ohome/store/${this.shopId}/` },
+      { label: 'Staff', link: `/ohome/store/${this.shopId}/staffs` },
+      { label: 'Items', link: `/ohome/store/${this.shopId}/items` },
       { label: 'Store', link: '/store' },
       { label: 'Work schedule', link: '/store' },
     ]
-
   }
   ngOnDestroy(): void {}
 }

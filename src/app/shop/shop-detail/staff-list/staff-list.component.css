@@ -1,0 +1,232 @@
+.staffs {
+    background: #D0E1F9;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.staff_body {
+    display: flex;
+}
+
+.staff_body_list {
+    width: 80%;
+    padding: 20px;
+}
+
+.staff_card {
+    width: 160px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 8px solid #fff;
+    position: relative;
+    margin: 20px;
+}
+
+
+
+.staff_avt {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.staff_card-body {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: -100%;
+    position: absolute;
+    background: #1f3d4738;
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    color: #fff;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: .2s ;
+    user-select: none;
+
+}
+
+.staff_card-name {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.staff_card:hover .staff_card-body {
+    right: 0;
+}
+
+.staff_card-sub {
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.staff_card-info {
+    font-size: 12px;
+    line-height: 15px;
+    margin: 20px 0;
+    font-weight: 400;
+
+}
+
+.staff_card-btn {
+    color: #1f3d47;
+    background: #8fabba;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    border: none;
+    outline: none;
+    font-weight: 300;
+    cursor: pointer;
+    width: 100%;
+}
+
+.staff_body_tool {
+    width: 10%;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.staff_body_tool button {
+    background: #283655;
+    color: #FFFFFF;
+    border: 0px;
+    border-radius: 5px;
+    width: 100%;
+    min-width: 130px;
+    height: 44px;
+
+}
+
+.staff_card-create {
+    width: 160px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #42ED17;
+    position: relative;
+    margin: 20px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s ;
+    cursor: pointer;
+    user-select: none;
+}
+
+.plus{
+    transition: .2s ;
+}
+
+.staff_card-create:hover .plus{
+    scale: 2;
+}
+.staff_card-create:hover{
+    border: 8px solid #42ED17;
+    box-shadow: 5px 5px #1d8104;
+}
+.staff_card-create:active{
+    transform: translateY(5px);
+    box-shadow: none;
+}
+
+.staff_create-console{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background: #1f3d4738;
+    backdrop-filter: blur(15px);
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+    transition-delay: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.staff_create-console.active {
+    /* Active state when shown (translated to 0%) */
+    transform: translateX(0%);
+  }
+.staff_create-form{
+    padding: 30px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;  
+    width: 50%;
+    border-radius: 12px;
+    max-width: 500px;
+}
+
+.form-field{
+    position: relative;
+}
+
+.form-input{
+    border: 1px solid #eee;
+    border-radius: 4px;
+    width: 100%;
+    height: 56px;
+    padding: 0 20px;
+    transition: 0.2s ease;
+
+}
+
+.form-input:focus{
+    border-color: #1d8104; 
+    outline-color: #1d8104; 
+    color: #1d8104;
+}
+
+.form-label{
+    position: absolute;
+    top:15%;
+    transform: translateY(50%);
+    left: 21px;
+    user-select: none;
+    color: #999;
+    pointer-events: none;
+    transition: .2s ease;
+}
+
+.form-input:not(:placeholder-shown) + .form-label,
+
+.form-input:focus + .form-label{
+    top: -20px;
+    left: 16px;
+    padding: 0 5px;
+    display: inline-block;
+    background-color: white;
+}
+
+.form-btn{
+    border: 1px #283655;
+    color: white;
+    padding: 12px 24px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.cancel{
+    background-color:#FD2020 ;
+}
+.create{
+    background-color:#42ED17 ;
+}
+

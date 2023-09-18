@@ -1,40 +1,105 @@
-.sub_nav {
+nav {
     background-color: #1E1F26;
     width: 100%;
     height: 32px;
-    display: block;
-    justify-content: center;
-}
-
-.sub_nav ul {
     display: flex;
-    padding: 0;
-    margin: 0;
+    position: relative;
 }
 
-.sub_nav a {
-    display: inline-block;
+
+
+nav a {
     text-decoration: none;
     color: white;
-    background-color: #1E1F26;
-    opacity: 0.4;
-    transition: opacity 0.3s;
-}
-
-.sub_nav a:hover,
-.sub_nav a:active,
-.sub_nav a :visited {
-    background-color: #1E1F26;
-    opacity: 1;
-    /* Opacity mờ 70% khi hover hoặc active */
-}
-
-
-.sub_nav li {
-    display: flex;
-    width: 164px;
-    height: 32px;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    z-index: 1;
     cursor: pointer;
+    line-height: 32px;
+    display: inline-block;
+    text-align: center;
+    transition: opacity 0.5s;
+    opacity: 0.4;
 }
+
+
+
+nav .animation {
+    position: absolute;
+    height: 3px;
+    bottom: 0;
+    z-index: 0;
+    background-color: white;
+    transition: all .5s ease 0s;
+    border-radius: 8px;
+}
+
+nav .router-link-active {
+    opacity: 1;
+}
+
+
+nav a:nth-child(1) {
+    width: 164px;
+}
+
+nav .start,a:nth-child(1):hover~.animation{
+    width: 164px;
+    left: 0;
+}
+nav .start,a:nth-child(1):active~.animation{
+    width: 164px;
+    left: 0;
+}
+
+nav a:nth-child(2) {
+    width: 164px;
+}
+
+nav a:nth-child(2):hover~.animation{
+    width: 164px;
+    left: 164px;
+}
+nav a:nth-child(2):active~.animation{
+    width: 164px;
+    left: 164px;
+}
+
+nav a:nth-child(3) {
+    width: 164px;
+}
+nav a:nth-child(3):hover~.animation{
+    width: 164px;
+    left: 328px;
+}
+nav a:nth-child(3):active~.animation{
+    width: 164px;
+    left: 328px;
+}
+
+
+nav a:nth-child(4) {
+    width: 164px;
+}
+nav a:nth-child(4):hover~.animation{
+    width: 164px;
+    left: 492px;
+}
+
+nav a:nth-child(5) {
+    width: 164px;
+}
+nav a:nth-child(5):hover~.animation{
+    width: 164px;
+    left: 656px;
+}
+
+.router-link-active{
+
+}
+
+
+
+
+
+
+

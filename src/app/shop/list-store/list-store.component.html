@@ -3,8 +3,8 @@
     <div *ngIf="userStores$ | async as stores; else loading">
         <div *ngFor="let store of userStores$ | async ; let i = index"
             (click)="onStoreClick(i)"
-            class="border-1 border-bluegray-100 m-3 border-round-2xl bg-bluegray-600">
-            <a class="no-underline flex cursor-pointer text-white">
+            class="store border-1 border-bluegray-100 m-3 border-round-2xl bg-bluegray-600">
+            <a class="no-underline flex cursor-pointer text-white ">
                 <div class="m-3">
                     <h3 class="uppercase">{{ store.shopname }}</h3>
                     <p>Category: {{ store.category }}</p>
