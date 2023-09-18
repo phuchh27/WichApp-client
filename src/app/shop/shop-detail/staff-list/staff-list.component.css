@@ -4,6 +4,8 @@
     height: 100%;
     position: relative;
     overflow: hidden;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
 }
 
 .staff_body {
@@ -129,7 +131,7 @@
 }
 
 .staff_card-create:hover .plus{
-    scale: 2;
+    scale: 1.5;
 }
 .staff_card-create:hover{
     border: 8px solid #42ED17;
@@ -170,10 +172,12 @@
     width: 50%;
     border-radius: 12px;
     max-width: 500px;
+    min-width: 300px;
 }
 
 .form-field{
     position: relative;
+    margin-bottom: 20px;
 }
 
 .form-input{
@@ -229,4 +233,49 @@
 .create{
     background-color:#42ED17 ;
 }
+
+#toggle1{
+    position: absolute;
+    top: 5px;
+    transform: translateY(50%);
+    right: 21px;
+    user-select: none;
+    width: 25px;
+    height: 25px;
+    background-image: url('https://img.icons8.com/stickers/30/visible.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+#toggle2{
+    position: absolute;
+    top: 5px;
+    transform: translateY(50%);
+    right: 21px;
+    user-select: none;
+    width: 25px;
+    height: 25px;
+    background-image: url('https://img.icons8.com/stickers/100/hide.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+
+.staff_create-title{
+    text-align: center;
+}
+
+.staff_create-title h2{
+    font-size: 24px;
+    color: #283655;
+    
+}
+
+.staff_create-title p{
+    font-size: 16px;
+    color: #8fabba;
+}
+
 
