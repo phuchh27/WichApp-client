@@ -24,7 +24,8 @@
       {
         "ignore": [
           "backdrop-filter",
-          "user-select"
+          "user-select",
+          "scale"
         ]
       }
     ]

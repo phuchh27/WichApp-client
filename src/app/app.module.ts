@@ -22,6 +22,7 @@ import { CategoryEffects } from './store/category/cactegory.effects';
 import { StoreEffects } from './store/store/srore.effects';
 import { PaymentsComponent } from './payments/payments.component';
 import { SharedModule } from './shared/shared.module';
+import { StaffEffects } from './store/staff/staff.effects';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { SharedModule } from './shared/shared.module';
     MenubarModule,
     InputTextModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects,CategoryEffects, StoreEffects]),
+    EffectsModule.forRoot([AuthEffects,CategoryEffects, StoreEffects,StaffEffects]),
     CoreModule,
     SharedModule,
   ],

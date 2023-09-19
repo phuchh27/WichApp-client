@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { registerStaff } from 'src/app/store/staff/staff.actions';
+import * as fromApp from 'src/app/store/app.reducer';
+import { Store } from '@ngrx/store';
+import { Staff } from '../../../models/staff.models';
+import { ActivatedRoute, Route } from '@angular/router';
+
 
 @Component({
   selector: 'app-staff-list',
@@ -12,6 +18,8 @@ export class StaffListComponent {
   showPassC : boolean = false;
   showPass : boolean = false;
 
+  staff: Staff[] = [];
+  constructor(private route: ActivatedRoute ,private store:Store<fromApp.AppState>) {}
   onCreate() {
     this.createMode = true;
   }
@@ -24,11 +32,18 @@ export class StaffListComponent {
       console.log("form not valid");
       return;
     }
-    const username: string = form.value.username;
-    const email: string = form.value.email;
-    const phone: string = form.value.phone;
-    const password: string = form.value.password;
-    const repassword: string = form.value.repassword;
+    const newStaff: Staff ={
+      email: form.value.email,
+      username : form.value.username,
+      password : form.value.password,
+      phone : form.value.phone,
+    }
+    console.log(newStaff);
+    const currentShopActive = localStorage.getItem('currentShopActive');
+    console.log(currentShopActive);
+    this.store.dispatch(
+      registerStaff({staff:newStaff, storeId : currentShopActive})
+    )
 
   }
   onShowPassC(){this.showPassC = true}

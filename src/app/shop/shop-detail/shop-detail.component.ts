@@ -19,6 +19,8 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.shopId = this.route.snapshot.params['id']
+    const currentShopActive: string = this.shopId?.toString()?? ''
+    localStorage.setItem('currentShopActive', currentShopActive)
     this.menuItems = [
       { label: 'Back', link: `/ohome/store/${this.shopId}/` },
       { label: 'Staff', link: `/ohome/store/${this.shopId}/staffs` },
