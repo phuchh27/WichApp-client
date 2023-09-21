@@ -14,4 +14,10 @@ export class StaffService {
     const url = `${this.baseUrl}/${storeId}/staff-register/`;
     return this.http.post(url, staff);
   }
+
+  getStaffs(storeId: string| null): Observable<any> {
+    const url = `${this.baseUrl}/${storeId}/`; // Adjust the endpoint URL as needed
+    return this.http.get(url);
+  }
+
 }

@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { registerStaff } from 'src/app/store/staff/staff.actions';
+import { registerStaff, startGetStaff } from 'src/app/store/staff/staff.actions';
 import * as fromApp from 'src/app/store/app.reducer';
 import { Store } from '@ngrx/store';
-import { Staff } from '../../../models/staff.models';
+import { Staff,Staffs } from '../../../models/staff.models';
 import { ActivatedRoute, Route } from '@angular/router';
+import { Observable } from 'rxjs';
+import { selectStaff, selectStaffError, selectStaffLoading } from './staff.selectors';
 
 
 @Component({
@@ -12,14 +14,31 @@ import { ActivatedRoute, Route } from '@angular/router';
   templateUrl: './staff-list.component.html',
   styleUrls: ['./staff-list.component.css'],
 })
-export class StaffListComponent {
+export class StaffListComponent implements OnInit {
   createMode : boolean = false;
 
   showPassC : boolean = false;
   showPass : boolean = false;
 
+  staff$: Observable<Staffs[]> | undefined;
+  loading$: Observable<boolean> | undefined;
+  error$: Observable<any> | undefined;
+
+
   staff: Staff[] = [];
   constructor(private route: ActivatedRoute ,private store:Store<fromApp.AppState>) {}
+  
+  ngOnInit(): void {
+    const currentShopActive = localStorage.getItem('currentShopActive');
+    this.store.dispatch(startGetStaff({storeId : currentShopActive}));
+    this.staff$ = this.store.select(selectStaff);
+    this.loading$ = this.store.select(selectStaffLoading);
+    this.error$ = this.store.select(selectStaffError);
+
+
+    
+  }
+  
   onCreate() {
     this.createMode = true;
   }

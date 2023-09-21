@@ -1,15 +1,15 @@
 <section class="staffs">
     <div class="staff_body">
         <div class="staff_body_list">
-            <div class="staff_card">
+            <div *ngFor="let staffMember of staff$ | async" class="staff_card">
                 <img
                     src="../../../../assets/images/150527513.jpg"
                     class="staff_avt"
                     alt />
                 <div class="staff_card-body">
-                    <div class="staff_card-name">Staff 01</div>
-                    <p class="staff_card-sub">manager</p>
-                    <p class="staff_card-info">Lorem ipsum dolor</p>
+                    <div class="staff_card-name">{{ staffMember.username }}</div>
+                    <p class="staff_card-sub">{{ staffMember.email }}</p>
+                    <p class="staff_card-info">Phone:{{ staffMember.phone }}</p>
                     <!-- <button class="staff_card-btn">See</button> -->
                 </div>
             </div>

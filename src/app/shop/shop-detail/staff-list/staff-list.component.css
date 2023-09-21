@@ -1,11 +1,12 @@
 .staffs {
     background: #D0E1F9;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
     overflow: hidden;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 14px;
+    min-height: 500px;
 }
 
 .staff_body {
@@ -15,6 +16,7 @@
 .staff_body_list {
     width: 80%;
     padding: 20px;
+    display: flex;
 }
 
 .staff_card {
@@ -24,7 +26,8 @@
     overflow: hidden;
     border: 8px solid #fff;
     position: relative;
-    margin: 20px;
+    margin: 10px;
+    min-width: 145px;
 }
 
 
@@ -46,7 +49,7 @@
     backdrop-filter: blur(5px);
     border-radius: 15px;
     color: #fff;
-    padding: 30px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,15 +70,14 @@
 
 .staff_card-sub {
     text-transform: capitalize;
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 10px;
+    font-weight: 500;
 }
 
 .staff_card-info {
-    font-size: 12px;
+    font-size: 10px;
     line-height: 15px;
-    margin: 20px 0;
-    font-weight: 400;
+    font-weight: 500;
 
 }
 
@@ -114,28 +116,29 @@
     height: 250px;
     border-radius: 20px;
     overflow: hidden;
-    border: 2px solid #42ED17;
+    border: 2px solid #42ed174f;
     position: relative;
-    margin: 20px;
+    margin: 10px;
     background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: .2s ;
+    transition: .25s ;
     cursor: pointer;
     user-select: none;
+    min-width: 145px;
 }
 
 .plus{
-    transition: .2s ;
+    transition: .25s ;
 }
 
 .staff_card-create:hover .plus{
-    scale: 1.5;
+    scale: 1.35;
 }
 .staff_card-create:hover{
-    border: 8px solid #42ED17;
-    box-shadow: 5px 5px #1d8104;
+    border: 3px solid #42ED17;
+    box-shadow: 3px 3px #1d8104;
 }
 .staff_card-create:active{
     transform: translateY(5px);

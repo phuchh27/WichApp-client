@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { StaffService } from '../../services/staff.service'; // Create a service for making HTTP requests
 import * as StaffActions from './staff.actions';
@@ -25,9 +25,20 @@ export class StaffEffects {
     )
   );
 
+  getStaffs$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StaffActions.startGetStaff),
+      switchMap(({storeId}) =>
+        this.staffService.getStaffs(storeId).pipe(
+          map((staffs) => StaffActions.getStaffSuccess({ staffs })),
+          catchError((error) => of(StaffActions.getStaffFailure({ error })))
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private staffService: StaffService // Inject the service for making HTTP requests
-  
   ) {}
 }
