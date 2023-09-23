@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-items-list',
@@ -6,5 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./items-list.component.css']
 })
 export class ItemsListComponent {
+
+  createMode : boolean = false;
+
+
+  onCreate() {
+    this.createMode = true;
+  }
+
+  onCancel() {
+    this.createMode = false;
+  }
+
+  onSubmit(from: NgForm){
+
+  }
 
 }

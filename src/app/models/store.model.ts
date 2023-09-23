@@ -25,11 +25,29 @@ export class Store {
     this.image_url = image_url;
   }
 }
-export interface PaidStoreData {
+
+
+export class PaidStoreData {
   shopname: string;
   description: string;
   address: string;
   phone: string;
-  category: string;
-  verify_code: string;
+  category: number;
+  verify_code: string | null;
+
+  constructor(
+    shopname: string,
+    description: string,
+    address: string,
+    phone: string,
+    category: number,
+    verify_code: string
+  ) {
+    this.shopname = shopname;
+    this.description = description;
+    this.address = address;
+    this.phone = phone;
+    this.category = category;
+    this.verify_code = verify_code;
+  }
 }

@@ -164,7 +164,7 @@
 .staff_create-console.active {
     /* Active state when shown (translated to 0%) */
     transform: translateX(0%);
-  }
+}
 .staff_create-form{
     padding: 30px 50px;
     display: flex;
@@ -280,5 +280,10 @@
     font-size: 16px;
     color: #8fabba;
 }
+
+
+
+
+
 
 

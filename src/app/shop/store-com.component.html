@@ -1,5 +1,5 @@
-<section class="card">
-    <div class="flex h-screen " >
+<section class="store-page">
+    <div class="store-body">
         <div class="col col-4 bg-bluegray-600 p-0 size "  *ngIf="selectedStore">
             <a routerLink="create" class="cursor-pointer no-underline">
                 <div
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="col col-8 bg-blue-50">
+        <div class="stores_section">
             <app-list-store (storeClicked)="onStoreClicked($event)"></app-list-store>
         </div>
     </div>

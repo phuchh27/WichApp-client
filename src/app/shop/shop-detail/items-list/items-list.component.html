@@ -1,1 +1,79 @@
-<p>items-list works!</p>
+<app-scrollable></app-scrollable>
+<div class="item_page">
+    <div class="search_box">
+        <input type="text" class="search-text">
+        <img width="35" height="35"
+            src="https://img.icons8.com/cotton/35/search--v2.png"
+            alt="search--v2" />
+        <button *ngIf="!createMode" class="btn-create" type="button"
+            (click)="onCreate()">New</button>
+        <button *ngIf="createMode" class="btn-create" type="button"
+            (click)="onCancel()">Cancel</button>
+    </div>
+    <div class="item_list">
+        <div class="item_card">
+            <img width="64" height="64"
+                src="../../../../assets/images/icons8-goods-100.png"
+                alt="external-goods-soft-power-glyph-wichaiwi" />
+            <h2 class="item_name">Capucino</h2>
+            <p class="item_code">2651118951</p>
+            <p class="item_price">Price 20$</p>
+            <div class="item_action">
+                <a href>Detail</a>
+                <a href>Delete</a>
+            </div>
+        </div>
+        <div class="item_card">
+            <img width="64" height="64"
+                src="../../../../assets/images/icons8-goods-100.png"
+                alt="external-goods-soft-power-glyph-wichaiwi" />
+            <h2 class="item_name">Capucino</h2>
+            <p class="item_code">2651118951</p>
+            <p class="item_price">Price 20$</p>
+            <div class="item_action">
+                <a href>Detail</a>
+                <a href>Delete</a>
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="{'item_console-create' : true , 'active': createMode}">
+        <form #addItemForm="ngForm" (ngSubmit)="onSubmit(addItemForm)">
+            <div class="form-field">
+                <input type="text" class="form-input" placeholder=" "
+                    required username id="username" name="username" ngModel>
+                <label for="name" class="form-label">Staff name</label>
+            </div>
+            <div class="form-field">
+                <input type="text" class="form-input" placeholder=" "
+                    required username id="username" name="username" ngModel>
+                <label for="name" class="form-label">Staff name</label>
+            </div>
+            <div class="form-field">
+                <input type="text" class="form-input" placeholder=" "
+                    required username id="username" name="username" ngModel>
+                <label for="name" class="form-label">Staff name</label>
+            </div>
+            <div class="form-field">
+                <input type="text" class="form-input" placeholder=" "
+                    required username id="username" name="username" ngModel>
+                <label for="name" class="form-label">Staff name</label>
+            </div>
+            <div class="form-field">
+                <input type="text" class="form-input" placeholder=" "
+                    required username id="username" name="username" ngModel>
+                <label for="name" class="form-label">Staff name</label>
+            </div>
+            <div class="add_img">
+                <img width="200" height="200" src="https://img.icons8.com/plasticine/100/image.png" alt="image"/>
+                <div class="add_button">
+                    <input type="file" id="file" accept="image/*">
+                    <label for="file"> Choose Image</label>
+                    <button type="submit">Add</button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>

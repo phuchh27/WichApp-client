@@ -1,3 +1,15 @@
-.store{
-    max-width: 400px;
+.stores{
+ padding: 20px;
+}
+
+.stores-body{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    height: auto;
+}
+.stores-card{
+    width: 300px;
+    border: 1px #514a4a solid;
+    display: flex;
 }

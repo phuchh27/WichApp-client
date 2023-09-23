@@ -1,0 +1,25 @@
+.footer{
+    display: flex;
+    flex-wrap:wrap ;
+    height: auto;
+    background-color: darkslateblue;
+    padding: 30px 0 0 0;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    gap: 20px;
+}
+
+.about{
+    max-width: 300px;
+}
+
+.service{
+    max-width: 600px;
+}
+
+.contact{
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
