@@ -1,16 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
 import * as PaymentStoreActions from './payment.actions';
 import { state } from '@angular/animations';
+import {PaidStoreData} from '../../models/store.model'
 
 export interface State {
-  title: string;
-  cost: string;
+  paidStore : PaidStoreData[];
+  loading: boolean;
+  success: boolean;
   error: any;
 }
 
 export const initialState: State = {
-  title: '',
-  cost: '',
+  paidStore: [],
+  loading: false,
+  success: false,
   error: null,
 };
 
@@ -30,16 +33,7 @@ export const paymentReducer = createReducer(
     ...state,
     error,
   })),
-  on(PaymentStoreActions.PaidStore, (state) => ({
-    ...state,
-    error: null,
-  })),
-  on(PaymentStoreActions.PaidStoreFailure, (state, { error }) => ({
-    ...state,
-    error,
-  })),
-  on(PaymentStoreActions.PaidStoreSuccess, (state) => ({
-    ...state,
-    error: null,
-  }))
+  on(PaymentStoreActions.startPaymentCreateStore, (state) => ({ ...state, loading: true, success: false, error: null })),
+  on(PaymentStoreActions.successPaymentCreateStore, (state) => ({ ...state, loading: false, success: true, error: null })),
+  on(PaymentStoreActions.failurePaymentCreateStore, (state, { error }) => ({ ...state, loading: false, success: false, error }))
 );

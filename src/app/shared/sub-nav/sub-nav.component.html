@@ -1,0 +1,6 @@
+<nav class="sub_nav">
+    <a *ngFor="let item of menuItems ; let i = index" [routerLink]="[item.link]"
+        routerLinkActive="router-link-active" [ngStyle]="{'--router-link-active-count': i + 1}" >{{ item.label }}
+    </a>
+    <div class="animation start "></div>
+</nav>

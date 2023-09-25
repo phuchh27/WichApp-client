@@ -41,17 +41,19 @@ export class PaymentEffects {
       ),
     { dispatch: false }
   );
-  $PaidStore = createEffect(() =>
+
+  paymentCreateStore$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(PaymentStoreActions.PaidStore),
-      switchMap(({ store }) =>
-        this.paymentService.PaidStore(store).pipe(
+      ofType(PaymentStoreActions.startPaymentCreateStore),
+      switchMap(({ storeData }) =>
+        this.paymentService.paymentCreateStore(storeData).pipe(
           map(
-            () => PaymentStoreActions.PaidStoreSuccess(),
-            localStorage.removeItem('store402')
+            (response) =>
+              PaymentStoreActions.successPaymentCreateStore({ response }),
+            localStorage.removeItem('userStores')
           ),
           catchError((error) =>
-            of(PaymentStoreActions.PaidStoreFailure({ error }))
+            of(PaymentStoreActions.failurePaymentCreateStore({ error }))
           )
         )
       )

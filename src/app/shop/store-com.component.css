@@ -1,4 +1,17 @@
-.size{
-    max-width: 354px;
-    min-width: 300px;
+.store-page{
+    height: auto; 
+  max-height: 100%; 
+  /* overflow-y: auto; */
+}
+
+.store-body{
+    height: auto;
+    display: flex;
+    min-height: 800px;
+}
+
+.stores_section{
+    height: auto;
+    width: 100%;
+
 }

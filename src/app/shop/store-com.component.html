@@ -1,5 +1,5 @@
-<section class="card">
-    <div class="flex h-screen " >
+<section class="store-page">
+    <div class="store-body">
         <div class="col col-4 bg-bluegray-600 p-0 size "  *ngIf="selectedStore">
             <a routerLink="create" class="cursor-pointer no-underline">
                 <div
@@ -19,12 +19,12 @@
                     <p>Description: {{ selectedStore.description }}</p>
                 </div>
                 <button
-                    class=" w-full border-round bg-bluegray-800 text-white px-8 py-3 mt-8 hover:bg-bluegray-600">Go
+                    class=" w-full border-round bg-bluegray-800 text-white px-8 py-3 mt-8 hover:bg-bluegray-600" (click)="goToShop()">Go
                     to Store</button>
             </div>
         </div>
 
-        <div class="col col-8 bg-blue-50">
+        <div class="stores_section">
             <app-list-store (storeClicked)="onStoreClicked($event)"></app-list-store>
         </div>
     </div>

@@ -13,18 +13,17 @@ export const PaymentFailure = createAction(
   props<{ error: any }>()
 );
 
-export const PaidStore = createAction(
-  '[Payment] Paid Store',
-  props<{
-    store: PaidStoreData;
-  }>()
+export const startPaymentCreateStore = createAction(
+  '[Store] Start Payment Create Store',
+  props<{ storeData: PaidStoreData }>()
 );
 
-export const PaidStoreSuccess = createAction(
-  '[Payment] Paid Store Success',
-)
+export const successPaymentCreateStore = createAction(
+  '[Store] Success Payment Create Store',
+  props<{ response: any }>()
+);
 
-export const PaidStoreFailure = createAction(
-  '[Payment] Paid Store Failure',
+export const failurePaymentCreateStore = createAction(
+  '[Store] Failure Payment Create Store',
   props<{ error: any }>()
-)
+);

@@ -11,6 +11,23 @@
         "select-name": "off"
       }
     ],
-    "axe/parsing": "off"
+    "axe/parsing": "off",
+    "axe/structure": [
+      "default",
+      {
+        "listitem": "off",
+        "list": "off"
+      }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "backdrop-filter",
+          "user-select",
+          "scale"
+        ]
+      }
+    ]
   }
 }

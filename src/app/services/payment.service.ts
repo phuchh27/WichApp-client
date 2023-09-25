@@ -12,7 +12,8 @@ import { PaidStoreData } from "../models/store.model";
   
     constructor(private http: HttpClient) {}
   
-    PaidStore( store : PaidStoreData): Observable<void> {
-      return this.http.post<void>(`${this.apiUrl}/stores/paymentcreatestore/`,store );
+    paymentCreateStore( storeData: PaidStoreData): Observable<any> {
+      console.log( 'service'+ storeData);
+      return this.http.post(`${this.apiUrl}/stores/paymentcreatestore/`,storeData );
     }
   }

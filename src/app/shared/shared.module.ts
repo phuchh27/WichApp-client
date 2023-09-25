@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { PaymentsComponent } from '../payments/payments.component';
 import { CommonModule } from '@angular/common';
-import { SharedRoutingModule } from './shared-routing.module';
+import { SubNavComponent } from './sub-nav/sub-nav.component';
+import { RouterModule } from '@angular/router';
+import { ScrollableComponent } from './scrollable/scrollable.component';
+
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, SharedRoutingModule],
-  exports: [],
+  declarations: [SubNavComponent, ScrollableComponent],
+  imports: [CommonModule,RouterModule],
+  exports: [SubNavComponent,ScrollableComponent],
 })
 export class SharedModule {}

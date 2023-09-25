@@ -1,0 +1,78 @@
+<section class="staffs">
+    <div class="staff_body">
+        <div class="staff_body_list">
+            <div *ngFor="let staffMember of staff$ | async" class="staff_card">
+                <img
+                    src="../../../../assets/images/150527513.jpg"
+                    class="staff_avt"
+                    alt />
+                <div class="staff_card-body">
+                    <div class="staff_card-name">{{ staffMember.username }}</div>
+                    <p class="staff_card-sub">{{ staffMember.email }}</p>
+                    <p class="staff_card-info">Phone:{{ staffMember.phone }}</p>
+                    <!-- <button class="staff_card-btn">See</button> -->
+                </div>
+            </div>
+
+            <div class="staff_card-create" (click)="onCreate()">
+                <img
+                    src="https://img.icons8.com/cute-clipart/64/plus.png"
+                    class="plus"
+                    alt="plus" />
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="{'staff_create-console': true, 'active': createMode}">
+
+        <div class="staff_create-form">
+
+            <div class="staff_create-title">
+                <h2>Register New Staff</h2>
+                <p>Fill out the following information to register a new staff
+                    member for the store:</p>
+            </div>
+
+            <form #registerStaffForm="ngForm" (ngSubmit)="onSubmit(registerStaffForm)">
+                <div class="form-field">
+                    <input type="text" class="form-input" placeholder=" "
+                        required username id="username" name="username" ngModel>
+                    <label for="name" class="form-label">Staff name</label>
+                </div>
+                <div class="form-field">
+                    <input type="email" class="form-input" placeholder=" "
+                        required email id="mail" name="email" ngModel>
+                    <label for="email" class="form-label">Email</label>
+                </div>
+                <div class="form-field">
+                    <input type="tel" class="form-input" placeholder=" "
+                        required phone id="phone" name="phone" ngModel>
+                    <label for="phone" class="form-label">Phone</label>
+                </div>
+                <div class="form-field">
+                    <input type="{{ showPass ? 'text' : 'password' }}"
+                        class="form-input" placeholder=" " required password
+                        id="password" name="password" ngModel>
+                    <label for="password" class="form-label">Password</label>
+                    <div *ngIf="!showPass" class id="toggle1"
+                        (click)="onShowPass()"></div>
+                    <div *ngIf="showPass" class id="toggle2"
+                        (click)="onHidePass()"></div>
+                </div>
+                <div class="form-field">
+                    <input type="{{ showPassC ? 'text' : 'password' }}"
+                        class="form-input" placeholder=" " required repassword
+                        id="repassword" name="repassword" ngModel>
+                    <label for="password" class="form-label">Password comfirm</label>
+                    <div *ngIf="!showPassC" class id="toggle1"
+                        (click)="onShowPassC()"></div>
+                    <div *ngIf="showPassC" class id="toggle2"
+                        (click)="onHidePassC()"></div>
+                </div>
+                <div>
+                    <button class="form-btn cancel" (click)="onCancel()" type="button">Cancel</button>
+                    <button class="form-btn create" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
