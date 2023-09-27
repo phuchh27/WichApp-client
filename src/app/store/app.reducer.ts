@@ -4,6 +4,7 @@ import * as fromCategory from './category/category.reducer';
 import * as fromStore from './store/store.reducer';
 import * as fromStaff from './staff/staff.reducer';
 import * as fromPayment from './payment/payment.reducer';
+import * as fromItem from './item/item.reducer';
 
 export interface AppState {
   auth: AuthState;
@@ -11,13 +12,15 @@ export interface AppState {
   store : fromStore.State;
   staff: fromStaff.State;
   payment: fromPayment.State;
+  item: fromItem.State;
 }
 export const reducers: ActionReducerMap<AppState> = {
   auth: authReducer,
   category : fromCategory.categoryReducer,
   store : fromStore.storeReducer,
   staff: fromStaff.staffReducer,
-  payment: fromPayment.paymentReducer
+  payment: fromPayment.paymentReducer,
+  item: fromItem.itemReducer,
 };
 export const selectAuthState = createFeatureSelector<AuthState>('auth');
 
@@ -28,3 +31,5 @@ export const selectStoreState = createFeatureSelector<fromStore.State>('store');
 export const selectStaffState = createFeatureSelector<fromStaff.State>('staff');
 
 export const selectPaymentState = createFeatureSelector<fromPayment.State>('payment');
+
+export const selectItemState = createFeatureSelector<fromItem.State>('item');

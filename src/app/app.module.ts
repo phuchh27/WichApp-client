@@ -24,14 +24,14 @@ import { PaymentsComponent } from './payments/payments.component';
 import { SharedModule } from './shared/shared.module';
 import { StaffEffects } from './store/staff/staff.effects';
 import { PaymentEffects } from './store/payment/payment.effects';
-
+import { ItemEffects } from './store/item/item.effects';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PaymentsComponent
+    PaymentsComponent,
   ],
   imports: [
     HttpClientModule,
@@ -44,11 +44,18 @@ import { PaymentEffects } from './store/payment/payment.effects';
     MenubarModule,
     InputTextModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects,CategoryEffects, StoreEffects,StaffEffects, PaymentEffects]),
+    EffectsModule.forRoot([
+      AuthEffects,
+      CategoryEffects,
+      StoreEffects,
+      StaffEffects,
+      PaymentEffects,
+      ItemEffects,
+    ]),
     CoreModule,
     SharedModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

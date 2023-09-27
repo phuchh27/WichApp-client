@@ -34,9 +34,6 @@ export class StaffListComponent implements OnInit {
     this.staff$ = this.store.select(selectStaff);
     this.loading$ = this.store.select(selectStaffLoading);
     this.error$ = this.store.select(selectStaffError);
-
-
-    
   }
   
   onCreate() {

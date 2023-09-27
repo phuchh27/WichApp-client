@@ -5,7 +5,7 @@ export class Store {
   phone: string;
   address: string;
   category: number;
-  image_url: string | null;
+  image: string | null;
 
   constructor(
     id: number,
@@ -14,7 +14,7 @@ export class Store {
     phone: string,
     address: string,
     category: number,
-    image_url: string | null
+    image: string | null
   ) {
     this.id = id;
     this.shopname = shopname;
@@ -22,7 +22,7 @@ export class Store {
     this.phone = phone;
     this.address = address;
     this.category = category;
-    this.image_url = image_url;
+    this.image = image;
   }
 }
 

@@ -1,28 +1,34 @@
 export class Item {
   
     name: string;
+    code : string | null;
     description: string;
-    cost: number;
-    price: number;
+    cost: any;
+    price: any;
     quantity: number;
-    imglink :any | null;
+    image :string | null;
+    image_link?: any |null;
     
     constructor(
     
       name: string,
+      code : string |null,
       description: string,
-      cost: number,
-      price: number,
+      cost: any,
+      price: any,
       quantity: number,
-      imglink :any | null
+      image :string | null,
+      image_link: any |null
     ) {
 
       this.name = name;
+      this.code = code;
       this.description = description;
       this.cost = cost;
       this.price = price;
       this.quantity = quantity;
-      this.imglink = imglink;
+      this.image = image;
+      this.image_link = image_link;
     }
   }
   
