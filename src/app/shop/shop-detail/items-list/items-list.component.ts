@@ -1,11 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, map, of } from 'rxjs';
+
 import { Item } from 'src/app/models/item.model';
+
 import * as fromApp from 'src/app/store/app.reducer';
 import { addItemStart, getItemsStart } from 'src/app/store/item/item.actions';
-import * as selectorsItem from './item.selectors'
+import { getICategoryStart, getICategorySuccess } from 'src/app/store/Icategory/iCategory.actions';
+
+import * as selectorsItem from './item.selectors';
+import * as selectorsICategory from './icategory.selectors';
+import { ICategory } from 'src/app/models/category.model';
+
 
 @Component({
   selector: 'app-items-list',
@@ -22,17 +29,45 @@ export class ItemsListComponent implements OnInit {
   $loading: Observable<boolean> | undefined;
   $error: Observable<any> | undefined;
 
+  IcategoriesMenu: any;
+  $icategories: Observable<ICategory[]> | undefined;
+  categories: any[] = [];
+ 
+  
+
+  subscription: Subscription | undefined;
+
   @ViewChild('fileInput') fileInput: any;
 
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
     const currentShopActive = localStorage.getItem('currentShopActive');
-    this.store.dispatch(getItemsStart({storeId: currentShopActive}));
+    this.store.dispatch(getItemsStart({ storeId: currentShopActive }));
     this.$item = this.store.select(selectorsItem.selectItem);
     this.$loading = this.store.select(selectorsItem.selectItemLoading);
     this.$error = this.store.select(selectorsItem.selectItemError);
+
+    this.store.dispatch(getICategoryStart({ storeId: currentShopActive }));
+    
+    this.$icategories = this.store.select(selectorsICategory.selectICategories)
+
+    this.$icategories.subscribe(categories => {
+      this.categories = categories;
+    });
+
+    
+
+    setTimeout(()=>{
+      console.log(this.categories)
+      this.categories.forEach(item => {
+        console.log(`id: ${item.id}, name: ${item.name}, store: ${item.store}`);
+      });
+    },300)
+    
   }
+
+
 
   onFileSelected(event: any) {
     const file = event.target.files[0];

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Item } from '../models/item.model';
+import { ICategory } from '../models/category.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,4 +39,16 @@ export class ItemService {
   getListItem(storeId: any | null): Observable<any> {
     return this.http.get(`${this.baseUrl}stores/${storeId}/items/`);
   }
+
+  getListCategoryItem(storeId: any | null): Observable<any> {
+    return this.http.get(`${this.baseUrl}stores/${storeId}/items/categoryCreate`);
+  }
+
+  addCategoryItem(categoryName: ICategory, storeId: any | null): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}stores/${storeId}/categories/`,
+      categoryName
+    );
+  }
 }
+

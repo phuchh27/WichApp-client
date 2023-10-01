@@ -13,7 +13,7 @@
     <div class="item_list">
         <div class="item_card" *ngFor="let item of $item | async">
             <img width="64" height="64"
-            [src]="item.image_link" alt="{{ item.name }}" />
+                [src]="item.image_link" alt="{{ item.name }}" />
             <h2 class="item_name">{{item.name}}</h2>
             <p class="item_code">{{item.code}}</p>
             <p class="item_price">{{item.price}}</p>
@@ -38,7 +38,8 @@
             </div>
             <div class="form-field">
                 <input type="text" class="form-input" placeholder=" "
-                    required description id="description" name="description" ngModel>
+                    required description id="description" name="description"
+                    ngModel>
                 <label for="description" class="form-label">Description</label>
             </div>
             <div class="form-field">
@@ -57,10 +58,15 @@
                 <label for="quantity" class="form-label">Quantity</label>
             </div>
             <div class="add_img">
-                <img *ngIf="!selectedImage" width="200" height="200" src="https://img.icons8.com/plasticine/100/image.png" alt="image"/>
-                <img *ngIf="selectedImage" width="200" height="200" [src]="selectedImage" alt="image"/>
+                <img *ngIf="!selectedImage" width="200" height="200"
+                    src="https://img.icons8.com/plasticine/100/image.png"
+                    alt="image" />
+                <img *ngIf="selectedImage" width="200" height="200"
+                    [src]="selectedImage" alt="image" />
                 <div class="add_button">
-                    <input type="file" id="itemimg" itemimg name="itemimg" ngModel accept="image/*" (change)="onFileSelected($event)" #fileInput>
+                    <input type="file" id="itemimg" itemimg name="itemimg"
+                        ngModel accept="image/*"
+                        (change)="onFileSelected($event)" #fileInput>
                     <label for="itemimg">Choose Image</label>
                     <button type="submit">Add</button>
                 </div>

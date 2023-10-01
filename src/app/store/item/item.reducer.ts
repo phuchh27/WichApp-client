@@ -1,6 +1,7 @@
 import { Item } from 'src/app/models/item.model';
 import * as fromItemActions from './item.actions';
 import { createReducer, on } from '@ngrx/store';
+import { state } from '@angular/animations';
 export interface State {
   items: Item[];
   loading: boolean;
@@ -32,5 +33,7 @@ export const itemReducer = createReducer(
   })),
   on(fromItemActions.getItemsStart, (state) => ({...state, loading:true, error:null})),
   on(fromItemActions.getItemsSuccess, (state, {items}) => ({...state, items, loading:false, error:null})),
-  on(fromItemActions.getItemsFailure, (state, {error}) => ({...state, loading:false, error:error}))
-);
+  on(fromItemActions.getItemsFailure, (state, {error}) => ({...state, loading:false, error:error})),
+ 
+  )
+;

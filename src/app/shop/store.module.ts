@@ -11,6 +11,8 @@ import { SharedModule } from '../shared/shared.module';
 import { StaffListComponent } from './shop-detail/staff-list/staff-list.component';
 import { ItemsListComponent } from './shop-detail/items-list/items-list.component';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import {ICategoriesReducer} from '../store/Icategory/iCategory.reducer'
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     SharedModule,
     CommonModule,
+    StoreModule.forFeature('ICategories', ICategoriesReducer),
   ],
   exports: [StoreComComponent],
 })

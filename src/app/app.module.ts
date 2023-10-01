@@ -25,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
 import { StaffEffects } from './store/staff/staff.effects';
 import { PaymentEffects } from './store/payment/payment.effects';
 import { ItemEffects } from './store/item/item.effects';
+import { ICategoriesEffects } from './store/Icategory/iCategory.effects';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ItemEffects } from './store/item/item.effects';
       StaffEffects,
       PaymentEffects,
       ItemEffects,
+      ICategoriesEffects,
     ]),
     CoreModule,
     SharedModule,

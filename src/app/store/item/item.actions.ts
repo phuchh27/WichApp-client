@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { ICategory } from "src/app/models/category.model";
 import { Item } from "src/app/models/item.model";
 
 export const addItemStart = createAction(
@@ -60,6 +61,16 @@ export const deleteItemFailure = createAction(
     ' [Item] Delete Item Failure',
     props<{ error: any }>()
 )
+
+
+
+
+
+
+
+
+
+
     
 
 
