@@ -40,6 +40,11 @@ export class ItemService {
     return this.http.get(`${this.baseUrl}stores/${storeId}/items/`);
   }
 
+  getListItemByCategory(storeId: any | null, cate_id: any | null):Observable<any>{
+    return this.http.get(`${this.baseUrl}items/items/${storeId}/${cate_id}/`);
+  }
+  
+
   getListCategoryItem(storeId: any | null): Observable<any> {
     return this.http.get(`${this.baseUrl}stores/${storeId}/items/categoryCreate`);
   }

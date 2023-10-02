@@ -1,5 +1,13 @@
-<app-scrollable></app-scrollable>
+<app-scrollable [categoriesMenu]="iCategoriesMenu" (categorySelected)="onCategorySelected($event)"></app-scrollable>
 <div class="item_page">
+    <div  [ngClass]="{'add-new-category' : true, 'active': addNewCategory}">
+        <form action="" class="add-new-category_form">
+            <input type="text" placeholder="" class="add-new-category_input" placeholder="Category's name">
+
+            <button type="submit" class="add-new-category_btn-add"><img width="20px" height="20px" src="https://res.cloudinary.com/dm4renyes/image/upload/v1696264176/icons8-plus-math-40_xrc07l.png" alt=""></button>
+            <button type="button" (click)="onCancelAdd()" class="add-new-category_btn-cancel"><img width="20px" height="20px" src="https://res.cloudinary.com/dm4renyes/image/upload/v1696264176/icons8-multiply-40_x6ocnh.png" alt=""></button>
+        </form>
+    </div>
     <div class="search_box">
         <input type="text" class="search-text">
         <img width="35" height="35"

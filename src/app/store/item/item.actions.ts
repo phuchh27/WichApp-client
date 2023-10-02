@@ -62,6 +62,21 @@ export const deleteItemFailure = createAction(
     props<{ error: any }>()
 )
 
+export const getItemsByCategoryStart = createAction(
+    ' [Item] Get Items By Category Start',
+    props<{ storeId: string | null, cate_id:any }>()
+)
+
+export const getItemsByCategorySuccess = createAction(
+    ' [Item] Get Items By Category Success',
+    props<{ items: Item[] }>()
+)
+
+export const getItemsByCategoryFailure = createAction(
+    ' [Item] Get Items By Category Failure',
+    props<{ error: any }>()
+)
+
 
 
 

@@ -31,9 +31,36 @@ export const itemReducer = createReducer(
     loading: false,
     error: error,
   })),
-  on(fromItemActions.getItemsStart, (state) => ({...state, loading:true, error:null})),
-  on(fromItemActions.getItemsSuccess, (state, {items}) => ({...state, items, loading:false, error:null})),
-  on(fromItemActions.getItemsFailure, (state, {error}) => ({...state, loading:false, error:error})),
- 
-  )
-;
+  on(fromItemActions.getItemsStart, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(fromItemActions.getItemsSuccess, (state, { items }) => ({
+    ...state,
+    items,
+    loading: false,
+    error: null,
+  })),
+  on(fromItemActions.getItemsFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error,
+  })),
+  on(fromItemActions.getItemsByCategoryStart, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(fromItemActions.getItemsByCategorySuccess, (state, { items }) => ({
+    ...state,
+    items,
+    loading: false,
+    error: null,
+  })),
+  on(fromItemActions.getItemsByCategoryFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error,
+  }))
+);

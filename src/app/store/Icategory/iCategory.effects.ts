@@ -13,7 +13,7 @@ export class ICategoriesEffects {
       ofType(ICategoryActions.getICategoryStart),
       switchMap(({storeId }) =>
         this.itemServices.getListCategoryItem(storeId).pipe(
-          map((icategories) => { return ICategoryActions.getICategorySuccess({icategories})}),
+          map((icategories) =>  ICategoryActions.getICategorySuccess({icategories})),
           catchError((error) => of(ICategoryActions.getICategoryFailure({ error })))))
     )
   )

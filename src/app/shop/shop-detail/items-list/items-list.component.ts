@@ -6,13 +6,19 @@ import { Observable, Subscription, map, of } from 'rxjs';
 import { Item } from 'src/app/models/item.model';
 
 import * as fromApp from 'src/app/store/app.reducer';
-import { addItemStart, getItemsStart } from 'src/app/store/item/item.actions';
-import { getICategoryStart, getICategorySuccess } from 'src/app/store/Icategory/iCategory.actions';
+import {
+  addItemStart,
+  getItemsByCategoryStart,
+  getItemsStart,
+} from 'src/app/store/item/item.actions';
+import {
+  getICategoryStart,
+  getICategorySuccess,
+} from 'src/app/store/Icategory/iCategory.actions';
 
 import * as selectorsItem from './item.selectors';
 import * as selectorsICategory from './icategory.selectors';
 import { ICategory } from 'src/app/models/category.model';
-
 
 @Component({
   selector: 'app-items-list',
@@ -21,6 +27,10 @@ import { ICategory } from 'src/app/models/category.model';
 })
 export class ItemsListComponent implements OnInit {
   createMode: boolean = false;
+  addNewCategory: boolean = false;
+
+  selectby: any;
+  selectmode: boolean = false;
 
   selectedImage: any | null = null;
   base64String: string | null = null;
@@ -29,45 +39,94 @@ export class ItemsListComponent implements OnInit {
   $loading: Observable<boolean> | undefined;
   $error: Observable<any> | undefined;
 
-  IcategoriesMenu: any;
+  iCategoriesMenu: any | null;
+
   $icategories: Observable<ICategory[]> | undefined;
   categories: any[] = [];
- 
-  
 
   subscription: Subscription | undefined;
 
   @ViewChild('fileInput') fileInput: any;
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<fromApp.AppState>) {
+    const currentShopActive = localStorage.getItem('currentShopActive');
+    this.store.dispatch(getICategoryStart({ storeId: currentShopActive }));
+    this.$icategories = this.store.select(selectorsICategory.selectICategories);
+    this.$icategories.subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
 
   ngOnInit(): void {
+    // const currentShopActive = localStorage.getItem('currentShopActive');
+    // if ((!this.selectmode)) {
+    //   console.log(this.selectmode)
+    //   this.store.dispatch(getItemsStart({ storeId: currentShopActive }));
+    // } if ((this.selectmode)) {
+    //   this.store.dispatch(
+    //     getItemsByCategoryStart({
+    //       storeId: currentShopActive,
+    //       cate_id: this.selectby,
+    //     })
+    //   );
+    // }
     const currentShopActive = localStorage.getItem('currentShopActive');
     this.store.dispatch(getItemsStart({ storeId: currentShopActive }));
     this.$item = this.store.select(selectorsItem.selectItem);
     this.$loading = this.store.select(selectorsItem.selectItemLoading);
     this.$error = this.store.select(selectorsItem.selectItemError);
 
-    this.store.dispatch(getICategoryStart({ storeId: currentShopActive }));
     
-    this.$icategories = this.store.select(selectorsICategory.selectICategories)
-
-    this.$icategories.subscribe(categories => {
-      this.categories = categories;
-    });
-
-    
-
-    setTimeout(()=>{
-      console.log(this.categories)
-      this.categories.forEach(item => {
-        console.log(`id: ${item.id}, name: ${item.name}, store: ${item.store}`);
-      });
-    },300)
-    
+    // this.iCategoriesMenu = this.categories;
+    this.onSubCategories();
   }
 
+  onSubCategories() {
+    // setTimeout(() => {
+    //   this.iCategoriesMenu = this.categories;
+    // }, 300);
 
+    this.iCategoriesMenu = [];
+    setTimeout(() => {
+      this.categories.forEach((item) => {
+        this.iCategoriesMenu.push({
+          id: item.id,
+          name: item.name,
+          store: item.store,
+        });
+      });
+
+      // Add item at the beginning
+      this.iCategoriesMenu.unshift({ id: 0, name: 'All', store: null });
+
+      // Add item at the end
+      this.iCategoriesMenu.push({ id: 99, name: 'Create', store: null });
+    }, 300);
+  }
+
+  onCategorySelected(categoryId: number) {
+    const currentShopActive = localStorage.getItem('currentShopActive');
+
+    if (categoryId === 99) {
+      this.addNewCategory = true;
+    } else if (categoryId === 0) {
+      this.selectmode = false;
+      this.store.dispatch(getItemsStart({ storeId: currentShopActive }));
+    } else {
+      if (this.selectby !== categoryId) {
+        this.selectmode = true;
+        this.selectby = categoryId;
+        this.store.dispatch(
+          getItemsByCategoryStart({
+            storeId: currentShopActive,
+            cate_id: this.selectby,
+          })
+        );
+      }
+    }
+
+    
+  }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -112,5 +171,9 @@ export class ItemsListComponent implements OnInit {
         storeId: localStorage.getItem('currentShopActive'),
       })
     );
+  }
+
+  onCancelAdd(){
+    this.addNewCategory = false;
   }
 }

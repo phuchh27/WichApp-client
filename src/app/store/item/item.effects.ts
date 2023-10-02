@@ -35,6 +35,18 @@ export class ItemEffects {
     )
   );
 
+  getListItemByCategory$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ItemActions.getItemsByCategoryStart),
+      switchMap(({ storeId, cate_id }) =>
+        this.itemServices.getListItemByCategory(storeId,cate_id).pipe(
+          map((items) => ItemActions.getItemsByCategorySuccess({ items })),
+          catchError((error) => of(ItemActions.getItemsByCategoryFailure({ error })))
+        )
+      )
+    )
+  );
+
   
 
   constructor(private actions$: Actions, private itemServices: ItemService) {}

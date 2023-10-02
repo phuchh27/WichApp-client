@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-scrollable',
@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scrollable.component.css'],
 })
 export class ScrollableComponent implements OnInit {
+
+  @Input() categoriesMenu: {id: number; name: string; store: number}[]=[]
+  @Output() categorySelected: EventEmitter<number> = new EventEmitter();
+  
   constructor() {}
 
   ngOnInit(): void {
@@ -34,5 +38,14 @@ export class ScrollableComponent implements OnInit {
     stabsbox.addEventListener('mousedown', () => (isdragging = true));
     stabsbox.addEventListener('mousemove', dragging);
     document.addEventListener('mouseup', dragStop);
+
+    setTimeout(() => {console.log('from scroll bar: ',this.categoriesMenu)},350)
+    
+  }
+
+  
+
+  onCategoryClick(categoryId: number): void {
+    this.categorySelected.emit(categoryId);
   }
 }
