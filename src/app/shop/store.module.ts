@@ -12,7 +12,8 @@ import { StaffListComponent } from './shop-detail/staff-list/staff-list.componen
 import { ItemsListComponent } from './shop-detail/items-list/items-list.component';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import {ICategoriesReducer} from '../store/Icategory/iCategory.reducer'
+import {ICategoriesReducer} from '../store/Icategory/iCategory.reducer';
+import { WorkScheduleComponent } from './shop-detail/work-schedule/work-schedule.component'
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {ICategoriesReducer} from '../store/Icategory/iCategory.reducer'
     ShopDetailComponent,
     StaffListComponent,
     ItemsListComponent,
+    WorkScheduleComponent,
   ],
   imports: [
     RouterModule,

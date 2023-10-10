@@ -262,6 +262,7 @@
     right: 0;
     transform: translateX(110%);
     transition: transform 0.5s ease-in-out;
+    transition-delay: 0.3s;
 }
 
 .add-new-category.active{

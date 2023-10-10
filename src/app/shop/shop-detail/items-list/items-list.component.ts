@@ -109,6 +109,7 @@ export class ItemsListComponent implements OnInit {
 
     if (categoryId === 99) {
       this.addNewCategory = true;
+      this.createMode = false
     } else if (categoryId === 0) {
       this.selectmode = false;
       this.store.dispatch(getItemsStart({ storeId: currentShopActive }));
@@ -143,6 +144,7 @@ export class ItemsListComponent implements OnInit {
 
   onCreate() {
     this.createMode = true;
+    this.addNewCategory = false;
   }
 
   onCancel() {
