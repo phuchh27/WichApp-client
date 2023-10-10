@@ -21,6 +21,7 @@
     "@ngrx/effects": "^16.1.0",
     "@ngrx/store": "^16.1.0",
     "@ngx-translate/core": "^15.0.0",
+    "formdata-node": "^5.0.1",
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
     "primeng": "^16.0.2",

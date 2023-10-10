@@ -1,5 +1,13 @@
-<app-scrollable></app-scrollable>
+<app-scrollable [categoriesMenu]="iCategoriesMenu" (categorySelected)="onCategorySelected($event)"></app-scrollable>
 <div class="item_page">
+    <div  [ngClass]="{'add-new-category' : true, 'active': addNewCategory}">
+        <form action="" class="add-new-category_form">
+            <input type="text" placeholder="" class="add-new-category_input" placeholder="Category's name">
+
+            <button type="submit" class="add-new-category_btn-add"><img width="20px" height="20px" src="https://res.cloudinary.com/dm4renyes/image/upload/v1696264176/icons8-plus-math-40_xrc07l.png" alt=""></button>
+            <button type="button" (click)="onCancelAdd()" class="add-new-category_btn-cancel"><img width="20px" height="20px" src="https://res.cloudinary.com/dm4renyes/image/upload/v1696264176/icons8-multiply-40_x6ocnh.png" alt=""></button>
+        </form>
+    </div>
     <div class="search_box">
         <input type="text" class="search-text">
         <img width="35" height="35"
@@ -11,25 +19,13 @@
             (click)="onCancel()">Cancel</button>
     </div>
     <div class="item_list">
-        <div class="item_card">
+        <div class="item_card" *ngFor="let item of $item | async">
             <img width="64" height="64"
-                src="../../../../assets/images/icons8-goods-100.png"
-                alt="external-goods-soft-power-glyph-wichaiwi" />
-            <h2 class="item_name">Capucino</h2>
-            <p class="item_code">2651118951</p>
-            <p class="item_price">Price 20$</p>
-            <div class="item_action">
-                <a href>Detail</a>
-                <a href>Delete</a>
-            </div>
-        </div>
-        <div class="item_card">
-            <img width="64" height="64"
-                src="../../../../assets/images/icons8-goods-100.png"
-                alt="external-goods-soft-power-glyph-wichaiwi" />
-            <h2 class="item_name">Capucino</h2>
-            <p class="item_code">2651118951</p>
-            <p class="item_price">Price 20$</p>
+                [src]="item.image_link" alt="{{ item.name }}" />
+            <h2 class="item_name">{{item.name}}</h2>
+            <p class="item_code">{{item.code}}</p>
+            <p class="item_price">{{item.price}}</p>
+            <p class="item_price">{{item.cost}}</p>
             <div class="item_action">
                 <a href>Detail</a>
                 <a href>Delete</a>
@@ -45,7 +41,13 @@
             </div>
             <div class="form-field">
                 <input type="text" class="form-input" placeholder=" "
-                    required description id="description" name="description" ngModel>
+                    required code id="code" name="code" ngModel>
+                <label for="code" class="form-label">Item's code</label>
+            </div>
+            <div class="form-field">
+                <input type="text" class="form-input" placeholder=" "
+                    required description id="description" name="description"
+                    ngModel>
                 <label for="description" class="form-label">Description</label>
             </div>
             <div class="form-field">
@@ -64,10 +66,15 @@
                 <label for="quantity" class="form-label">Quantity</label>
             </div>
             <div class="add_img">
-                <img *ngIf="!imageURL" width="200" height="200" src="https://img.icons8.com/plasticine/100/image.png" alt="image"/>
-                <img *ngIf="imageURL" width="200" height="200" [src]="imageURL" alt="image"/>
+                <img *ngIf="!selectedImage" width="200" height="200"
+                    src="https://img.icons8.com/plasticine/100/image.png"
+                    alt="image" />
+                <img *ngIf="selectedImage" width="200" height="200"
+                    [src]="selectedImage" alt="image" />
                 <div class="add_button">
-                    <input type="file" id="itemimg" itemimg name="itemimg" ngModel accept="image/*" (change)="onFileSelected($event)" #fileInput>
+                    <input type="file" id="itemimg" itemimg name="itemimg"
+                        ngModel accept="image/*"
+                        (change)="onFileSelected($event)" #fileInput>
                     <label for="itemimg">Choose Image</label>
                     <button type="submit">Add</button>
                 </div>

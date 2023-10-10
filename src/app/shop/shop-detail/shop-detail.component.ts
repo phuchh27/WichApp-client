@@ -26,7 +26,7 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
       { label: 'Staff', link: `/ohome/store/${this.shopId}/staffs` },
       { label: 'Items', link: `/ohome/store/${this.shopId}/items` },
       { label: 'Store', link: '/store' },
-      { label: 'Work schedule', link: '/store' },
+      { label: 'Work schedule', link: `/ohome/store/${this.shopId}/workschedule` },
     ]
   }
   ngOnDestroy(): void {}

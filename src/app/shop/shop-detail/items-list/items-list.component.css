@@ -1,8 +1,10 @@
 .item_page{
     background-color: #d0e1f942;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    font-family: 'Comfortaa', cursive;
 }
 
 .search_box{
@@ -12,6 +14,7 @@
     align-items: center;
     position: relative;
     justify-content: center;
+    margin-top: 20px;
 
 }
 
@@ -49,6 +52,9 @@
 }
 .item_list{
     margin: 30px;
+    display: flex;
+    flex-wrap:wrap;
+    height:100%;
 }
 
 .item_card{
@@ -115,14 +121,14 @@
 .item_console-create{
     position: absolute;
     width: 414px;
-    height: 765px;
+    height: 780px;
     background-color: #ffffff;
     top: 5px;
     right: 0;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 20px 0 0 20px;
     border: 5px solid #4D648D;
-    transform: translateX(100%);
+    transform: translateX(110%);
     transition: transform 0.5s ease-in-out;
     transition-delay: 0.3s;
     display: flex;
@@ -142,6 +148,7 @@
 }
 .add_img img{
     border: 1px solid #283655;
+    padding-bottom: 15px;
 }
 .add_button{
     width: 184.4px;
@@ -158,14 +165,22 @@
 
 .add_button label{
     position: absolute;
-    bottom: 32px;
+    bottom: 100px;
     width: 100%;
-    background: #f19020;
+    background: #283655;
     padding: 8px 4px;
     color: white;
-    font-size: 14px;
+    font-size: 20px;
     text-align: center;
-    line-height: 30px;
+    line-height: 90px;
+    height: 100px;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.add_button label:hover{
+    background: #283655ef;
+    font-size: 22px;
 }
 
 
@@ -177,11 +192,18 @@
     bottom: 0;
     padding: 8px 4px;
     width: 100%;
-    border: #28365562 1px solid ;
-    background-color: #42ED17;
+    border: 0;
+    background-color: #31d109;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 20px;
     color: white;
+    height: 100px;
+    transition: .25s;
+}
+
+.add_button button:hover{
+    background-color: #42ED17;
+    font-size: 22px;
 }
 
 
@@ -230,6 +252,58 @@
     padding: 0 5px;
     display: inline-block;
     background-color: white;
+}
+
+.add-new-category{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    right: 0;
+    transform: translateX(110%);
+    transition: transform 0.5s ease-in-out;
+    transition-delay: 0.3s;
+}
+
+.add-new-category.active{
+    transform: translateX(0%);
+}
+
+.add-new-category_form{
+    display: flex;
+}
+
+
+
+.add-new-category_input{
+    width: 100%;
+    padding: 12px 20px;
+    border: 0px;
+    background-color: #445469;
+    outline: none;
+    color: #eee;
+    font-size: 14px;
+}
+
+.add-new-category button{
+    width: 40px;
+    height: 40px;
+    border: 0px;
+    cursor: pointer;
+}
+.add-new-category_btn-add{
+    background-color: #31d10986;
+}
+.add-new-category_btn-add:hover{
+    background-color: #31d109;
+}
+
+.add-new-category_btn-cancel{
+    background-color: #fd20207d;
+}
+
+.add-new-category_btn-cancel:hover{
+    background-color: #fd2020;
 }
 
 

@@ -1,0 +1,92 @@
+
+
+.work_body-staff_schedule{
+    width: min(900px, 100% - 3rem);
+    margin-inline: auto;
+}
+
+.staff_schedule-tablee{
+    max-width: 100%;
+    overflow: auto;
+}
+
+table{
+    background-color: #fff;
+    border-collapse: collapse ;
+    width: 100%;
+}
+
+caption,th,td{
+    padding: 1rem;
+}
+
+caption, th{
+    text-align: left;
+}
+
+caption{
+    background: hsl(0, 0%, 0%);
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+th{
+    background: hsl(0 0% 0% / 0.5);
+}
+
+tr:nth-of-type(2n){
+    background: hsl(0 0% 0% / 0.1);
+}
+
+@media (max-width: 650px){
+
+    th{
+        display: none;
+    }
+
+    td{
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 15ch auto;
+        padding: 0.5rem 1rem;
+    }
+
+    td:first-child{
+        padding-top: 2rem;
+    }
+
+    td:last-child{
+        padding-bottom: 2rem;
+    }
+
+    td::before {
+        /* content: attr(data-cell) ": "; */
+        font-weight: 700;
+        text-transform: capitalize;
+        
+    }
+
+    td:nth-of-type(1)::before{
+        content: "name" ": ";
+    }
+    td:nth-of-type(2)::before{
+        content: "image" ": ";
+    }
+    td:nth-of-type(3)::before{
+        content: "email" ": ";
+    }
+    td:nth-of-type(4)::before{
+        content: "phone" ": ";
+    }
+    td:nth-of-type(5)::before{
+        content: "status" ": ";
+    }
+    td:nth-of-type(6)::before{
+        content: "time" ": ";
+    }
+    td:nth-of-type(7)::before{
+        content: "late" ": ";
+    }
+}

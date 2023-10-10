@@ -1,16 +1,17 @@
-.store-page{
-    height: auto; 
-  max-height: 100%; 
-  /* overflow-y: auto; */
+.store-page {
+    height: auto;
+    max-height: 100%;
+    font-family: 'Comfortaa', cursive;
+    /* overflow-y: auto; */
 }
 
-.store-body{
+.store-body {
     height: auto;
     display: flex;
     min-height: 800px;
 }
 
-.stores_section{
+.stores_section {
     height: auto;
     width: 100%;
 

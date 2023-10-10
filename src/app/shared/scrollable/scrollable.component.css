@@ -67,6 +67,7 @@
     height: 25px;
     font-weight: bold;
     color: aliceblue;
+    min-width: 100px;
 }
 
 .tab-box .tab:hover{

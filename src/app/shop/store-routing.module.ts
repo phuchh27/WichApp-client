@@ -5,6 +5,7 @@ import { CreateStoreComponent } from './create-store/create-store.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { StaffListComponent } from './shop-detail/staff-list/staff-list.component';
 import { ItemsListComponent } from './shop-detail/items-list/items-list.component';
+import { WorkScheduleComponent } from './shop-detail/work-schedule/work-schedule.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'items',
         component : ItemsListComponent
+      },
+      {
+        path:'workschedule',
+        component: WorkScheduleComponent
       }
     ]
   },
