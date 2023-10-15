@@ -113,7 +113,13 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.authenticateSuccess),
-        tap((action) => action.redirrect && this.router.navigate(['/ohome']))
+        tap((action) => {
+          if (action.is_staff) {
+            this.router.navigate(['/staff-page']);
+          } else if (action.is_owner) {
+            this.router.navigate(['/ohome']);
+          }
+        })
       ),
     { dispatch: false }
   );
