@@ -77,6 +77,22 @@ export const getItemsByCategoryFailure = createAction(
     props<{ error: any }>()
 )
 
+//For staff
+export const getItemsForStaffStart = createAction(
+    ' [Item] Get Items For Staff Start',
+    props<{ storeId: string | null }>()
+)
+
+export const getItemsForStaffSuccess = createAction(
+    ' [Item] Get Items For Staff Success',
+    props<{ items: Item[] }>()
+)
+
+export const getItemsForStaffFailure = createAction(
+    ' [Item] Get Items For Staff Failure',
+    props<{ error: any }>()
+)
+
 
 
 

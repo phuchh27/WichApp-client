@@ -16,7 +16,7 @@ import {
   getICategorySuccess,
 } from 'src/app/store/Icategory/iCategory.actions';
 
-import * as selectorsItem from './item.selectors';
+import * as selectorsItem from '../../../selectors/item.selectors';
 import * as selectorsICategory from './icategory.selectors';
 import { ICategory } from 'src/app/models/category.model';
 

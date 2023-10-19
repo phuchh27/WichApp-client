@@ -28,3 +28,8 @@ export const getStaffFailure = createAction(
   '[Staff] Get Staff Failure',
   props<{ error: any }>()
 );
+export const getStoreId = createAction('[Store] Get Store ID');
+export const setStoreId = createAction(
+  '[Store] Set Store ID',
+  props<{ storeId: string }>()
+);

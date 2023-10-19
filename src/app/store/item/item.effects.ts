@@ -35,6 +35,18 @@ export class ItemEffects {
     )
   );
 
+  getListItemForStaff$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ItemActions.getItemsForStaffStart),
+      switchMap(({ storeId }) =>
+        this.itemServices.getListItemForStaff(storeId).pipe(
+          map((items) => ItemActions.getItemsForStaffSuccess({ items })),
+          catchError((error) => of(ItemActions.getItemsForStaffFailure({ error })))
+        )
+      )
+    )
+  );
+
   getListItemByCategory$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ItemActions.getItemsByCategoryStart),

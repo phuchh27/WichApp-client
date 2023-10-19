@@ -1,0 +1,48 @@
+<div class="item_component">
+    <div class="item_body">
+        <div class="add_bill">
+            <button type="button" (click)="onAddBill()" class="add_bill-btn">Add
+                Bill</button>
+        </div>
+        <div class="item_list" *ngIf="$item | async as items">
+            <div class="item_card"
+                *ngFor="let item of items.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)">
+                <img width="64" height="64"
+                    [src]="item.image_link" alt="{{ item.name }}" />
+                <div class="content">
+                    <h2 class="item_name">{{item.name}}</h2>
+                    <p class="item_code">{{item.code}}</p>
+                    <p class="item_price">Price: {{item.price}}</p>
+                </div>
+                <div class="item_action">
+                    <a href>Detail</a>
+                    <a href>Delete</a>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="$item | async as items" class="paginator">
+            <mat-paginator
+                [length]="length"
+                [pageSize]="itemsPerPage"
+                (page)="onPageChange($event)">
+
+            </mat-paginator>
+        </div>
+
+    </div>
+
+    <div #bill [ngClass]="{'bill_console' : true, 'active':showOrHidenBillConsole}">
+        <img class="close" width="25" height="25"
+            src="https://img.icons8.com/stencil/25/delete-sign.png"
+            alt="delete-sign" (click)="onHideAddBill()" />
+        <img class="print" width="30" height="30"
+            src="https://img.icons8.com/dotty/30/print.png" alt="print" (click)="onPrint()" />
+        <div class="line"></div>
+        <div class="boder"></div>
+        <img
+            src="https://api.vietqr.io/image/970423-0764320293-7885c1e.jpg?accountName=HOANGPHUC&amount=020000"
+            alt="bank">
+    </div>
+
+</div>

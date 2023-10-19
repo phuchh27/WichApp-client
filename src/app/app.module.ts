@@ -26,6 +26,8 @@ import { StaffEffects } from './store/staff/staff.effects';
 import { PaymentEffects } from './store/payment/payment.effects';
 import { ItemEffects } from './store/item/item.effects';
 import { ICategoriesEffects } from './store/Icategory/iCategory.effects';
+import { QRCodeModule } from 'angularx-qrcode';
+
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { ICategoriesEffects } from './store/Icategory/iCategory.effects';
       PaymentEffects,
       ItemEffects,
       ICategoriesEffects,
+      QRCodeModule
     ]),
     CoreModule,
     SharedModule,

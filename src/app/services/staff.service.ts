@@ -20,4 +20,8 @@ export class StaffService {
     return this.http.get(url);
   }
 
+  getStoreId(): Observable<string> {
+    return this.http.get<string>(`${this.baseUrl}/get-store/`);
+  }
+
 }

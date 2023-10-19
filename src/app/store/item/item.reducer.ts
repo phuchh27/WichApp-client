@@ -62,5 +62,22 @@ export const itemReducer = createReducer(
     ...state,
     loading: false,
     error: error,
-  }))
+  })),
+
+  on(fromItemActions.getItemsForStaffStart, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(fromItemActions.getItemsForStaffSuccess, (state, { items }) => ({
+    ...state,
+    items,
+    loading: false,
+    error: null,
+  })),
+  on(fromItemActions.getItemsForStaffFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error,
+  })),
 );

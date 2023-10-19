@@ -5,6 +5,7 @@ import {
   getStaffSuccess,
   registerStaff,
   startGetStaff,
+  setStoreId,
 } from './staff.actions';
 import { Staffs } from 'src/app/models/staff.models';
 
@@ -12,11 +13,13 @@ export interface State {
   staffs: Staffs[];
   loading: boolean;
   error: string | null;
+  storeId: string | null;
 }
 const initialState: State = {
   staffs: [],
   loading: false,
   error: null,
+  storeId: null,
 };
 
 export const staffReducer = createReducer(
@@ -36,5 +39,6 @@ export const staffReducer = createReducer(
     ...state,
     loading: false,
     error,
-  }))
+  })),
+  on(setStoreId, (state, { storeId }) => ({ ...state, storeId }))
 );

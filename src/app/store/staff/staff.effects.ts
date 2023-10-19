@@ -28,10 +28,31 @@ export class StaffEffects {
   getStaffs$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StaffActions.startGetStaff),
-      switchMap(({storeId}) =>
+      switchMap(({ storeId }) =>
         this.staffService.getStaffs(storeId).pipe(
           map((staffs) => StaffActions.getStaffSuccess({ staffs })),
           catchError((error) => of(StaffActions.getStaffFailure({ error })))
+        )
+      )
+    )
+  );
+
+  getStoreId$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StaffActions.getStoreId),
+      mergeMap(() =>
+        this.staffService.getStoreId().pipe(
+          map((result) => {
+
+            console.log('Received storeId:', result);
+            
+            
+
+            localStorage.setItem('storeId', JSON.stringify(result))
+
+            
+            return StaffActions.setStoreId({ storeId: result });
+          })
         )
       )
     )
