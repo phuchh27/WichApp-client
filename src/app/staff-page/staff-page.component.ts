@@ -12,6 +12,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./staff-page.component.css'],
 })
 export class StaffPageComponent implements OnInit {
+
+  loading: boolean = true;
+  
   checkStaff: boolean | undefined;
 
   message: string = '';
@@ -20,6 +23,8 @@ export class StaffPageComponent implements OnInit {
   storeId$: Observable<string | null> | undefined;
   storeId: string | null = null;
   items: any[] = [];
+
+  menuItems:any
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -42,6 +47,15 @@ export class StaffPageComponent implements OnInit {
       const getstaff = JSON.parse(userdata);
       this.checkStaff = getstaff.is_staff;
     }
+
+    this.menuItems = [
+      { label: 'Back', link: `/staff-page/` },
+      { label: 'Bills', link: `/staff-page/bills` },
+      { label: 'Items', link: `/staff-page/items` },
+      { label: 'Work schedule', link: `/staff-page` },
+    ]
+
+    
 
     if (this.checkStaff) {
       console.log('isStaff');
@@ -69,6 +83,11 @@ export class StaffPageComponent implements OnInit {
     // } else {
     //   console.error('store_id is null. Cannot send to the WebSocket.');
     // }
+
+
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
 
   

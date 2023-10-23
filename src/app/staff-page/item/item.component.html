@@ -16,7 +16,7 @@
                 </div>
                 <div class="item_action">
                     <a href>Detail</a>
-                    <a href>Delete</a>
+                    <button  type="button" (click)="onAddToBill(item)" [disabled]="!showOrHidenBillConsole" >Add</button>
                     <div class="line"></div>
                 </div>
             </div>
@@ -32,16 +32,69 @@
 
     </div>
 
-    <div #bill [ngClass]="{'bill_console' : true, 'active':showOrHidenBillConsole}">
+    <div #bill
+        [ngClass]="{'bill_console' : true, 'active':showOrHidenBillConsole}">
         <img class="close" width="25" height="25"
             src="https://img.icons8.com/stencil/25/delete-sign.png"
             alt="delete-sign" (click)="onHideAddBill()" />
         <img class="print" width="30" height="30"
-            src="https://img.icons8.com/dotty/30/print.png" alt="print" (click)="onPrint()" />
+            src="https://img.icons8.com/dotty/30/print.png" alt="print"
+            (click)="onPrint()" />
+        <img class="save-bill" src="../../../assets/images/icons8-save-30.png" alt="save--v1" (click)="onSaveBill()"/>
         <div class="line"></div>
         <div class="boder"></div>
+
+        <!-- <div class="bill_body" *ngFor="let billItem of billview">
+            <p>{{ billItem.name }} - {{ billItem.quantity }} - 
+                {{ billItem.price }}</p>
+        </div> -->
+        <!-- <mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let billItem">{{ billItem.name }}</td>
+              </ng-container>
+              
+              <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                <td mat-cell *matCellDef="let billItem">{{ billItem.quantity }}</td>
+              </ng-container>
+              
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef>Price</th>
+                <td mat-cell *matCellDef="let billItem">{{ billItem.price }}</td>
+              </ng-container>
+              
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+          </mat-table> -->
+
+          <div>
+            <p>ID: {{ billview.id }} - Total: {{ billview.Total }}</p>
+        
+            <!-- Iterate over the items property in each Bill object -->
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Price</th>
+                </tr>
+                <tr *ngFor="let billItem of billview.items">
+                    <td>{{ billItem.name }}</td>
+                    <td>{{ billItem.quantity }}</td>
+                    <td>{{ billItem.price }}</td>
+                    <td>{{ billItem.total }}</td>
+                </tr>
+            </table>
+            <h2>Total : {{billview.Total}}</h2>
+        </div>
+          
+       
         <img
-            src="https://api.vietqr.io/image/970423-0764320293-7885c1e.jpg?accountName=HOANGPHUC&amount=020000"
+            [src]="'https://api.vietqr.io/image/970423-0764320293-7885c1e.jpg?accountName=Shop1&amount=' + billTotal"
             alt="bank">
     </div>
 

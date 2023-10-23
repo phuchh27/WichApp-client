@@ -1,0 +1,42 @@
+.loading{
+    height: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #283655;
+}
+
+.construction-house {
+    /* Đặt hình ảnh căn nhà xây dựng */
+    background: url('../../assets/images/icons8-warehouse.gif') center center no-repeat;
+    width: 70px; /* Thay đổi kích thước theo ý muốn */
+    height: 70px;
+    background-size: 100% auto;
+    animation: blink 1s infinite alternate;
+    margin: 0;
+  }
+
+  .blink {
+    animation: blink 1s infinite alternate;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+  }
+  
+  @keyframes blink {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.2;
+    }
+  }
+
+.staff-page{
+    min-height: 900px;
+    width: 100%;
+    text-align: center;
+}

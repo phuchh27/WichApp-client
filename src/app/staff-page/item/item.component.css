@@ -1,5 +1,5 @@
-.item_component{
-    
+.item_component {
+
     padding: 30px 0;
     display: flex;
     justify-content: center;
@@ -7,29 +7,29 @@
     overflow-x: hidden;
 }
 
-.add_bill{
+.add_bill {
     width: 100%;
     display: flex;
     align-items: center;
-}   
+}
 
-.add_bill-btn{
+.add_bill-btn {
     margin: 15px auto;
     border: 0px;
-    padding: 12px 24px ;
+    padding: 12px 24px;
     width: 200px;
     color: white;
-    background-color:#283655 ;
+    background-color: #283655;
     font-size: 16px;
     font-weight: bold;
     border-radius: 5px;
 }
 
-.add_bill-btn:hover{
+.add_bill-btn:hover {
     background-color: #283655e1;
 }
 
-.item_list{
+.item_list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -37,53 +37,73 @@
     gap: 10px;
 }
 
-.item_card{
+.item_card {
     min-width: 200px;
     box-shadow: 2px 3px 5px #918e8e;
 }
 
-img{
+img {
     width: 200px;
     height: 200px;
 }
 
-.content{
+.content {
     padding: 5px;
     text-transform: capitalize;
     text-align: center;
 }
 
-.paginator{
+.paginator {
     margin: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.item_action{
+.item_action {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.item_action a:hover{
+.item_action a:hover {
     background-color: rgba(112, 128, 144, 0.411);
 }
 
-.item_action a{
+.item_action a {
     width: 100%;
     height: 30px;
     line-height: 30px;
     text-align: center;
-    
+
 }
 
-.item_action a:first-child{
+.item_action button {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 0px;
+    background-color: #FFFFFFFF;
+    transition: all 0.25;
+}
+
+.item_action button:hover {
+    background-color: rgba(112, 128, 144, 0.411);
+}
+
+.item_action button:disabled{
+    background-color: #FFFFFFFF;
+}
+
+
+
+.item_action a:first-child {
     border-right: 1px solid rgba(112, 128, 144, 0.411);
 }
 
-.bill_console{
+.bill_console {
     background-color: #FFFFFFFF;
     width: 400px;
     height: 600px;
@@ -91,47 +111,68 @@ img{
     right: 0;
     top: -30px;
     transform: translateX(110%);
-    border-left: 1px solid ;
+    border-left: 1px solid;
+    padding-top: 70px;
 }
 
 
 
-.bill_console.active{
+.bill_console.active {
     transform: translateX(0%);
     position: relative;
 }
-.bill_console img:first-child{
+
+.bill_console img:first-child {
     position: absolute;
     width: 25px;
     height: 25px;
     right: 30px;
+    top: 5px;
     transition: all .2s;
 }
 
-.bill_console img:first-child:hover{
+.bill_console img:first-child:hover {
     transform: rotate(90deg);
     cursor: pointer;
 }
-.bill_start img:last-child{
+
+.bill_start img:last-child {
     position: absolute;
     width: 25px;
     height: 25px;
     right: 60px;
 }
 
-.print{
+.print {
     position: absolute;
     height: 25px;
     width: 25px;
     right: 70px;
     transition: all .2s;
+    top: 5px;
 }
-.print:hover{
+
+.save-bill{
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    right: 110px;
+    transition: all .2s;
+    top: 5px;
+}
+
+.save-bill:hover{
+    scale: 1.2;
+    cursor: pointer;
+    transform: rotate(8deg);
+}
+
+.print:hover {
     scale: 1.5;
     cursor: pointer;
 }
 
-.bill_console img:last-child{
+.bill_console img:last-child {
     position: absolute;
     bottom: 0;
     mix-blend-mode: multiply;
@@ -139,15 +180,18 @@ img{
     width: 200px;
     height: 200px;
 }
-.line{
+
+.line {
     width: 1px;
     height: 25px;
     position: absolute;
     background-color: #28365560;
     right: 63px;
     opacity: 80%;
+    top: 5px;
 }
-.boder{
+
+.boder {
     height: 1px;
     width: 100%;
     background-color: #2836555e;
@@ -155,40 +199,64 @@ img{
     top: 38px;
 }
 
+.bill_body {
+    margin-top: 16px;
+    margin-left: 20px;
+}
+
+table{
+    width: 100%;
+    text-align: center;
+    margin: 0 15px;
+    text-transform: capitalize;
+}
+
+caption{
+    margin: 30px;
+}
+
+h2{
+    text-align: center;
+    font-size: 16px;
+}
+
 @media print {
 
-    .bill_console img:first-child{
+    .bill_console img:first-child {
         position: absolute;
         width: 25px;
         height: 25px;
         right: 30px;
         transition: all .2s;
     }
-    
-    .bill_console img:first-child:hover{
+
+    .bill_console img:first-child:hover {
         transform: rotate(90deg);
         cursor: pointer;
     }
-    .bill_start img:last-child{
+
+    .bill_start img:last-child {
         position: absolute;
         width: 25px;
         height: 25px;
         right: 60px;
     }
-    
-    .print{
+
+    .print {
         position: absolute;
         height: 25px;
         width: 25px;
         right: 70px;
         transition: all .2s;
     }
-    .print:hover{
+
+
+    .print:hover {
         scale: 1.5;
         cursor: pointer;
     }
-    
-    .bill_console img:last-child{
+
+    .bill_console img:last-child {
         position: absolute;
         bottom: 0;
         mix-blend-mode: multiply;
@@ -196,7 +264,8 @@ img{
         width: 200px;
         height: 200px;
     }
-    .line{
+
+    .line {
         width: 1px;
         height: 25px;
         position: absolute;
@@ -204,7 +273,8 @@ img{
         right: 63px;
         opacity: 80%;
     }
-    .boder{
+
+    .boder {
         height: 1px;
         width: 100%;
         background-color: #2836555e;

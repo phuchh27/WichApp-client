@@ -1,3 +1,11 @@
-<p>staff-page works!</p>
+<div class="loading" *ngIf="loading;">
+    <div class="construction-house">
+    </div>
+    <p class="blink">loading.....</p>
+</div>
 
-<app-item></app-item>
+<div *ngIf="!loading;" class="staff-page">
+    <app-sub-nav [menuItems]="menuItems"></app-sub-nav>
+    <router-outlet></router-outlet>
+    <!-- <app-item></app-item> -->
+</div>

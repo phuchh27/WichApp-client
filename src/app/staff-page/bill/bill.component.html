@@ -1,1 +1,6 @@
 <p>bill works!</p>
+
+<div *ngFor="let bill of billList; let i = index">
+    <p>ID: {{ i + 1 }} - Total: {{ bill.billTotal }}</p>
+</div>
+  

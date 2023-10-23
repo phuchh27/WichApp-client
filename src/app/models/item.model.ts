@@ -4,7 +4,7 @@ export class Item {
     code : string | null;
     description: string;
     cost: any;
-    price: any;
+    price: number;
     quantity: number;
     image :string | null;
     image_link?: any |null;
