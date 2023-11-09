@@ -1,6 +1,115 @@
-<p>bill works!</p>
+<section class="bills_section">
 
-<div *ngFor="let bill of billList; let i = index">
-    <p>ID: {{ i + 1 }} - Total: {{ bill.billTotal }}</p>
-</div>
-  
+  <div>
+    <div *ngIf="$listbill | async as bills" class="list_bills">
+      <div *ngFor="let bill of bills " class="card_bill">
+        <div class="bill-start">
+          <p>QR pay:</p>
+          <img class="qr-pay"
+            [src]="'https://api.vietqr.io/image/970423-0764320293-7885c1e.jpg?accountName=Shop1&amount=' + bill.total_amount"
+            alt="bank">
+          <p>Thank you !!!</p>
+        </div>
+        <div class="bill-end">
+          <p> {{bill.employee_id }}</p>
+          <p>Total Amount: {{ bill.total_amount }}</p>
+          <button class="btn-detail"
+            (click)="onDetail(bill.id,bill.total_amount)">Detail</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noBills>
+    <p>The store doesn't have any bills.</p>
+  </ng-template>
+
+  <div *ngIf="showDetail" class="bill_detail">
+    <div class="detail_body">
+      <img class="btn_close_detail"
+        src="../../../assets/images/icons8-close-40.png" alt="close-img"
+        (click)="onCloseDetail()">
+      <div class="content">
+        <div class="content-start">
+          <div class="title">Cart Item Detail</div>
+
+          <div class="table-colum">
+            <p>NO. </p>
+            <p>Name</p>
+            <p>Price</p>
+            <p>Quantity</p>
+          </div>
+        </div>
+        <div *ngIf="!onEdit">
+          <div class="cart-data"
+            *ngFor=" let bill of $billDetail| async; let i = index">
+            <p>{{i+1}}</p>
+            <p>{{bill.product.name}}</p>
+            <p>{{bill.product.price}}</p>
+            <p>
+              {{bill.quantity}}
+            </p>
+          </div>
+        </div>
+        <div *ngIf="onEdit">
+          <div class="cart-data"
+            *ngFor=" let bill of billEditing; let i = index">
+            <p>{{i+1}}</p>
+            <p>{{bill.product.name}}</p>
+            <p>{{bill.product.price}}</p>
+            <p class="quantity">
+              <img class="quantity_plus" width="26" height="26"
+                src="https://img.icons8.com/stickers/30/plus.png"
+                (click)="onplus(i,bill.product.price)" alt="plus" />
+              {{bill.quantity}}
+              <img class="quantity_minus" width="26" height="26"
+                (click)="ondel(i,bill.product.price)"
+                src="https://img.icons8.com/stickers/30/minus.png" alt="minus" />
+            </p>
+          </div>
+        </div>
+        <h3>Total: {{billtotal}} VND</h3>
+      </div>
+      <div *ngIf="del" class="del-confirm">
+        <img class="del-confirm-cancel" width="30" height="30"
+          src="../../../assets/images/icons8-close-40.png" alt="close-img"
+          (click)="onCancelDel()">
+        <p>Are you sure for detale this bill</p>
+        <div class="del-confirm-body">
+          <mat-form-field class="del-confirm-field">
+            <mat-label>Enter the reason to delete this bill</mat-label>
+            <input matInput type="text" [(ngModel)]="value">
+            <ng-container *ngIf="value">
+              <button matSuffix mat-icon-button aria-label="Clear"
+                (click)="value=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </ng-container>
+          </mat-form-field>
+          <button class="btn-del-bill" *ngIf="value" (click)="onDelBill()">
+            <img width="50" height="50"
+              src="https://img.icons8.com/stickers/60/delete-forever.png"
+              alt="delete-forever" />
+            <p>
+              Delete this Bill
+            </p>
+          </button>
+          <button class="btn-cant-del-bill" *ngIf="!value">
+            <img width="50" height="50"
+              src="https://img.icons8.com/stickers/60/filled-trash.png"
+              alt="filled-trash" />
+            <p>
+              Can't delete this Bill
+            </p>
+          </button>
+        </div>
+
+      </div>
+      <div class="actions">
+        <button class="btn-pay">Pay</button>
+        <button *ngIf="!onEdit" class="btn-edit" (click)="onedit()">Edit</button>
+        <button *ngIf="onEdit" class="btn-edit" (click)="onSave()">Save</button>
+        <button class="btn-del" (click)="onDel()">Del</button>
+      </div>
+    </div>
+  </div>
+</section>

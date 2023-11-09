@@ -1,55 +1,61 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Bill, BillItem } from '../models/bill.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { BillData, BillItem, Bills, CartItem } from '../models/bill.model';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class BillService {
-//   private billItemsSubject = new BehaviorSubject<BillItem[]>([]);
-//   billItems$ = this.billItemsSubject.asObservable();
+@Injectable({
+  providedIn: 'root'
+})
+export class BillService {
 
-//   private currentItems: BillItem[] = [];
+  
 
-//   constructor() {}
+  private apiUrl = 'http://127.0.0.1:8000';
 
-  //   createBill() {
-  //     const newBill: Bill = {
-  //       id: generateRandomId(10),
-  //       items: [],
-  //       Total: 0,
-  //     };
-  //     this.billSubject.next(newBill);
-  //   }
+  constructor(private http: HttpClient) {}
 
-//   addItemToBill(item: BillItem) {
-//     const existingItem = this.currentItems.find(
-//       (billItem) => billItem.name === item.name
-//     );
+  createBill(data: any): Observable<any> {
+    console.log('request data: ',data);
+    return this.http.post<any>(`${this.apiUrl}/bills/createBill/`, data);
+  }
 
-//     if (existingItem) {
-//       existingItem.quantity += 1;
-//     } else {
-//       const newBillItem: BillItem = {
-//         name: item.name,
-//         price: item.price,
-//         quantity: 1,
-//       };
-//       this.currentItems.push(newBillItem);
-//       this.billItemsSubject.next([...this.currentItems]);
-//     }
-//   }
-// }
+  getBills(): Observable<Bills[]> {
+    const url = `${this.apiUrl}/bills/bills/by-store/`;
+    return this.http.get<Bills[]>(url);
+  }
 
-// function generateRandomId(length: number): string {
-//   const characters =
-//     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-//   let result = '';
+  getBillDetail(bill_id: string): Observable<CartItem[]> {
+    const url = `${this.apiUrl}/bills/bill-detail/${bill_id}/`;
+    return this.http.get<CartItem[]>(url);
+  }
 
-//   for (let i = 0; i < length; i++) {
-//     const randomIndex = Math.floor(Math.random() * characters.length);
-//     result += characters.charAt(randomIndex);
-//   }
+  saveBill(bill_id: string, billEditing: CartItem[], billtotal: number): Observable<any> {
+    const payload = { bill_id, billEditing, billtotal };
+    return this.http.post(`${this.apiUrl}/bills/update_bill/`, payload);
+  }
 
-//   return result;
-// }
+  deleteBill(bill_id: string): Observable<any> {
+    const url = `${this.apiUrl}/bills/delete_bill/${bill_id}/`;
+    return this.http.delete(url);
+  }
+
+}
+
+export function convertToBillData(billView: any): BillData {
+  const billDetails = billView.items.map((item: BillItem) => ({
+    product: {
+      id : item.id,
+      name: item.name,
+      price: item.price,
+    },
+    quantity: item.quantity,
+  }));
+
+  return {
+    total_amount: billView.Total.toString(),
+    bill_details: billDetails,
+  };
+}
+
+
+

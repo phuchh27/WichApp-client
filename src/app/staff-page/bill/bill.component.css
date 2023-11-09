@@ -1,0 +1,367 @@
+.bills_section {
+    width: 100%;
+    height: 100vh;
+    padding: 20px 15px;
+    margin: 0 auto;
+    min-height: 800px;
+    position: relative;
+}
+
+
+.list_bills {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    max-width: 1440px;
+}
+
+.card_bill {
+    width: 150px;
+    min-width: 200px;
+    height: auto;
+    min-height: 250px;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    overflow-x: hidden;
+    box-shadow: 2px 3px 5px #918e8e;
+}
+
+.bill-start,
+.bill-end {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: transform 0.5s ease;
+    background-color: aliceblue;
+}
+
+.btn-detail{
+    width: 100%;
+    border: 0px;
+    padding: 12px;
+    margin-top: 75px;
+    background-color: #17C6ED;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all .2s;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.btn-detail:hover{
+    color: #17C6ED;
+    background-color: #333;
+}
+
+.bill-start {
+    height: 100%;
+    width: 200px;
+    margin: 0 auto;
+    z-index: 0;
+}
+
+.qr-pay {
+    width: 150px;
+    height: 150px;
+}
+
+.bill-end {
+    padding: 15px;
+    height: 100%;
+    width: 200px;
+    z-index: 1;
+}
+
+.bill-end {
+    transform: translateX(100%);
+}
+
+.card_bill:hover .bill-end {
+    transform: translateX(0);
+}
+
+.bill_detail {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #b1b0b047;
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+}
+
+.detail_body{
+    width: 100%;
+    height: 500px;
+    background-color: white;
+    position: relative;
+}
+
+.content{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-start{
+
+}
+
+.title{
+    font-weight: 500;
+    font-size: 24px;
+    text-align:center;
+}
+
+.cart-data{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.cart-data p{
+    width: 100px;
+}
+
+.table-colum{
+    margin-top: 70px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.table-colum p{
+    width: 100px;
+}
+
+.actions{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50px;
+    top: 0;
+    left: 0;
+    background-color: #918e8e;
+}
+
+.actions button{
+    flex: 1;
+    border: 0px;
+}
+
+.btn-pay{
+    background-color:#93b958;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    transition: all 0.2s ;
+}
+
+.btn-pay:hover{
+    background-color:#333;
+    color: #0e5122;
+}
+
+.btn-edit{
+    background-color:#FFAA33;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    transition: all 0.2s ;
+}
+
+.btn-edit:hover{
+    background-color:#333;
+    color: #FF5733;
+}
+
+.btn-del{
+    background-color: #ff3333;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    transition: all 0.2s ;
+}
+
+.btn-del:hover{
+    background-color:#333;
+    color: #ff3333;
+}
+
+.content{
+    position: relative;
+    width: 100%;
+}
+
+.detail-item{
+    width: 100%;
+    height: 100%;
+}
+
+.del-confirm{
+    position: absolute;
+    width: 100%;
+    background-color: #ff3333ce;
+    height: 167px;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.del-confirm p:first-child{
+    color: white;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.del-confirm-cancel{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transition: all 0.25s;
+    cursor: pointer;
+}
+
+.del-confirm-cancel:hover{
+    scale: 1.1;
+}
+
+.del-confirm-field{
+    width: 400px;
+}
+
+.del-confirm-body{   
+    display: flex;
+}
+
+.btn-del-bill{
+    margin-left: 15px;
+    border-radius: 8px;
+    min-width: 150px;
+    padding:0 12px;
+    height: 99px;
+    border: 0px;
+    background-color: #ff3333;
+    display: flex;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.btn-del-bill:hover{
+    background-color: #333;
+    color: #ff7575;
+    box-shadow: rgba(252, 111, 111, 0.25) 0px 50px 100px -20px, rgba(161, 60, 60, 0.3) 0px 30px 60px -30px, rgba(15, 54, 93, 0.35) 0px -2px 6px 0px inset;
+    
+}
+
+.btn-cant-del-bill{
+    margin-left: 15px;
+    border-radius: 8px;
+    min-width: 150px;
+    padding:0 12px;
+    height: 55px;
+    border: 0px;
+    background-color: #9aa2e6;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor:not-allowed;
+    transition: all .2s;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.btn-cant-del-bill:hover{
+    background-color: #333;
+    color: #9aa2e6;
+    box-shadow: rgba(154, 162, 230, 0.568) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.724) 0px -2px 6px 0px inset;
+}
+
+.btn_close_detail{
+    position: absolute;
+    top:15px;
+    right: 15px;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.btn_close_detail:hover{
+    scale: 1.1;
+}
+
+.detail-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    border-bottom: 1px solid slategrey;
+    max-width: 500px;
+}
+
+.detail-product{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.quantity{
+    position: relative;
+}
+
+.quantity_plus{
+    position: absolute;
+    left: 10px;
+    top: -3px;
+    cursor: pointer;
+    transition: all .2s;
+}
+.quantity_plus:hover{
+    scale: 1.1;
+}
+
+.quantity_minus{
+    position: absolute;
+    right: 10px;
+    top: -3px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.quantity_minus:hover{
+    scale: 1.1;
+}
+
+
+
+
+
+
+

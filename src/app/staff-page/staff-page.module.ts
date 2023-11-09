@@ -14,7 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 // import { ItemsModule } from './item/item.module';
 
 @NgModule({
-  declarations: [StaffPageComponent,BillComponent, WorkScheduleComponent],
-  imports: [RouterModule,CommonModule, StaffPageRoutingModule, ItemComponent,QRCodeModule,SharedModule],
+  declarations: [StaffPageComponent, WorkScheduleComponent],
+  imports: [RouterModule,CommonModule, StaffPageRoutingModule, ItemComponent,QRCodeModule,SharedModule,BillComponent],
 })
 export class StaffPageModule {}

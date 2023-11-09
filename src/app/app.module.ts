@@ -27,6 +27,7 @@ import { PaymentEffects } from './store/payment/payment.effects';
 import { ItemEffects } from './store/item/item.effects';
 import { ICategoriesEffects } from './store/Icategory/iCategory.effects';
 import { QRCodeModule } from 'angularx-qrcode';
+import { BillEffects } from './store/bill/bill.effects';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { QRCodeModule } from 'angularx-qrcode';
       PaymentEffects,
       ItemEffects,
       ICategoriesEffects,
-      QRCodeModule
+      QRCodeModule,
+      BillEffects
     ]),
     CoreModule,
     SharedModule,

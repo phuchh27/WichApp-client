@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import * as fromApp from '../../store/app.reducer';
+
 import { Store } from '@ngrx/store';
 import * as ItemActions from '../../store/item/item.actions';
 import * as ItemSelectors from '../../selectors/item.selectors';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Item } from 'src/app/models/item.model';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -11,20 +11,36 @@ import { CommonModule } from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';
 
 // import { BillService } from '../../services/bill.service';
-import { BillItem, Bill } from 'src/app/models/bill.model';
+import { BillItem, Bill, BillData } from 'src/app/models/bill.model';
 
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+
+import * as BillActions from '../../store/bill/bill.actions';
+import * as BillSelectors from '../../store/bill/bill.selectors';
+import * as fromApp from '../../store/app.reducer';
+import { convertToBillData } from 'src/app/services/bill.service';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css'],
   standalone: true,
-  imports: [MatPaginatorModule, CommonModule, QRCodeModule, MatTableModule],
+  imports: [
+    MatPaginatorModule,
+    CommonModule,
+    QRCodeModule,
+    MatTableModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
 })
 export class ItemComponent implements OnInit {
   @ViewChild('bill') bill!: ElementRef;
@@ -33,9 +49,21 @@ export class ItemComponent implements OnInit {
 
   storeId: any;
 
+  isloading: boolean = false;
+  issuccess: boolean = false;
+  iserror: any = null
+
   $item: Observable<Item[]> | undefined;
   $loading: Observable<boolean> | undefined;
   $error: Observable<any> | undefined;
+
+  $successbill: Observable<boolean> | undefined;
+  $loadingbill: Observable<boolean> | undefined;
+  $errorbill: Observable<any> | undefined;
+
+  loadingSubscription: Subscription | undefined;
+  successSubscription: Subscription | undefined;
+  errorSubscription: Subscription | undefined;
 
   //paginator page
   itemsPerPage = 5;
@@ -44,19 +72,19 @@ export class ItemComponent implements OnInit {
   totalItems = this.length;
 
   billItem: BillItem = {
+    id: 0,
     name: '',
     price: 0,
     quantity: 0,
     total: 0,
   };
+
   billview: Bill = {
-    id: '',
     items: [],
     Total: 0,
   };
+
   billTotal: number = 0;
-  billviewSubject = new BehaviorSubject<BillItem[]>([]);
-  billview$ = this.billviewSubject.asObservable();
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -69,7 +97,6 @@ export class ItemComponent implements OnInit {
     const storeData = JSON.parse(storedDataString || '{}');
     this.storeId = storeData.store_id;
     console.log(this.storeId);
-
     this.store.dispatch(
       ItemActions.getItemsForStaffStart({ storeId: this.storeId })
     );
@@ -78,9 +105,40 @@ export class ItemComponent implements OnInit {
     this.$loading = this.store.select(ItemSelectors.selectItemLoading);
     this.$error = this.store.select(ItemSelectors.selectItemError);
 
-    //get length
+    this.$loading = this.store.select(BillSelectors.selectBillLoading);
+    this.$successbill = this.store.select(BillSelectors.selectBillSuccess);
+    this.$errorbill = this.store.select(BillSelectors.selectBillError);
+
+    this.loadingSubscription = this.$loading.subscribe((loading) => {
+      if (loading) {
+        console.log('Loading...');
+      }
+    });
+
+    this.successSubscription = this.$successbill.subscribe((success) => {
+      if (success) {
+       
+        console.log('Success!');
+       this.issuccess = true;
+        setTimeout(() => {
+          this.issuccess = false;
+          this.showOrHidenBillConsole = false;
+        }, 3000);
+      }
+    });
+
+    this.errorSubscription = this.$errorbill.subscribe((error) => {
+      if (error) {
+        console.log(error)
+        this.iserror = error;
+        setTimeout(() => {
+          this.iserror = null;
+          this.showOrHidenBillConsole = false;
+        }, 3000);
+      }
+    });
+
     this.$item?.subscribe((items) => {
-      // Get the length of the array
       this.length = items.length;
     });
   }
@@ -100,14 +158,16 @@ export class ItemComponent implements OnInit {
     this.showOrHidenBillConsole = true;
 
     this.billview = {
-      id: this.generateRandomId(),
       items: [],
       Total: 0,
     };
   }
 
   calculateTotal() {
-    this.billview.Total = this.billview.items.reduce((total, item) => total + Number(item.total), 0);
+    this.billview.Total = this.billview.items.reduce(
+      (total, item) => total + Number(item.total),
+      0
+    );
   }
 
   onAddToBill(item: Item) {
@@ -123,6 +183,7 @@ export class ItemComponent implements OnInit {
     } else {
       // If the item does not exist, add it to the bill
       let newBillItem: BillItem = {
+        id: item.id ?? 0,
         name: item.name,
         price: item.price,
         quantity: 1,
@@ -145,7 +206,6 @@ export class ItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.billview = {
-          id: '',
           items: [],
           Total: 0,
         };
@@ -155,22 +215,43 @@ export class ItemComponent implements OnInit {
     });
   }
 
+  
+
   onSaveBill() {
-    const storedBills = localStorage.getItem('bills');
+    const billDataToSend: BillData = convertToBillData(this.billview);
 
-    if (storedBills) {
-      let bills = JSON.parse(storedBills);
+    // if (billDataToSend) {
+    //   // If bills already exist in localStorage, update the existing bills
+    //   let bills: Bill[] = JSON.parse(storedBills);
+    //   const existingBill = this.billview;
 
-      bills.push(this.billview);
+    //   if (existingBill) {
+    //     // If the bill already exists, update its details
+    //     existingBill.items = this.billview.items;
+    //     existingBill.Total = this.billview.Total;
+    //   } else {
+    //     // If the bill does not exist, add it to the bills array
+    //     bills.push(this.billview);
+    //   }
 
-      // Lưu lại danh sách bills đã được cập nhật
-      localStorage.setItem('bills', JSON.stringify(bills));
-    } else {
-      localStorage.setItem('bills', JSON.stringify(this.billview));
-    }
-    // this.billview = [];
-    this.billTotal = 0;
-    this.showOrHidenBillConsole = false;
+    //   // Save the updated bills array back to localStorage
+    //   localStorage.setItem('bills', JSON.stringify(bills));
+    // } else {
+    //   // If no bills exist in localStorage, create a new array with the current bill
+    //   localStorage.setItem('bills', JSON.stringify([this.billview]));
+    // }
+
+    // Reset the billview after saving
+    this.store.dispatch(BillActions.createBill({ payload: billDataToSend }));
+    console.log(JSON.stringify(billDataToSend));
+    this.resetBill();
+  }
+
+  resetBill() {
+    this.billview = {
+      items: [],
+      Total: 0,
+    };
   }
 
   onPrint() {

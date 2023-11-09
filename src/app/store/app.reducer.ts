@@ -6,7 +6,7 @@ import * as fromStaff from './staff/staff.reducer';
 import * as fromPayment from './payment/payment.reducer';
 import * as fromItem from './item/item.reducer';
 import * as fromIcategory from './Icategory/iCategory.reducer';
-
+import * as fromBill from './bill/bill.reducer';
 export interface AppState {
   auth: AuthState;
   category : fromCategory.State;
@@ -15,6 +15,8 @@ export interface AppState {
   payment: fromPayment.State;
   item: fromItem.State;
   icategory: fromIcategory.State;
+  bill: fromBill.State;
+
 }
 export const reducers: ActionReducerMap<AppState> = {
   auth: authReducer,
@@ -24,6 +26,7 @@ export const reducers: ActionReducerMap<AppState> = {
   payment: fromPayment.paymentReducer,
   item: fromItem.itemReducer,
   icategory: fromIcategory.ICategoriesReducer,
+  bill: fromBill.billReducer,
 };
 export const selectAuthState = createFeatureSelector<AuthState>('auth');
 
@@ -38,3 +41,7 @@ export const selectPaymentState = createFeatureSelector<fromPayment.State>('paym
 export const selectItemState = createFeatureSelector<fromItem.State>('item');
 
 export const selectIcategoryState = createFeatureSelector<fromIcategory.State>('icategory');
+
+export const selectBillState = createFeatureSelector<fromBill.State>('bill');
+
+
