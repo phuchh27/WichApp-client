@@ -15,6 +15,9 @@ import { StoreModule } from '@ngrx/store';
 import {ICategoriesReducer} from '../store/Icategory/iCategory.reducer';
 import { WorkScheduleComponent } from './shop-detail/work-schedule/work-schedule.component'
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 @NgModule({
   declarations: [
     StoreComComponent,
@@ -24,6 +27,7 @@ import { WorkScheduleComponent } from './shop-detail/work-schedule/work-schedule
     StaffListComponent,
     ItemsListComponent,
     WorkScheduleComponent,
+    
   ],
   imports: [
     RouterModule,
@@ -33,6 +37,8 @@ import { WorkScheduleComponent } from './shop-detail/work-schedule/work-schedule
     SharedModule,
     CommonModule,
     StoreModule.forFeature('ICategories', ICategoriesReducer),
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [StoreComComponent],
 })

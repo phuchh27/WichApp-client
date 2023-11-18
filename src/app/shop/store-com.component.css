@@ -5,6 +5,74 @@
     /* overflow-y: auto; */
 }
 
+.store-page-start{
+    width: 100%;
+    margin: 0;
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+}
+
+.stores{
+    width: 200px;
+    height: 100px;
+    display: flex;
+    background: #D0E1F9;
+    justify-content: center;
+    align-items: center;
+    gap:30px;
+    border-radius: 24px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+}
+
+.create{
+    width: 200px;
+    height: 100px;
+    display: flex;
+    background: #44c767;
+    justify-content: center;
+    align-items: center;
+    gap:30px;
+    border-radius: 24px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+}
+
+.staffs{
+    width: 200px;
+    height: 100px;
+    display: flex;
+    background: #979fe1;
+    justify-content: center;
+    align-items: center;
+    gap:30px;
+    border-radius: 24px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+}
+
+.stores h3 {
+
+    text-align: center;
+    color: #283655;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.create h3 {
+
+    text-align: center;
+    color: #283655;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.staffs h3 {
+
+    text-align: center;
+    color: #283655;
+    font-size: 40px;
+    font-weight: bold;
+}
+
 .store-body {
     height: auto;
     display: flex;

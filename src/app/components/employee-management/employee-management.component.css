@@ -1,0 +1,42 @@
+.employee_page{
+
+}
+
+.employee_page-header{
+    height: 200px;
+    width: 100%;
+    padding: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.store{
+    width: 150px;
+    height: 100px;
+    background-color: #333;
+}
+
+.employee_page-body{
+    padding: 30px 50px;
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 20px;
+    position: relative;
+}
+
+.content-start{
+
+}
+
+.content-end{
+    position: absolute;
+    top: 0;
+    right: 0;
+}

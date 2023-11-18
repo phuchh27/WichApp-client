@@ -41,7 +41,9 @@ export class ItemEffects {
       switchMap(({ storeId }) =>
         this.itemServices.getListItemForStaff(storeId).pipe(
           map((items) => ItemActions.getItemsForStaffSuccess({ items })),
-          catchError((error) => of(ItemActions.getItemsForStaffFailure({ error })))
+          catchError((error) =>
+            of(ItemActions.getItemsForStaffFailure({ error }))
+          )
         )
       )
     )
@@ -51,15 +53,40 @@ export class ItemEffects {
     this.actions$.pipe(
       ofType(ItemActions.getItemsByCategoryStart),
       switchMap(({ storeId, cate_id }) =>
-        this.itemServices.getListItemByCategory(storeId,cate_id).pipe(
+        this.itemServices.getListItemByCategory(storeId, cate_id).pipe(
           map((items) => ItemActions.getItemsByCategorySuccess({ items })),
-          catchError((error) => of(ItemActions.getItemsByCategoryFailure({ error })))
+          catchError((error) =>
+            of(ItemActions.getItemsByCategoryFailure({ error }))
+          )
         )
       )
     )
   );
 
-  
+  updateItem$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ItemActions.updateItemStart),
+      switchMap(({ item }) =>
+        this.itemServices.updateItem(item).pipe(
+          map(() => ItemActions.updateItemSuccess()),
+          catchError((error) => of(ItemActions.updateItemFailure({ error })))
+        )
+      )
+    )
+  );
+
+  addCategory$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(ItemActions.addItemsCategoryStart),
+    switchMap(({ storeId ,category }) =>
+      this.itemServices.addCategoryItem(category,storeId).pipe(
+        map(() => ItemActions.addItemsCategorySuccess()),
+        catchError((error) => of(ItemActions.addItemsCategoryFailure({ error })))
+      )
+    )
+  )
+);
+
 
   constructor(private actions$: Actions, private itemServices: ItemService) {}
 }

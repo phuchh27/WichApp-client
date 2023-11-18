@@ -1,11 +1,21 @@
 <section class="store-page">
+    <div class="store-page-start">
+        <div class="stores">
+            <img width="70" height="70"
+                src="https://img.icons8.com/stickers/100/grocery-store.png"
+                alt="grocery-store" />
+            <h3>4</h3>
+        </div>
+        <div class="staffs"><img width="70" height="70"
+                src="https://img.icons8.com/stickers/70/employee-card--v1.png"
+                alt="employee-card--v1" /><h3>5</h3></div>
+        <div class="create"><a routerLink="create"
+                class="cursor-pointer no-underline">
+                <h3>Create new Store</h3>
+            </a></div>
+    </div>
     <div class="store-body">
-        <div class="col col-4 bg-bluegray-600 p-0 size "  *ngIf="selectedStore">
-            <a routerLink="create" class="cursor-pointer no-underline">
-                <div
-                    class=" text-center text-white font-bold text-md bg-green-600 hover:bg-green-500">Create
-                    new Store</div>
-            </a>
+        <div class="col col-4 bg-bluegray-600 p-0 size " *ngIf="selectedStore">
             <div class=" pt-8 px-5">
                 <div class=" text-center text-white">
                     <h2>{{ selectedStore.shopname }}</h2>
@@ -19,11 +29,11 @@
                     <p>Description: {{ selectedStore.description }}</p>
                 </div>
                 <button
-                    class=" w-full border-round bg-bluegray-800 text-white px-8 py-3 mt-8 hover:bg-bluegray-600" (click)="goToShop()">Go
+                    class=" w-full border-round bg-bluegray-800 text-white px-8 py-3 mt-8 hover:bg-bluegray-600"
+                    (click)="goToShop()">Go
                     to Store</button>
             </div>
         </div>
-
         <div class="stores_section">
             <app-list-store (storeClicked)="onStoreClicked($event)"></app-list-store>
         </div>

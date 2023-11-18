@@ -61,5 +61,28 @@ export class ItemService {
       categoryName
     );
   }
+
+  updateItem(item: Item): Observable<any> {
+    const url = `${this.baseUrl}items/update/${item.id}/`;
+
+    const formData = new FormData();
+
+    formData.append('name', item.name);
+    formData.append('code', item.code || '');
+    formData.append('description', item.description);
+    formData.append('cost', item.cost.toString());
+    formData.append('price', item.price.toString());
+    formData.append('quantity', item.quantity.toString());  
+
+    if (item.image) {
+      formData.append('image', item.image);
+    }
+    const headers = new HttpHeaders({
+      Accept: 'application/json', 
+    });
+
+    console.log('fromservice', formData.get('image'));
+    return this.http.put(url, formData, { headers: headers });
+  }
 }
 

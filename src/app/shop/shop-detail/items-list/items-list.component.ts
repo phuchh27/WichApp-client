@@ -10,6 +10,7 @@ import {
   addItemStart,
   getItemsByCategoryStart,
   getItemsStart,
+  updateItemStart,
 } from 'src/app/store/item/item.actions';
 import {
   getICategoryStart,
@@ -28,6 +29,8 @@ import { ICategory } from 'src/app/models/category.model';
 export class ItemsListComponent implements OnInit {
   createMode: boolean = false;
   addNewCategory: boolean = false;
+  editMode: boolean = false;
+  showDetail: boolean = false;
 
   selectby: any;
   selectmode: boolean = false;
@@ -45,6 +48,9 @@ export class ItemsListComponent implements OnInit {
   categories: any[] = [];
 
   subscription: Subscription | undefined;
+
+  itemDetail?: Item;
+  itemEdited: Item = new Item(0, '', null, '', null, 0, 0, null, null);
 
   @ViewChild('fileInput') fileInput: any;
 
@@ -76,7 +82,6 @@ export class ItemsListComponent implements OnInit {
     this.$loading = this.store.select(selectorsItem.selectItemLoading);
     this.$error = this.store.select(selectorsItem.selectItemError);
 
-    
     // this.iCategoriesMenu = this.categories;
     this.onSubCategories();
   }
@@ -109,7 +114,7 @@ export class ItemsListComponent implements OnInit {
 
     if (categoryId === 99) {
       this.addNewCategory = true;
-      this.createMode = false
+      this.createMode = false;
     } else if (categoryId === 0) {
       this.selectmode = false;
       this.store.dispatch(getItemsStart({ storeId: currentShopActive }));
@@ -125,8 +130,6 @@ export class ItemsListComponent implements OnInit {
         );
       }
     }
-
-    
   }
 
   onFileSelected(event: any) {
@@ -175,7 +178,57 @@ export class ItemsListComponent implements OnInit {
     );
   }
 
-  onCancelAdd(){
+  onCancelAdd() {
     this.addNewCategory = false;
+  }
+
+  onOpentDetail(item: Item) {
+    this.showDetail = true;
+    console.log(item);
+    this.itemDetail = item;
+  }
+
+  onCloseDetail() {
+    this.showDetail = false;
+  }
+
+  onEdit() {
+    this.editMode = true;
+    if (this.itemDetail) {
+      this.itemEdited = this.itemDetail;
+    } else {
+      
+    }
+    console.log(this.itemEdited)
+  }
+  onSave(form: NgForm) {
+    this.editMode = false;
+    if (!form.valid) {
+      console.log('form not valid');
+      return;
+    }
+
+    const ItemEdted: Item = {
+      id: this.itemEdited.id,
+      name: form.value.itemname,
+      code: form.value.code,
+      description: form.value.description,
+      price: form.value.price,
+      cost: form.value.cost,
+      quantity: form.value.quantity,
+      image: this.base64String,
+    };
+
+    this.store.dispatch(updateItemStart({item:ItemEdted}))
+    console.log(ItemEdted)
+  }
+
+  onAddCategoty(form: NgForm){
+    if (!form.valid) {
+      console.log('form not valid');
+      return;
+    }
+    const categotyName = form.value.category
+    console.log(categotyName)
   }
 }

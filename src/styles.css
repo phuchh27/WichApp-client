@@ -8,3 +8,8 @@
 body:root {
     font-family: 'Comfortaa', cursive;
 }
+
+:root{
+    --blueblack: #283655;
+    
+}

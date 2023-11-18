@@ -11,14 +11,12 @@ import { Store as StoreModel } from '../../models/store.model';
   styleUrls: ['./list-store.component.css'],
 })
 export class ListStoreComponent implements OnInit {
-
- 
   @Output() storeClicked = new EventEmitter<number>();
 
   onStoreClick(index: number) {
     this.storeClicked.emit(index);
   }
-  
+
   constructor(private store: Store<fromApp.AppState>) {}
 
   userStores$: Observable<StoreModel[]> | undefined;
@@ -33,7 +31,7 @@ export class ListStoreComponent implements OnInit {
       const parsedStores = JSON.parse(userStores);
       this.store.dispatch(StoreActions.setUserStores({ stores: parsedStores }));
     }
-    this.userStores$ = this.store.select(state => state.store.Stores);
+    this.userStores$ = this.store.select((state) => state.store.Stores);
     console.log(this.userStores$);
   }
 }

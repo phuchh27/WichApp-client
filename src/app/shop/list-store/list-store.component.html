@@ -1,21 +1,32 @@
 
 <section class="stores">
-    <div *ngIf="userStores$ | async as stores; else loading" class="stores-body">
-        <div  *ngFor="let store of userStores$ | async ; let i = index"
-            (click)="onStoreClick(i)"
-            class="stores-card">
-            <a class="">
-                <div class="">
-                    <h3 class="">{{ store.shopname }}</h3>
-                    <p>Category: {{ store.category }}</p>
-                </div>
-                <div class="">
-                    <p class="">{{ store.description }}</p>
-                    <p>Phone: {{ store.phone }}</p>
-                    <p class="">Address: {{ store.address }}</p>
-                </div>
+    <table *ngIf="userStores$ | async as stores; else loading" class="stores-body">
+      <thead>
+        <tr>
+          <th>Shop Name</th>
+          <th>Category</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let store of userStores$ | async; let i = index" (click)="onStoreClick(i)" class="stores-card">
+          <td>
+            <a>
+              <h3>{{ store.shopname }}</h3>
             </a>
-        </div>
-    </div>
+          </td>
+          <td>
+            <a>
+              <p>{{ store.category }}</p>
+            </a>
+          </td>
+          <td>
+            <a>
+              <p>{{ store.description }}</p>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <ng-template #loading>Loading...</ng-template>
-</section>
+  </section>

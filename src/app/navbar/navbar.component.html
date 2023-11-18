@@ -1,26 +1,43 @@
-<section class="h-full flex w-auto ">
-    <div class=" w-auto flex flex-column justify-content-center bg-blue-200"
-        *ngIf="showSidebar">
-        <a routerLink="/ohome/store" (click)="onlog()">
-            <div
-                class="transition-colors transition-duration-500 bg-blue-200 hover:bg-bluegray-600 text-white hover:text-white hover:shadow-8
-        flex align-items-center justify-content-center font-bold cursor-pointer px-5 py-3">Store
-                manage</div>
-        </a>
-
-        <div
-            class="transition-colors transition-duration-500 bg-blue-200 hover:bg-bluegray-600 text-white hover:text-white hover:shadow-8
-        flex align-items-center justify-content-center font-bold cursor-pointer px-5 py-3"
-            routerLink>Staff manage</div>
-        <div
-            class="transition-colors transition-duration-500 bg-blue-200 hover:bg-bluegray-600 text-white hover:text-white hover:shadow-8
-        flex align-items-center justify-content-center font-bold cursor-pointer px-5 py-3"
-            routerLink>Finalce</div>
-    </div>
-    <div
-        class="w-1rem flex flex-column justify-content-center cursor-pointer bg-blue-200 text-blue-600 hover:bg-bluegray-600 hover:font-bold text-white hover:shadow-8"
-        (click)="toggleSidebar()">
-        <div class="text-center ">{{showSidebar? '<' :'>'}}</div>
-    </div>
+<section class="navigation">
+    <ul>
+        <li>
+            <a href="#">
+                <span class="icon"><img width="30" height="30" src="https://img.icons8.com/stickers/100/w.png" alt="w"/></span>
+                <span class="Title">WICH APP</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/ohome/store" routerLinkActive="router-link-active">
+                <span class="icon"><img width="60" height="60"
+                        src="https://img.icons8.com/stickers/100/online-store.png"
+                        alt="online-store" /></span>
+                <span class="Title">Store</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/ohome/Employee" routerLinkActive="router-link-active">
+                <span class="icon"><img width="60" height="60"
+                        src="https://img.icons8.com/stickers/100/conference-background-selected.png"
+                        alt="conference-background-selected" /></span>
+                <span class="Title">Employee</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/ohome/finace" routerLinkActive="router-link-active">
+                <span class="icon"><img width="60" height="60"
+                        src="https://img.icons8.com/stickers/100/economic-improvement.png"
+                        alt="economic-improvement" /></span>
+                <span class="Title">Finace</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="/ohome/setting" routerLinkActive="router-link-active">
+                <span class="icon"><img width="60" height="60"
+                        src="https://img.icons8.com/stickers/100/gear.png"
+                        alt="gear" /></span>
+                <span class="Title">Setting</span>
+            </a>
+        </li>
+    </ul>
 
 </section>

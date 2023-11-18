@@ -1,0 +1,35 @@
+<section class="employee_page">
+    <div class="employee_page-header">
+        <div class="store"></div>
+        <div class="store"></div>
+        <div class="store"></div>
+    </div>
+    <div class="employee_page-body">
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let staffMember of staff$ | async"
+                (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Self aware panel
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        She/he is manager
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="content">
+                    <div class="content-start">
+                        <p>Staff name: {{ staffMember.username }}</p>
+                        <p>Email: {{ staffMember.email }}</p>
+                        <p>Phone: {{ staffMember.phone }}</p>
+                        <p>Status: {{ staffMember.is_active }}</p>
+                    </div>
+                    <div class="content-end"><img width="30" height="30"
+                            src="https://img.icons8.com/stickers/100/search-in-list.png"
+                            alt="search-in-list" /></div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+</section>

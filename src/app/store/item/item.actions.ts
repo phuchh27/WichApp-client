@@ -34,12 +34,12 @@ export const getItemsFailure = createAction(
 
 export const updateItemStart = createAction(
     '[Item] Update Item Start',
-    props<{ item: Item, storeId: string | null, id: number }>()
+    props<{ item: Item}>()
 )
 
 export const updateItemSuccess = createAction(
     '[Item] Update Item Success',
-    props<{ item: Item }>()
+    // props<{ item: Item }>()
 )
 
 export const updateItemFailure = createAction(
@@ -74,6 +74,21 @@ export const getItemsByCategorySuccess = createAction(
 
 export const getItemsByCategoryFailure = createAction(
     ' [Item] Get Items By Category Failure',
+    props<{ error: any }>()
+)
+
+
+export const addItemsCategoryStart = createAction(
+    ' [Item] Add Items Category Start',
+    props<{ storeId: string | null, category:any }>()
+)
+
+export const addItemsCategorySuccess = createAction(
+    ' [Item] Add Items Category Success',
+)
+
+export const addItemsCategoryFailure = createAction(
+    ' [Item] Add Items Category Failure',
     props<{ error: any }>()
 )
 

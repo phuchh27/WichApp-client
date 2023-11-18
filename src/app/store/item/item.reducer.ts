@@ -80,4 +80,35 @@ export const itemReducer = createReducer(
     loading: false,
     error: error,
   })),
+  on(fromItemActions.updateItemStart,(state)=>({
+    ...state,
+    loading:true,
+    error:null,
+  })),
+  on(fromItemActions.updateItemSuccess,(state)=>({
+    ...state,
+    loading:false,
+    error:null,
+  })),
+  on(fromItemActions.updateItemFailure,(state,{ error })=>({
+    ...state,
+    loading:false,
+    error:error,
+  })),
+
+  on(fromItemActions.addItemsCategoryStart,(state)=>({
+    ...state,
+    loading:true,
+    error:null,
+  })),
+  on(fromItemActions.addItemsCategorySuccess,(state)=>({
+    ...state,
+    loading:false,
+    error:null,
+  })),
+  on(fromItemActions.addItemsCategoryFailure,(state,{ error })=>({
+    ...state,
+    loading:false,
+    error:error,
+  })),
 );

@@ -14,8 +14,11 @@ const routes : Routes =[
             {
                 path: 'store',
                 loadChildren: () => import('../shop/store.module').then(m => m.StoreComModule)
-            }
-
+            },
+            {
+                path: 'Employee',
+                loadChildren: () => import('../components/employee-management/employee-management.module').then(m => m.EmployeeManagementModule)
+            },
         ]
     },
 

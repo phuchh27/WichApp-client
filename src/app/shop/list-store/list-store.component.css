@@ -5,12 +5,41 @@
 
 .stores-body{
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: left;
     height: auto;
 }
+
+.stores-body th{
+    width: 200px;
+}
+
+.stores-body thead{
+    background-color: #1E1F26;
+    padding: 12px 24px;
+    color: white;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: left;
+    transition: all 0.3s ease; 
+}
+
+.stores-card:hover {
+    background-color: #31323d;
+    color: white;
+    cursor: pointer; 
+}
+
 .stores-card{
-    width: 300px;
-    border: 1px #514a4a solid;
+    width: 100%;
+    border-bottom: 1px #514a4a87 solid;
     display: flex;
+    padding-left: 24px;
+}
+
+.stores-card td{
+    width: 200px;
+    text-align: left;
+    padding: 12px 24px;
+    text-transform: capitalize;
 }
