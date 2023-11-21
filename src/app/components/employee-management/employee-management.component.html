@@ -1,32 +1,120 @@
 <section class="employee_page">
     <div class="employee_page-header">
-        <div class="store"></div>
-        <div class="store"></div>
-        <div class="store"></div>
+        <div class="store"
+            [ngStyle]="{'background-color': generateRandomColor()}"></div>
+        <div class="store"
+            [ngStyle]="{'background-color': generateRandomColor()}"></div>
+        <div class="store"
+            [ngStyle]="{'background-color': generateRandomColor()}"></div>
     </div>
     <div class="employee_page-body">
         <mat-accordion>
-            <mat-expansion-panel *ngFor="let staffMember of staff$ | async"
-                (opened)="panelOpenState = true"
-                (closed)="panelOpenState = false">
+            <mat-expansion-panel *ngFor="let staffMember of allStaff$ | async"
+                (opened)="panelOpenState = true ; editMode= false"
+                (closed)="panelOpenState = false; editMode= false">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        Self aware panel
+                        {{ staffMember.username }}
                     </mat-panel-title>
                     <mat-panel-description>
                         She/he is manager
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div class="content">
+                <div *ngIf="!editMode" class="content">
                     <div class="content-start">
-                        <p>Staff name: {{ staffMember.username }}</p>
-                        <p>Email: {{ staffMember.email }}</p>
-                        <p>Phone: {{ staffMember.phone }}</p>
-                        <p>Status: {{ staffMember.is_active }}</p>
+                        <div class="id">
+                            <p>Fullname: {{ staffMember.fullname }}</p>
+                            <p>Address: {{ staffMember.address }}</p>
+                            <p>Phone: {{ staffMember.phone }}</p>
+                            <p>Email: {{ staffMember.email }}</p>
+                        </div>
+                        <div class="account">
+                            <p>Login id: {{ staffMember.username }}</p>
+                            <p>Status active: {{ staffMember.is_active }}</p>
+                            <p>Account verified: {{ staffMember.is_verified }}</p>
+                            <p>Joih at: {{ staffMember.created_at }}</p>
+                        </div>
+
                     </div>
-                    <div class="content-end"><img width="30" height="30"
-                            src="https://img.icons8.com/stickers/100/search-in-list.png"
-                            alt="search-in-list" /></div>
+                    <div class="content-end cursor-pointer"  matTooltip="Edit this employee" [matTooltipPosition]="'left'"><img width="30"
+                            height="30"
+                            src="https://img.icons8.com/stickers/100/edit-property.png"
+                            alt="edit-property"
+                            (click)="onEditStaff(staffMember)" /></div>
+                </div>
+                <div *ngIf="editMode" class="content">
+                    <form #EditStaffForm="ngForm">
+                        <div class="content-start">
+                            <div class="id">
+                                <div class="form-field">
+                                    <input type="text" class="form-input"
+                                        placeholder=" "
+                                        required fullname id="fullname"
+                                        name="fullname"
+                                        [(ngModel)]="editingStaff.fullname">
+                                    <label for="fullname" class="form-label">Full
+                                        name</label>
+                                </div>
+                                <div class="form-field">
+                                    <input type="text" class="form-input"
+                                        placeholder=" "
+                                        required phone id="address"
+                                        name="address"
+                                        [(ngModel)]="editingStaff.address">
+                                    <label for="address" class="form-label">Address</label>
+                                </div>
+                                <div class="form-field">
+                                    <input type="text" class="form-input"
+                                        placeholder=" "
+                                        required fullname id="phone"
+                                        name="phone"
+                                        [(ngModel)]="editingStaff.phone">
+                                    <label for="phone" class="form-label">Phone</label>
+                                </div>
+                                <div class="form-field">
+                                    <input type="text" class="form-input"
+                                        placeholder=" "
+                                        required email id="email" name="email"
+                                        [(ngModel)]="editingStaff.email">
+                                    <label for="email" class="form-label">Email</label>
+                                </div>
+
+                            </div>
+                            <div class="account">
+                                <div class="form-field">
+                                    <input type="text" class="form-input"
+                                        placeholder=" "
+                                        required username id="username"
+                                        name="username"
+                                        [(ngModel)]="editingStaff.username">
+                                    <label for="username" class="form-label">Username</label>
+                                </div>
+                                <div class="form-field">
+                                    <input type="text" class="form-input"
+                                        placeholder=" "
+                                        required is_active id="is_active"
+                                        name="is_active"
+                                        [(ngModel)]="editingStaff.is_active">
+                                    <label for="is_active" class="form-label">Active</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                    <div 
+                        class="content-end cursor-pointer">
+                        <img width="30"
+                            height="30"
+                            matTooltip="Save" [matTooltipPosition]="'left'"
+                            src="https://img.icons8.com/stickers/100/save.png"
+                            alt="save" (click)="onSaveChange(EditStaffForm)" />
+                        <img width="30"
+                            height="30"
+                            matTooltip="Remove this employee" [matTooltipPosition]="'left'"
+                            src="https://img.icons8.com/stickers/100/remove-fingerprint.png"
+                            alt="remove-fingerprint"
+                            (click)="onRemoveStaff()"/>
+                        </div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

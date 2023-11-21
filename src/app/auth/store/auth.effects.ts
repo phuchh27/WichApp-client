@@ -100,7 +100,7 @@ export class AuthEffects {
             })
             .pipe(
               tap(() => {
-                localStorage.removeItem('userData');
+                localStorage.clear();
                 this.router.navigate(['/auth']);
               })
             );

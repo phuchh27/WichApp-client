@@ -6,16 +6,27 @@ import {
   registerStaff,
   startGetStaff,
   setStoreId,
+  startGetAllStaff,
+  getStaffAllSuccess,
+  getStaffAllFailure,
+  updateStaff,
+  updateStaffSuccess,
+  updateStaffFailure,
+  removeStaff,
+  removeStaffSuccess,
+  removeStaffFailure,
 } from './staff.actions';
-import { Staffs } from 'src/app/models/staff.models';
+import { AllStaffs, Staffs } from 'src/app/models/staff.models';
 
 export interface State {
+  allStaffs: AllStaffs[];
   staffs: Staffs[];
   loading: boolean;
   error: string | null;
   storeId: string | null;
 }
 const initialState: State = {
+  allStaffs: [],
   staffs: [],
   loading: false,
   error: null,
@@ -40,5 +51,42 @@ export const staffReducer = createReducer(
     loading: false,
     error,
   })),
-  on(setStoreId, (state, { storeId }) => ({ ...state, storeId }))
+  on(setStoreId, (state, { storeId }) => ({ ...state, storeId })),
+
+  on(startGetAllStaff, (state) => ({ ...state, loading: true, error: null })),
+  on(getStaffAllSuccess, (state, { allStaffs }) => ({
+    ...state,
+    allStaffs,
+    loading: false,
+    error: null,
+  })),
+  on(getStaffAllFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+
+  on(updateStaff, (state) => ({ ...state, loading: true, error: null })),
+  on(updateStaffSuccess, (state) => ({
+    ...state,
+    loading: false,
+    error: null,
+  })),
+  on(updateStaffFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+
+  on(removeStaff, (state) => ({ ...state, loading: true, error: null })),
+  on(removeStaffSuccess, (state) => ({
+    ...state,
+    loading: false,
+    error: null,
+  })),
+  on(removeStaffFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
 );

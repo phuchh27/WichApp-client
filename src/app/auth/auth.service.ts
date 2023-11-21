@@ -6,16 +6,19 @@ import * as AuthActions from './store/auth.actions';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private tokenExpirationTimer: any;
+  // private loginTime: Date; 
+  // private logoutTime: Date; 
 
   constructor(private store: Store<fromApp.AppState>) {}
   setLogoutTimer(expirationDuration: number) {
     console.log('Setting timer: ' + expirationDuration);
+    const currentTime = new Date();
+    console.log(currentTime)
     this.tokenExpirationTimer = setTimeout(() => {
       const refreshData = this.getRefresh();
       if (refreshData) {
         this.store.dispatch(AuthActions.logout(refreshData));
       } else {
-        // Handle the case when refreshData is null (optional)
         console.log('Refresh token not available.');
       }
     }, expirationDuration);
@@ -31,12 +34,12 @@ export class AuthService {
   getAccess(): { access: string } | null {
     const authDataString = localStorage.getItem('userData');
   if (!authDataString) {
-    return null; // Return null if authDataString is not found in localStorage
+    return null; 
   }
 
   const authData = JSON.parse(authDataString); // Parse authDataString as JSON
   if (!authData._tokens || typeof authData._tokens !== 'string') {
-    return null; // Return null if _tokens property is not found or not a string
+    return null; 
   }
 
   const tokensJSON = authData._tokens.replace(/'/g, '"');
@@ -48,17 +51,19 @@ export class AuthService {
   getRefresh(): { refresh: string } | null {
     const authDataString = localStorage.getItem('userData');
     if (!authDataString) {
-      return null; // Return null if authDataString is not found in localStorage
+      return null; 
     }
   
-    const authData = JSON.parse(authDataString); // Parse authDataString as JSON
+    const authData = JSON.parse(authDataString); 
     if (!authData._tokens || typeof authData._tokens !== 'string') {
-      return null; // Return null if _tokens property is not found or not a string
+      return null; 
     }
   
     const tokensJSON = authData._tokens.replace(/'/g, '"');
     const tokensObject = JSON.parse(tokensJSON);
     const refresh = tokensObject.refresh;
+
+    console.log(refresh)
     return  refresh ;
   }
 }

@@ -58,6 +58,43 @@ export class StaffEffects {
     )
   );
 
+
+  getAllStaffs$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(StaffActions.startGetAllStaff),
+    switchMap(() =>
+      this.staffService.getAllStaffs().pipe(
+        map((allStaffs) => StaffActions.getStaffAllSuccess({ allStaffs })),
+        catchError((error) => of(StaffActions.getStaffAllFailure({ error })))
+      )
+    )
+  )
+);
+
+updateStaff$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(StaffActions.updateStaff),
+    switchMap(({staff_id, data}) =>
+      this.staffService.updateStaff(staff_id, data).pipe(
+        map(() => StaffActions.updateStaffSuccess()),
+        catchError((error) => of(StaffActions.updateStaffFailure({ error })))
+      )
+    )
+  )
+);
+
+removeStaff$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(StaffActions.removeStaff),
+    switchMap(({staff_id}) =>
+      this.staffService.removeStaff(staff_id).pipe(
+        map(() => StaffActions.removeStaffSuccess()),
+        catchError((error) => of(StaffActions.removeStaffFailure({ error })))
+      )
+    )
+  )
+);
+
   constructor(
     private actions$: Actions,
     private staffService: StaffService // Inject the service for making HTTP requests

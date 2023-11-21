@@ -105,7 +105,7 @@
 
       </div>
       <div class="actions">
-        <button class="btn-pay">Pay</button>
+        <button class="btn-pay" (click)="onPayBill()">Pay</button>
         <button *ngIf="!onEdit" class="btn-edit" (click)="onedit()">Edit</button>
         <button *ngIf="onEdit" class="btn-edit" (click)="onSave()">Save</button>
         <button class="btn-del" (click)="onDel()">Del</button>

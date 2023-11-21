@@ -5,6 +5,15 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EmployeeManagementRoutingModule } from './employee-management.routing.module';
 
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatTooltipModule,TooltipPosition} from '@angular/material/tooltip';
+import { SharedModule } from 'src/app/shared/shared.module';
+
+
 @NgModule({
   declarations: [EmployeeManagementComponent],
   imports: [
@@ -12,6 +21,13 @@ import { EmployeeManagementRoutingModule } from './employee-management.routing.m
     CommonModule,
     RouterModule,
     EmployeeManagementRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    SharedModule,
   ],
   exports: [EmployeeManagementComponent],
 })

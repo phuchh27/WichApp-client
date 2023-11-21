@@ -29,3 +29,11 @@ export const saveBill = createAction(
   
   export const deleteBillSuccess = createAction('[Bill] Delete Bill Success');
   export const deleteBillFailure = createAction('[Bill] Delete Bill Failure', props<{ error: any }>());
+
+  export const payBill = createAction(
+    '[Bill] Pay Bill',
+    props<{ bill_id: string;}>()
+  );
+  
+  export const payBillSuccess = createAction('[Bill] Pay Bill Success');
+  export const payBillFailure = createAction('[Bill] Pay Bill Failure', props<{ error: any }>());

@@ -173,4 +173,13 @@ export class BillComponent implements OnInit {
     });
 
   }
+
+
+  onPayBill(){
+    const bill_id = this.keyID.toString();
+    this.store.dispatch(BillActions.payBill({bill_id}))
+    this.store.dispatch(BillActions.loadBills());
+    this.onEdit = true;
+    this.showDetail = false;
+  }
 }

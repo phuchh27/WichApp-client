@@ -39,6 +39,11 @@ export class BillService {
     return this.http.delete(url);
   }
 
+  payBill(bill_id: string): Observable<any> {
+    const url = `${this.apiUrl}/bills/pay_bill/${bill_id}/`;
+    return this.http.delete(url);
+  }
+
 }
 
 export function convertToBillData(billView: any): BillData {

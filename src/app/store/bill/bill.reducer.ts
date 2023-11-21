@@ -124,5 +124,28 @@ export const billReducer = createReducer(
       loading: false,
       error,
     };
+  }),
+
+  on(billActions.payBill, (state, { bill_id}) => {
+    return {
+      ...state,
+      bill_id,
+      loading: true,
+      error: null,
+    };
+  }),
+  on(billActions.payBillSuccess, (state) => {
+    return {
+      ...state,
+      loading: false,
+      error: null,
+    };
+  }),
+  on(billActions.payBillFailure, (state, { error }) => {
+    return {
+      ...state,
+      loading: false,
+      error,
+    };
   })
 );

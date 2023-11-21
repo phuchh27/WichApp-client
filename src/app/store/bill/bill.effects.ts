@@ -71,5 +71,18 @@ export class BillEffects {
     )
   );
 
+
+  payBill$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(billActions.payBill),
+      mergeMap(({ bill_id}) =>
+        this.billService.payBill(bill_id).pipe(
+          map(() => billActions.payBillSuccess()),
+          catchError((error) => of(billActions.payBillFailure({ error })))
+        )
+      )
+    )
+  );
+
   constructor(private actions$: Actions, private billService: BillService) {}
 }
