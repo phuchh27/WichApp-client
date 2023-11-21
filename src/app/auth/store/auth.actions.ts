@@ -43,3 +43,17 @@ export const logout = createAction(
   '[Auth] Logout',
   props<{ refresh: string }>()
 );
+
+
+export const refreshTokenStart = createAction(
+  '[AUTH] Refresh Start',
+  props<{ refresh: string; }>()
+);
+
+export const refreshTokenSuccess = createAction(
+  '[AUTH] Refresh Success',
+);
+
+export const refreshTokenFail = createAction(
+  '[Auth] Refresh Fail',
+);

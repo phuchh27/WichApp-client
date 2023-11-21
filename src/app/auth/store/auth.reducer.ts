@@ -47,6 +47,20 @@ const _authReducer = createReducer(
   on(AuthActions.logout, (state) => ({
     ...state,
     user: null,
+  })),
+
+  on(AuthActions.refreshTokenStart, (state, { refresh }) => ({
+    ...state,
+    authError: null,
+    loading: true,
+  })),
+  on(AuthActions.refreshTokenSuccess, (state) => ({
+    ...state,
+    authError: null,
+    loading: false,
+  })),
+  on(AuthActions.refreshTokenFail, (state, action) => ({
+    ...state,
   }))
 );
 

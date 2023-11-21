@@ -16,6 +16,7 @@ import { AuthService } from './auth.service';
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService,private store: Store<fromApp.AppState>) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // this.authService.checkTokenLicense()
     const authToken = this.authService.getAccess();
     console.log('Start Interceptor');
     if (authToken) {

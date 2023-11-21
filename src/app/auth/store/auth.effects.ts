@@ -5,7 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { HttpClient } from '@angular/common/http';
 
-import { EMPTY, catchError, map, of, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Action } from '@ngrx/store';
@@ -125,18 +125,20 @@ export class AuthEffects {
   );
 
   autoLogin$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(AuthActions.autoLogin),
-    switchMap(() => {
-      const userDataString = localStorage.getItem('userData');
-      if (!userDataString) {
-        return EMPTY; // If userData doesn't exist in Local Storage, do nothing
-      }
+    this.actions$.pipe(
+      ofType(AuthActions.autoLogin),
+      switchMap(() => {
+        const userDataString = localStorage.getItem('userData');
+        if (!userDataString) {
+          return EMPTY; // If userData doesn't exist in Local Storage, do nothing
+        }
 
-      const userData: AuthResponseData = JSON.parse(userDataString);
-      const expirationDate = new Date(new Date().getTime() + userData.expiresIn * 1000);
-      this.authService.setLogoutTimer(userData.expiresIn * 1000);
-      // If the token is expired, dispatch logout action
+        const userData: AuthResponseData = JSON.parse(userDataString);
+        const expirationDate = new Date(
+          new Date().getTime() + userData.expiresIn * 1000
+        );
+        this.authService.setLogoutTimer(userData.expiresIn * 1000);
+        // If the token is expired, dispatch logout action
         // If the token is not expired yet, dispatch authenticateSuccess action
         return of(
           AuthActions.authenticateSuccess({
@@ -151,11 +153,30 @@ export class AuthEffects {
             is_staff: userData.is_staff,
           })
         );
-      
-    }),
-    map((result) => result as Action) // Transform the result into the expected type Action
-  )
-);
+      }),
+      map((result) => result as Action) // Transform the result into the expected type Action
+    )
+  );
+
+  refreshToken$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.refreshTokenStart),
+      exhaustMap(({ refresh }) =>
+        this.authService.refreshAccessToken(refresh).pipe(
+          tap((response) => console.log('Refresh Token Response:', response)),
+          map((response) => {
+            const accessToken = response.access;
+            this.authService.replaceAccessToken(accessToken);
+            return AuthActions.refreshTokenSuccess();
+          }),
+          catchError((error) => {
+            console.error('Error refreshing token:', error);
+            return of(AuthActions.refreshTokenFail());
+          })
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,
