@@ -43,14 +43,10 @@ export class StaffEffects {
       mergeMap(() =>
         this.staffService.getStoreId().pipe(
           map((result) => {
-
             console.log('Received storeId:', result);
-            
-            
 
-            localStorage.setItem('storeId', JSON.stringify(result))
+            localStorage.setItem('storeId', JSON.stringify(result));
 
-            
             return StaffActions.setStoreId({ storeId: result });
           })
         )
@@ -58,42 +54,65 @@ export class StaffEffects {
     )
   );
 
-
   getAllStaffs$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(StaffActions.startGetAllStaff),
-    switchMap(() =>
-      this.staffService.getAllStaffs().pipe(
-        map((allStaffs) => StaffActions.getStaffAllSuccess({ allStaffs })),
-        catchError((error) => of(StaffActions.getStaffAllFailure({ error })))
+    this.actions$.pipe(
+      ofType(StaffActions.startGetAllStaff),
+      switchMap(() =>
+        this.staffService.getAllStaffs().pipe(
+          map((allStaffs) => StaffActions.getStaffAllSuccess({ allStaffs })),
+          catchError((error) => of(StaffActions.getStaffAllFailure({ error })))
+        )
       )
     )
-  )
-);
+  );
 
-updateStaff$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(StaffActions.updateStaff),
-    switchMap(({staff_id, data}) =>
-      this.staffService.updateStaff(staff_id, data).pipe(
-        map(() => StaffActions.updateStaffSuccess()),
-        catchError((error) => of(StaffActions.updateStaffFailure({ error })))
+  updateStaff$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StaffActions.updateStaff),
+      switchMap(({ staff_id, data }) =>
+        this.staffService.updateStaff(staff_id, data).pipe(
+          map(() => StaffActions.updateStaffSuccess()),
+          catchError((error) => of(StaffActions.updateStaffFailure({ error })))
+        )
       )
     )
-  )
-);
+  );
 
-removeStaff$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(StaffActions.removeStaff),
-    switchMap(({staff_id}) =>
-      this.staffService.removeStaff(staff_id).pipe(
-        map(() => StaffActions.removeStaffSuccess()),
-        catchError((error) => of(StaffActions.removeStaffFailure({ error })))
+  removeStaff$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StaffActions.removeStaff),
+      switchMap(({ staff_id }) =>
+        this.staffService.removeStaff(staff_id).pipe(
+          map(() => StaffActions.removeStaffSuccess()),
+          catchError((error) => of(StaffActions.removeStaffFailure({ error })))
+        )
       )
     )
-  )
-);
+  );
+
+  checkingStaff$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StaffActions.staffCheking),
+      switchMap(({ email, password }) =>
+        this.staffService.checkingStaff(email, password).pipe(
+          map((resData) => StaffActions.staffChekingSuccess()),
+          catchError((error) => of(StaffActions.staffChekingFail({ error })))
+        )
+      )
+    )
+  );
+
+  getAllOnlineStaffs$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StaffActions.startGetAllOnlineStaff),
+      switchMap(() =>
+        this.staffService.onlineStaff().pipe(
+          map((onlineStaffs) => StaffActions.getStaffAllOnlineSuccess({ onlineStaffs })),
+          catchError((error) => of(StaffActions.getStaffAllOnlineFailure({ error })))
+        )
+      )
+    )
+  );
 
   constructor(
     private actions$: Actions,

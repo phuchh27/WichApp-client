@@ -6,6 +6,9 @@
 
 <div *ngIf="!loading;" class="staff-page">
     <app-sub-nav [menuItems]="menuItems"></app-sub-nav>
+    <app-staff-home *ngIf="shouldShowStaffHome()"></app-staff-home>
     <router-outlet></router-outlet>
-    <!-- <app-item></app-item> -->
 </div>
+
+
+

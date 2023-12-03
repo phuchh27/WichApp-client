@@ -188,9 +188,16 @@ export class AuthEffects {
 
 const handleError = (errorRes: any) => {
   let errorMessage = 'An unknown error occurred!';
-  if (!errorRes.error || !errorRes.error.error) {
-    return of(AuthActions.authenticateFail({ errorMessage }));
+  let errorDetail = null;
+
+  if (errorRes.error && errorRes.error.detail) {
+    errorDetail = errorRes.error.detail;
   }
+
+  if (!errorRes.error || !errorRes.error.error) {
+    return of(AuthActions.authenticateFail({ errorMessage, errorDetail }));
+  }
+
   switch (errorRes.error.error.message) {
     case 'EMAIL_EXISTS':
       errorMessage = 'This email exists already';
@@ -202,5 +209,7 @@ const handleError = (errorRes: any) => {
       errorMessage = 'This password is not correct.';
       break;
   }
-  return of(AuthActions.authenticateFail({ errorMessage }));
+
+  return of(AuthActions.authenticateFail({ errorMessage, errorDetail }));
 };
+

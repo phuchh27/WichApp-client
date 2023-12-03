@@ -41,4 +41,14 @@ export class StaffService {
     return this.http.delete(url);
   }
 
+  checkingStaff(email:string, password:string): Observable<any> {
+    const url = `http://127.0.0.1:8000/auth/loginstaff/`;
+    return this.http.post(url, {email, password});
+  }
+
+  onlineStaff(): Observable<any> {
+    const url = `http://127.0.0.1:8000/auth/onlineStaffs`;
+    return this.http.get(url);
+  }
+
 }

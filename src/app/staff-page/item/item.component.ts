@@ -26,6 +26,9 @@ import * as BillActions from '../../store/bill/bill.actions';
 import * as BillSelectors from '../../store/bill/bill.selectors';
 import * as fromApp from '../../store/app.reducer';
 import { convertToBillData } from 'src/app/services/bill.service';
+import { onlineStaffs } from 'src/app/models/staff.models';
+import { startGetAllOnlineStaff } from 'src/app/store/staff/staff.actions';
+import { selectStaffOnline } from 'src/app/shop/shop-detail/staff-list/staff.selectors';
 
 @Component({
   selector: 'app-item',
@@ -86,6 +89,12 @@ export class ItemComponent implements OnInit {
 
   billTotal: number = 0;
 
+  onlineStaffs$: Observable<onlineStaffs[]> | undefined;
+
+  onlineStaffs: onlineStaffs[] = []
+
+  selectedStaff: number = 0
+
   constructor(
     private store: Store<fromApp.AppState>,
     // private billService: BillService,
@@ -141,6 +150,25 @@ export class ItemComponent implements OnInit {
     this.$item?.subscribe((items) => {
       this.length = items.length;
     });
+
+    this.store.dispatch(startGetAllOnlineStaff())
+    this.onlineStaffs$ = this.store.select(selectStaffOnline)
+    if(this.onlineStaffs$){
+      this.onlineStaffs$.subscribe((data) => {
+        if(data){
+          localStorage.setItem('onlineStaffs', JSON.stringify(data))
+        }
+      })
+    }
+
+    const storedOnlineStaffs = localStorage.getItem('onlineStaffs');
+    if (storedOnlineStaffs) {
+      this.onlineStaffs = JSON.parse(storedOnlineStaffs);
+    }
+
+    console.log(onlineStaffs)
+
+   
   }
 
   generateRandomId(): string {
@@ -242,6 +270,8 @@ export class ItemComponent implements OnInit {
     // }
 
     // Reset the billview after saving
+    const selectedEmployeeId = this.selectedStaff;
+    billDataToSend.employee_id = selectedEmployeeId;
     this.store.dispatch(BillActions.createBill({ payload: billDataToSend }));
     console.log(JSON.stringify(billDataToSend));
     this.resetBill();
@@ -270,5 +300,10 @@ export class ItemComponent implements OnInit {
     `);
     printWindow!.document.close();
     printWindow!.print();
+  }
+
+  onStaffSelect(event: any): void {
+    // Access the selected staff
+    this.selectedStaff = event.target.value;
   }
 }

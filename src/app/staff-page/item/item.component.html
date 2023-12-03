@@ -59,8 +59,14 @@
 
           <div>
             <div class="bill_header">
-                <h2>Shop Name</h2>
-                <p>Adress: shop address</p>
+                <div class="select_staff">
+                    <label class="staff_label" for="staffSelect">Employee:</label>
+                    <select id="staffSelect" name="staffSelect" [(ngModel)]="selectedStaff" (change)="onStaffSelect($event)">
+                      <option *ngFor="let staff of onlineStaffs" [value]="staff.id">
+                        {{ staff.username }}
+                      </option>
+                    </select>
+                  </div>                  
                 <form class="example-form">
                     <mat-form-field class="example-full-width">
                       <mat-label>Note</mat-label>

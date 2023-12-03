@@ -1,5 +1,6 @@
 
 <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" class="login-form">
+    <div class="error" *ngIf="errorDetail">{{errorDetail}}</div>
     <div class="username">
         <span class="p-float-label">
             <input pInputText type="email" id="email" ngModel name="email" required email />

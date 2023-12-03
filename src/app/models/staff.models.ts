@@ -46,3 +46,23 @@ export class AllStaffs {
     this.created_at=created_at;
   }
 }
+
+
+export class onlineStaffs{
+  id?: number;
+  email: string;
+  username: string;
+  logintime: string;
+
+  constructor(
+    id: number,
+    email:  string,
+    username: string,
+    logintime: string
+  ){
+    this.id=id;
+    this.email=email;
+    this.username=username;
+    this.logintime=logintime;
+  }
+}

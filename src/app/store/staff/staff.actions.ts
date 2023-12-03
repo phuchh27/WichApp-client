@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AllStaffs, Staff, Staffs } from '../../models/staff.models';
+import { AllStaffs, Staff, Staffs, onlineStaffs } from '../../models/staff.models';
 
 export const registerStaff = createAction(
   '[Staff] Register Staff',
@@ -74,5 +74,32 @@ export const removeStaffSuccess = createAction(
 
 export const removeStaffFailure = createAction(
   '[Staff] Remove Failure',
+  props<{ error: any }>()
+);
+
+export const staffCheking = createAction(
+  '[Staff] Checking staff ',
+  props<{ email: string , password: string}>()
+)
+
+export const staffChekingSuccess = createAction(
+  '[Staff] Checking Staff Success ',
+)
+
+export const staffChekingFail = createAction(
+  ' [Staff]  Checking Staff Fail ',
+  props<{ error: any }>()
+)
+
+
+export const startGetAllOnlineStaff = createAction(
+  '[Staff] Start Get All Online Staff',
+);
+export const getStaffAllOnlineSuccess = createAction(
+  '[Staff] Get Staff All Online Staff Success',
+  props<{ onlineStaffs: onlineStaffs[] }>()
+);
+export const getStaffAllOnlineFailure = createAction(
+  '[Staff] Get Staff All Online Staff Failure',
   props<{ error: any }>()
 );

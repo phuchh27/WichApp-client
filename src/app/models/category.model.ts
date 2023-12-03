@@ -9,7 +9,7 @@ export class Category {
 }
 
 export class ICategory {
-  public id: number;
+  public id?: number;
   public name: string;
   public store: number;
 

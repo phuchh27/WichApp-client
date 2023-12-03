@@ -4,6 +4,7 @@ import { StaffPageComponent } from "./staff-page.component";
 import { AuthGuard } from "../auth/auth.guard";
 import { BillComponent } from './bill/bill.component';
 import { ItemComponent } from './item/item.component';
+import { StaffHomeComponent } from './staff-home/staff-home.component';
 
 const routes : Routes =[
     {
@@ -11,6 +12,10 @@ const routes : Routes =[
         component : StaffPageComponent,
         canActivate : [AuthGuard],
         children:[
+            {
+              path:'',
+              component : StaffHomeComponent  
+            },
             {
                 path:'bills',
                 component: BillComponent
@@ -21,9 +26,7 @@ const routes : Routes =[
             }
         ],
 
-    },
-
-    
+    },  
 
 ]
 

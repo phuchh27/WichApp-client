@@ -15,7 +15,7 @@ export class ItemService {
     const url = `${this.baseUrl}stores/${storeId}/items/`;
 
     const formData = new FormData();
-
+    formData.append('category',String(item.category));
     formData.append('name', item.name);
     formData.append('code', item.code || '');
     formData.append('description', item.description);
@@ -55,10 +55,11 @@ export class ItemService {
     return this.http.get(`${this.baseUrl}stores/${storeId}/items/categoryCreate`);
   }
 
-  addCategoryItem(categoryName: ICategory, storeId: any | null): Observable<any> {
+  addCategoryItem(category: ICategory, storeId: number): Observable<any> {
+    console.log(category)
     return this.http.post(
-      `${this.baseUrl}stores/${storeId}/categories/`,
-      categoryName
+      `${this.baseUrl}/items/stores/${storeId}/categories/`,
+      category
     );
   }
 

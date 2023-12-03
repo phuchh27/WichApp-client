@@ -9,6 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CategoryService {
 
+
+ 
+
   private baseUrl = 'http://127.0.0.1:8000/';
   constructor(private http: HttpClient) {}
   
@@ -21,6 +24,13 @@ export class CategoryService {
   getCategories(): Observable<Category[]> {
     return of(this.categories);
   }
+
+  addcategory(category: any, storeId: number): Observable<any> {
+    const url = `${this.baseUrl}/stores/${storeId}/categories/`;
+    return this.http.post(url, category);
+  }
+
+
 
   
 }

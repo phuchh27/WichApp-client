@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 // import { WebsocketService } from '../services/websocket.service';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
@@ -12,9 +12,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./staff-page.component.css'],
 })
 export class StaffPageComponent implements OnInit {
-
   loading: boolean = true;
-  
+
   checkStaff: boolean | undefined;
 
   message: string = '';
@@ -24,13 +23,14 @@ export class StaffPageComponent implements OnInit {
   storeId: string | null = null;
   items: any[] = [];
 
-  menuItems:any
+  menuItems: any;
 
   constructor(
     private store: Store<fromApp.AppState>,
     private router: Router,
-    // private websocketService: WebsocketService
-  ) {
+    private activatedRoute: ActivatedRoute
+  ) // private websocketService: WebsocketService
+  {
     const selectStoreState = createFeatureSelector<fromApp.AppState>('staff');
     const selectStoreId = createSelector(
       selectStoreState,
@@ -49,13 +49,11 @@ export class StaffPageComponent implements OnInit {
     }
 
     this.menuItems = [
-      { label: 'Back', link: `/staff-page/` },
+      { label: 'Back', link: `/staff-page` },
       { label: 'Bills', link: `/staff-page/bills` },
       { label: 'Items', link: `/staff-page/items` },
       { label: 'Work schedule', link: `/staff-page` },
-    ]
-
-    
+    ];
 
     if (this.checkStaff) {
       console.log('isStaff');
@@ -63,16 +61,11 @@ export class StaffPageComponent implements OnInit {
       this.router.navigate(['/not-found']);
     }
 
-   
-
     this.store.dispatch(StaffActions.getStoreId());
-
-    
 
     const storedDataString = localStorage.getItem('storeId');
     const storeData = JSON.parse(storedDataString || '{}');
     this.storeId = storeData.store_id;
-
 
     // if (this.storeId) {
     //   this.websocketService.sendStoreId(this.storeId);
@@ -84,13 +77,12 @@ export class StaffPageComponent implements OnInit {
     //   console.error('store_id is null. Cannot send to the WebSocket.');
     // }
 
-
     setTimeout(() => {
       this.loading = false;
     }, 2000);
   }
-
-  
-
-  
+  shouldShowStaffHome(): boolean {
+    const firstPath = this.activatedRoute.snapshot.url[0]?.path;
+    return firstPath === '';
+  }
 }

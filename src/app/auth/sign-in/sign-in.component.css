@@ -2,6 +2,10 @@
     align-items: center;
     width: 100%;
 }
+
+.error{
+    color: red;
+}
 .btn{
     width: 100px;
     height: 40px;

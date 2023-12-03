@@ -8,12 +8,14 @@ export interface State {
   user: User | null;
   authError: string | null;
   loading: boolean;
+  errorDetail?: any;
 }
 
 const initialState: State = {
   user: null,
   authError: null,
   loading: false,
+  errorDetail: null
 };
 
 const _authReducer = createReducer(
@@ -42,6 +44,7 @@ const _authReducer = createReducer(
     ...state,
     user: null,
     authError: action.errorMessage,
+    errorDetail: action.errorDetail, // Include the errorDetail property
     loading: false,
   })),
   on(AuthActions.logout, (state) => ({

@@ -3,12 +3,17 @@
 <div *ngIf="showDetail && !editMode" class="detail_item">
     <div class="edit_item-start">
         <h2 (click)="onCloseDetail()">Back</h2>
-        <img width="40" height="40" src="https://img.icons8.com/stickers/100/create-new.png" alt="create-new" (click)="onEdit()" class=" cursor-pointer"/>
+        <img width="40" height="40"
+            src="https://img.icons8.com/stickers/100/create-new.png"
+            alt="create-new" (click)="onEdit()" class=" cursor-pointer" />
     </div>
     <div class="edit_body">
         <div class="image">
-            <img *ngIf="!itemDetail?.image_link" width="450" height="450" src="https://img.icons8.com/stickers/450/select-none.png" alt="select-none"/>
-            <img *ngIf="itemDetail?.image_link" width="450" height="450" src="{{itemDetail?.image_link}}" alt="select-none"/>
+            <img *ngIf="!itemDetail?.image_link" width="450" height="450"
+                src="https://img.icons8.com/stickers/450/select-none.png"
+                alt="select-none" />
+            <img *ngIf="itemDetail?.image_link" width="450" height="450"
+                src="{{itemDetail?.image_link}}" alt="select-none" />
         </div>
         <div class="product_info">
             <h2>{{itemDetail?.name}} </h2>
@@ -23,23 +28,28 @@
 <div *ngIf="showDetail && editMode" class="edit_item">
     <div class="edit_item-start">
         <h2 (click)="onCloseDetail()">Edit</h2>
-        <img width="40" height="40" src="https://img.icons8.com/stickers/100/save.png" alt="save" (click)="onSave(EditItemForm)" class=" cursor-pointer"/>
+        <img width="40" height="40"
+            src="https://img.icons8.com/stickers/100/save.png" alt="save"
+            (click)="onSave(EditItemForm)" class=" cursor-pointer" />
     </div>
-   
+
     <div class="edit_body">
         <div class="image">
-            <img *ngIf="itemDetail?.image_link" width="450" height="450" src="{{itemDetail?.image_link}}" alt="select-none"/>
+            <img *ngIf="itemDetail?.image_link" width="450" height="450"
+                src="{{itemDetail?.image_link}}" alt="select-none" />
         </div>
         <div class="product_info">
             <form #EditItemForm="ngForm" (ngSubmit)="onSubmit(EditItemForm)">
                 <div class="form-field">
                     <input type="text" class="form-input" placeholder=" "
-                        required itemname id="itemname" name="itemname" [(ngModel)]="itemEdited.name">
+                        required itemname id="itemname" name="itemname"
+                        [(ngModel)]="itemEdited.name">
                     <label for="itemname" class="form-label">Item's name</label>
                 </div>
                 <div class="form-field">
                     <input type="text" class="form-input" placeholder=" "
-                        required code id="code" name="code" [(ngModel)]="itemEdited.code">
+                        required code id="code" name="code"
+                        [(ngModel)]="itemEdited.code">
                     <label for="code" class="form-label">Item's code</label>
                 </div>
                 <div class="form-field">
@@ -50,17 +60,20 @@
                 </div>
                 <div class="form-field">
                     <input type="text" class="form-input" placeholder=" "
-                        required cost id="cost" name="cost" [(ngModel)]="itemEdited.cost">
+                        required cost id="cost" name="cost"
+                        [(ngModel)]="itemEdited.cost">
                     <label for="cost" class="form-label">Item's cost</label>
                 </div>
                 <div class="form-field">
                     <input type="text" class="form-input" placeholder=" "
-                        required price id="price" name="price" [(ngModel)]="itemEdited.price">
+                        required price id="price" name="price"
+                        [(ngModel)]="itemEdited.price">
                     <label for="price" class="form-label">Item's price</label>
                 </div>
                 <div class="form-field">
                     <input type="number" class="form-input" placeholder=" "
-                        required quantity id="quantity" name="quantity" [(ngModel)]="itemEdited.quantity">
+                        required quantity id="quantity" name="quantity"
+                        [(ngModel)]="itemEdited.quantity">
                     <label for="quantity" class="form-label">Quantity</label>
                 </div>
                 <div class="add_img">
@@ -76,19 +89,22 @@
                         <label for="itemimg">Choose Image</label>
                         <button type="submit">Add</button>
                     </div>
-    
+
                 </div>
-    
+
             </form>
-            
+
         </div>
 
     </div>
 </div>
-<div class="item_page" >
+<div class="item_page">
     <div [ngClass]="{'add-new-category' : true, 'active': addNewCategory}">
-        <form #addCategoryForm="ngForm" (ngSubmit)="onAddCategoty(addCategoryForm)" action class="add-new-category_form">
-            <input type="text" placeholder class="add-new-category_input" name="category" id="category" ngModel
+        <form #addCategoryForm="ngForm"
+            (ngSubmit)="onAddCategoty(addCategoryForm)" action
+            class="add-new-category_form">
+            <input type="text" placeholder class="add-new-category_input"
+                name="category" id="category" ngModel
                 placeholder="Category's name">
 
             <button type="submit" class="add-new-category_btn-add"><img
@@ -127,7 +143,15 @@
         </div>
     </div>
     <div [ngClass]="{'item_console-create' : true , 'active': createMode}">
+        <div class="invalidFormmessage" *ngIf="invalidFormmessage">{{invalidFormmessage}}</div>
         <form #addItemForm="ngForm" (ngSubmit)="onSubmit(addItemForm)">
+            <div class="form-field">
+                <select class="form-input" id="category" name="category"
+                    [(ngModel)]="itemcreateCategory" required>
+                    <option *ngFor="let category of categories"
+                        [ngValue]="category.id">{{ category.name }}</option>
+                </select>
+            </div>
             <div class="form-field">
                 <input type="text" class="form-input" placeholder=" "
                     required itemname id="itemname" name="itemname" ngModel>

@@ -15,8 +15,14 @@ import {
   removeStaff,
   removeStaffSuccess,
   removeStaffFailure,
+  staffCheking,
+  staffChekingSuccess,
+  staffChekingFail,
+  startGetAllOnlineStaff,
+  getStaffAllOnlineSuccess,
+  getStaffAllOnlineFailure,
 } from './staff.actions';
-import { AllStaffs, Staffs } from 'src/app/models/staff.models';
+import { AllStaffs, Staffs, onlineStaffs } from 'src/app/models/staff.models';
 
 export interface State {
   allStaffs: AllStaffs[];
@@ -24,6 +30,7 @@ export interface State {
   loading: boolean;
   error: string | null;
   storeId: string | null;
+  onlineStaffs: onlineStaffs[];
 }
 const initialState: State = {
   allStaffs: [],
@@ -31,6 +38,7 @@ const initialState: State = {
   loading: false,
   error: null,
   storeId: null,
+  onlineStaffs: [],
 };
 
 export const staffReducer = createReducer(
@@ -89,4 +97,37 @@ export const staffReducer = createReducer(
     loading: false,
     error,
   })),
+
+  on(staffCheking, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(staffChekingSuccess, (state) => ({
+    ...state,
+    loading: false,
+    error: null,
+  })),
+  on(staffChekingFail, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+
+  on(startGetAllOnlineStaff, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(getStaffAllOnlineSuccess, (state, { onlineStaffs }) => ({
+    ...state,
+    onlineStaffs,
+    loading: false,
+    error: null,
+  })),
+  on(getStaffAllOnlineFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }))
 );

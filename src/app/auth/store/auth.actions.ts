@@ -31,7 +31,7 @@ export const authenticateSuccess = createAction(
 export const authenticateFail = createAction(
   '[Auth] Authenticate Fail',
   props<{
-    errorMessage: string;
+    errorMessage: string,errorDetail?: any
   }>()
 );
 

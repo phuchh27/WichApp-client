@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { ICategory } from "src/app/models/category.model";
+import { Category, ICategory } from "src/app/models/category.model";
 import { Item } from "src/app/models/item.model";
 
 export const addItemStart = createAction(
@@ -80,7 +80,7 @@ export const getItemsByCategoryFailure = createAction(
 
 export const addItemsCategoryStart = createAction(
     ' [Item] Add Items Category Start',
-    props<{ storeId: string | null, category:any }>()
+    props<{ storeId: number, category: ICategory }>()
 )
 
 export const addItemsCategorySuccess = createAction(

@@ -1,0 +1,31 @@
+
+
+<section class="staff_home">
+    <div class="card">
+        <div class="staff_checking">
+            <form #staffForm="ngForm" (ngSubmit)="onSubmit(staffForm)">
+                <h2>Staff</h2>
+                <div class="form-field">
+                    <input type="email" class="form-input" placeholder=" "
+                        required email id="email" name="email"
+                        ngModel>
+                    <label for="email" class="form-label">Email</label>
+                </div>
+                <div class="form-field">
+                    <input type="password" class="form-input" placeholder=" "
+                        required password id="password" name="password"
+                        ngModel>
+                    <label for="password" class="form-label">Password</label>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p *ngIf="message">{{message}}</p>
+            <div *ngIf="error$ | async">{{ error$ | async }}</div>
+            <div *ngIf="loading$ | async">loading</div>
+        </div>
+        <div class="rule"></div>
+        <div class="contact"></div>
+        <div class="other"></div>
+    </div>
+
+</section>

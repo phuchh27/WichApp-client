@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import * as CategoryActions from '../category/cactegory.actions';
 import { HttpClient } from '@angular/common/http';
 import { Category } from 'src/app/models/category.model';
+import { CategoryService } from 'src/app/services/category.service';
 
 
 @Injectable()
@@ -25,7 +26,20 @@ export class CategoryEffects {
     )
   );
 
+  addCategory$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(CategoryActions.createCategories),
+    switchMap(({ category, storeId }) =>
+      this.categoryService.addcategory(category, storeId).pipe(
+        map(() => CategoryActions.createCategoriesSuccess()),
+        catchError((error) => of(CategoryActions.createCategoriesFail({ error })))
+      )
+    )
+  )
+);
+
+
   
 
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(private actions$: Actions, private http: HttpClient, private categoryService : CategoryService) {}
 }

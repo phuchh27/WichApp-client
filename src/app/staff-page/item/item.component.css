@@ -19,9 +19,14 @@
 }
 
 @keyframes timeline {
-    from {width: 0%}
-    to {width: 100%}
-  }
+    from {
+        width: 0%
+    }
+
+    to {
+        width: 100%
+    }
+}
 
 
 
@@ -341,4 +346,33 @@ h2 {
         top: 38px;
     }
 
+}
+
+
+.select_staff {
+    margin: 20px;
+}
+
+.staff_label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+}
+
+option {
+    background-color: #fff;
+    color: #333;
+    border-radius: 0;
+    
 }

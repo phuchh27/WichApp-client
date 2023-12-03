@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable, Subscription, map, of } from 'rxjs';
 
 import { Item } from 'src/app/models/item.model';
@@ -8,6 +8,7 @@ import { Item } from 'src/app/models/item.model';
 import * as fromApp from 'src/app/store/app.reducer';
 import {
   addItemStart,
+  addItemsCategoryStart,
   getItemsByCategoryStart,
   getItemsStart,
   updateItemStart,
@@ -50,7 +51,10 @@ export class ItemsListComponent implements OnInit {
   subscription: Subscription | undefined;
 
   itemDetail?: Item;
-  itemEdited: Item = new Item(0, '', null, '', null, 0, 0, null, null);
+  itemEdited: Item = new Item(0,0, '', null, '', null, 0, 0, null, null);
+  itemcreateCategory!: number; 
+
+  invalidFormmessage: string = '';
 
   @ViewChild('fileInput') fileInput: any;
 
@@ -83,6 +87,9 @@ export class ItemsListComponent implements OnInit {
     this.$error = this.store.select(selectorsItem.selectItemError);
 
     // this.iCategoriesMenu = this.categories;
+
+    console.log(this.categories)
+
     this.onSubCategories();
   }
 
@@ -156,11 +163,13 @@ export class ItemsListComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (!form.valid) {
-      console.log('form not valid');
+      this.invalidFormmessage = 'Form invalid. Please check your input and try again!'
+
       return;
     }
 
     const newItem: Item = {
+      category:  this.itemcreateCategory,
       name: form.value.itemname,
       code: form.value.code,
       description: form.value.description,
@@ -169,7 +178,7 @@ export class ItemsListComponent implements OnInit {
       quantity: form.value.quantity,
       image: this.base64String,
     };
-    // console.log(newItem);
+    console.log(newItem);
     this.store.dispatch(
       addItemStart({
         item: newItem,
@@ -197,9 +206,8 @@ export class ItemsListComponent implements OnInit {
     if (this.itemDetail) {
       this.itemEdited = this.itemDetail;
     } else {
-      
     }
-    console.log(this.itemEdited)
+    console.log(this.itemEdited);
   }
   onSave(form: NgForm) {
     this.editMode = false;
@@ -219,16 +227,32 @@ export class ItemsListComponent implements OnInit {
       image: this.base64String,
     };
 
-    this.store.dispatch(updateItemStart({item:ItemEdted}))
-    console.log(ItemEdted)
+    this.store.dispatch(updateItemStart({ item: ItemEdted }));
+    console.log(ItemEdted);
   }
 
-  onAddCategoty(form: NgForm){
+  onAddCategoty(form: NgForm) {
     if (!form.valid) {
       console.log('form not valid');
       return;
     }
-    const categotyName = form.value.category
-    console.log(categotyName)
+    const categotyName = form.value.category;
+    const currentShopActive = Number(localStorage.getItem('currentShopActive'));
+
+    const newCategory: ICategory = {
+      name: categotyName,
+      store: Number(currentShopActive),
+    };
+    this.store.dispatch(
+      addItemsCategoryStart({
+        category: newCategory,
+        storeId: currentShopActive,
+      })
+    );
+
+    this.addNewCategory = false;
+
+    this.store.dispatch(getICategoryStart({ storeId: String(currentShopActive) }));
+
   }
 }

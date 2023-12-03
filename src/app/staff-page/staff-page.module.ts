@@ -9,12 +9,14 @@ import { WorkScheduleComponent } from './work-schedule/work-schedule.component';
 import { CommonModule } from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';
 import { SharedModule } from '../shared/shared.module';
+import { StaffHomeComponent } from './staff-home/staff-home.component';
+import { FormsModule } from '@angular/forms';
 
 
 // import { ItemsModule } from './item/item.module';
 
 @NgModule({
-  declarations: [StaffPageComponent, WorkScheduleComponent],
-  imports: [RouterModule,CommonModule, StaffPageRoutingModule, ItemComponent,QRCodeModule,SharedModule,BillComponent],
+  declarations: [StaffPageComponent, WorkScheduleComponent, StaffHomeComponent],
+  imports: [RouterModule,CommonModule, StaffPageRoutingModule, ItemComponent,QRCodeModule,SharedModule,BillComponent,FormsModule],
 })
 export class StaffPageModule {}

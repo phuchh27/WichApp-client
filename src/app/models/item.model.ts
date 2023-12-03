@@ -1,4 +1,5 @@
 export class Item {
+  category? : number;
   id?: number;
   name: string;
   code: string | null;
@@ -10,6 +11,7 @@ export class Item {
   image_link?: any | null;
 
   constructor(
+    category:number,
     id: number,
     name: string,
     code: string | null,
@@ -18,8 +20,10 @@ export class Item {
     price: any,
     quantity: number,
     image: string | null,
-    image_link: any | null
+    image_link: any | null,
+
   ) {
+    this.category = category;
     this.id = id;
     this.name = name;
     this.code = code;

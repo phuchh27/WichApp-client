@@ -6,12 +6,14 @@ export interface State {
   items: Item[];
   loading: boolean;
   error: string | null;
+  addNewCategory: boolean;
 }
 
 const initialState: State = {
   items: [],
   loading: false,
   error: null,
+  addNewCategory: false,
 };
 
 export const itemReducer = createReducer(
@@ -105,6 +107,7 @@ export const itemReducer = createReducer(
     ...state,
     loading:false,
     error:null,
+    addNewCategory: true
   })),
   on(fromItemActions.addItemsCategoryFailure,(state,{ error })=>({
     ...state,

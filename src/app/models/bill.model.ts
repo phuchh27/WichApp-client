@@ -16,6 +16,7 @@ export interface Bill {
 export interface BillData {
     total_amount: string;
     bill_details: Array<{ product: number; quantity: number }>;
+    employee_id?: number;
 }
 
 

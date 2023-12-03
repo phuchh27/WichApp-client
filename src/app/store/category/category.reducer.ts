@@ -10,7 +10,7 @@ export interface State {
 
 const initialState: State = {
   categories: [],
-  error: ''
+  error: '',
 };
 
 export const categoryReducer = createReducer(
@@ -18,10 +18,17 @@ export const categoryReducer = createReducer(
   on(CategoryActions.setCategories, (state, action) => ({
     ...state,
     categories: action.categories,
-    error: ''
+    error: '',
   })),
   on(CategoryActions.fetchCategoriesFail, (state, action) => ({
     ...state,
-    error: action.error
-  }))
+    error: action.error,
+  })),
+
+  on(CategoryActions.createCategoriesSuccess, (state) => {
+    return { ...state };
+  }),
+  on(CategoryActions.createCategoriesFail, (state, { error }) => {
+    return { ...state };
+  })
 );
