@@ -29,6 +29,11 @@ import { ICategoriesEffects } from './store/Icategory/iCategory.effects';
 import { QRCodeModule } from 'angularx-qrcode';
 import { BillEffects } from './store/bill/bill.effects';
 
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -57,12 +62,33 @@ import { BillEffects } from './store/bill/bill.effects';
       ItemEffects,
       ICategoriesEffects,
       QRCodeModule,
-      BillEffects
+      BillEffects,
     ]),
     CoreModule,
     SharedModule,
+    SocialLoginModule,
   ],
-  providers: [],
+
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '50348836962-oa6k09cpohca4qvncnqh9m6k5h0k2uqd.apps.googleusercontent.com'
+            )
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

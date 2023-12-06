@@ -2,10 +2,27 @@
   <div class="bg-start" *ngIf="!isStaffMode">
     <p class="owner-tag" pTooltip="Enter your username">OWNER</p>
     <h2>For Store Owner</h2>
-    <p>We are the market–leading technical interview platform to identify and hire developers with the right skills.</p>
+    <p>We are the market–leading technical interview platform to identify and
+      hire developers with the right skills.</p>
     <button type="button" class="btn" (click)="onSwitchOWnerMode()">Login</button>
-    <div class="">
-        <a class="quesstion" routerLink="/auth/signup">Don’t have an account?</a>
+    <div class>
+      <a class="quesstion" routerLink="/auth/signup">Don’t have an account?</a>
+    </div>
+    <div id="g_id_onload"
+      data-client_id="50348836962-oa6k09cpohca4qvncnqh9m6k5h0k2uqd.apps.googleusercontent.com"
+      data-context="use"
+      data-ux_mode="popup"
+      data-itp_support="true">
+    </div>
+
+    <div class="g_id_signin"
+      data-type="standard"
+      data-shape="rectangular"
+      data-theme="filled_black"
+      data-text="signin_with"
+      data-size="medium"
+      data-locale="en-US"
+      data-logo_alignment="left">
     </div>
   </div>
   <div *ngIf="isStaffMode" class="login">
@@ -14,7 +31,8 @@
   <div class="bg-end" *ngIf="!isOwnerMode">
     <p class="staff-tag" pTooltip="Enter your username">STAFF</p>
     <h2>For Staff</h2>
-    <p>We are the market–leading technical interview platform to identify and hire developers with the right skills.</p>
+    <p>We are the market–leading technical interview platform to identify and
+      hire developers with the right skills.</p>
     <button type="button" class="btn" (click)="onSwitchStaffMode()">Login</button>
   </div>
   <div *ngIf="isOwnerMode" class="login">

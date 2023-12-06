@@ -12,6 +12,8 @@ import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 
+
+
 @NgModule({
     declarations: [AuthComponent,SignInComponent,SignUpComponent],
     imports:[
@@ -23,7 +25,10 @@ import { CalendarModule } from 'primeng/calendar';
         TooltipModule,
         PasswordModule,
         InputTextModule,
-        CalendarModule
-    ]
+        CalendarModule,
+    ],
+    providers: [
+        
+      ],
 })
 export class AuthModule {}

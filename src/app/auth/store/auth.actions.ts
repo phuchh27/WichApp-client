@@ -13,6 +13,11 @@ export const loginStart = createAction(
   props<{ email: string; password: string }>()
 );
 
+export const socialLoginStart = createAction(
+  '[AUTH] Social Login Start',
+  props<{ auth_token: string }>()
+);
+
 export const authenticateSuccess = createAction(
   '[AUTH] Authenticate Success',
   props<{
@@ -31,7 +36,8 @@ export const authenticateSuccess = createAction(
 export const authenticateFail = createAction(
   '[Auth] Authenticate Fail',
   props<{
-    errorMessage: string,errorDetail?: any
+    errorMessage: string;
+    errorDetail?: any;
   }>()
 );
 
@@ -44,16 +50,11 @@ export const logout = createAction(
   props<{ refresh: string }>()
 );
 
-
 export const refreshTokenStart = createAction(
   '[AUTH] Refresh Start',
-  props<{ refresh: string; }>()
+  props<{ refresh: string }>()
 );
 
-export const refreshTokenSuccess = createAction(
-  '[AUTH] Refresh Success',
-);
+export const refreshTokenSuccess = createAction('[AUTH] Refresh Success');
 
-export const refreshTokenFail = createAction(
-  '[Auth] Refresh Fail',
-);
+export const refreshTokenFail = createAction('[Auth] Refresh Fail');

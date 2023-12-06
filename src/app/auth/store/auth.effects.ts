@@ -89,6 +89,36 @@ export class AuthEffects {
     )
   );
 
+
+  socialSignin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.socialLoginStart),
+      switchMap((action) => {
+        return this.http
+          .post<AuthResponseData>('http://127.0.0.1:8000/socialAuth/google-auth/', {
+            auth_token: action.auth_token,
+            returnSecureToken: true,
+          })
+          .pipe(
+            map((resData) => {
+              return handleAuthentication(
+                resData.email,
+                resData.id,
+                resData.username,
+                resData.tokens,
+                resData.expiresIn,
+                resData.is_owner,
+                resData.is_staff
+              );
+            }),
+            catchError((errorRes) => {
+              return handleError(errorRes);
+            })
+          );
+      })
+    )
+  );
+
   authLogOut$ = createEffect(
     () =>
       this.actions$.pipe(

@@ -25,6 +25,11 @@ const _authReducer = createReducer(
     authError: null,
     loading: true,
   })),
+  on(AuthActions.socialLoginStart, (state) => ({
+    ...state,
+    authError: null,
+    loading: true,
+  })),
   on(AuthActions.authenticateSuccess, (state, action) => ({
     ...state,
     authError: null,
