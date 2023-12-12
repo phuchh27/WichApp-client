@@ -1,10 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import * as billActions from './bill.actions';
-import { Bill, Bills,CartItem } from '../../models/bill.model';
+import { Bill, BillDetailProductItem, Bills,BillsForOwner,CartItem } from '../../models/bill.model';
 
 export interface State {
   bills: Bills[];
   bill: Bill[];
+  billsowner: BillsForOwner[];
+  billdetailsowner : BillDetailProductItem[]
   bill_id?: string;
   billtotal?: number;
   cartItems:CartItem[];
@@ -16,6 +18,8 @@ export interface State {
 export const initialState: State = {
   bills: [],
   bill: [],
+  billsowner:[],
+  billdetailsowner:[],
   bill_id: '',
   billtotal: 0,
   cartItems:[],
@@ -147,5 +151,44 @@ export const billReducer = createReducer(
       loading: false,
       error,
     };
-  })
+  }),
+
+  on(billActions.loadBillsOwner, (state) => ({
+    ...state,
+    loading: true,
+    success: false,
+    error: null,
+  })),
+  on(billActions.loadBillsOwnerSuccess, (state, { billsowner }) => ({
+    ...state,
+    billsowner,
+    loading: false,
+    error: null,
+  })),
+  on(billActions.loadBillsOwnerFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error,
+  })),
+
+  on(billActions.loadBillsDetailOwner, (state) => ({
+    ...state,
+    loading: true,
+    success: false,
+    error: null,
+  })),
+  on(billActions.loadBillsDetailOwnerSuccess, (state, { billdetailsowner }) => ({
+    ...state,
+    billdetailsowner,
+    loading: false,
+    error: null,
+  })),
+  on(billActions.loadBillsDetailOwnerFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error: error,
+  })),
 );
+
+
+

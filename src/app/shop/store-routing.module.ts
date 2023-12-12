@@ -6,6 +6,7 @@ import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { StaffListComponent } from './shop-detail/staff-list/staff-list.component';
 import { ItemsListComponent } from './shop-detail/items-list/items-list.component';
 import { WorkScheduleComponent } from './shop-detail/work-schedule/work-schedule.component';
+import { HistoryOrdersComponent } from './shop-detail/history-orders/history-orders.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path:'workschedule',
         component: WorkScheduleComponent
+      },
+      {
+        path: 'historyorder',
+        component: HistoryOrdersComponent
       }
     ]
   },

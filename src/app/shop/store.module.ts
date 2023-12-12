@@ -12,11 +12,16 @@ import { StaffListComponent } from './shop-detail/staff-list/staff-list.componen
 import { ItemsListComponent } from './shop-detail/items-list/items-list.component';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import {ICategoriesReducer} from '../store/Icategory/iCategory.reducer';
-import { WorkScheduleComponent } from './shop-detail/work-schedule/work-schedule.component'
+import { ICategoriesReducer } from '../store/Icategory/iCategory.reducer';
+import { WorkScheduleComponent } from './shop-detail/work-schedule/work-schedule.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HistoryOrdersComponent } from './shop-detail/history-orders/history-orders.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +32,7 @@ import { MatInputModule } from '@angular/material/input';
     StaffListComponent,
     ItemsListComponent,
     WorkScheduleComponent,
+    HistoryOrdersComponent
     
   ],
   imports: [
@@ -39,6 +45,8 @@ import { MatInputModule } from '@angular/material/input';
     StoreModule.forFeature('ICategories', ICategoriesReducer),
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatButtonModule, MatMenuModule
   ],
   exports: [StoreComComponent],
 })

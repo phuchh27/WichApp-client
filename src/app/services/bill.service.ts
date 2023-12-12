@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BillData, BillItem, Bills, CartItem } from '../models/bill.model';
+import { BillData, BillDetailProductItem, BillItem, Bills, BillsForOwner, CartItem } from '../models/bill.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,16 @@ export class BillService {
   getBills(): Observable<Bills[]> {
     const url = `${this.apiUrl}/bills/bills/by-store/`;
     return this.http.get<Bills[]>(url);
+  }
+
+  getBillsOwner(store_id : number): Observable<BillsForOwner[]> {
+    const url = `${this.apiUrl}/bills/store-bill-profit/${store_id}/`;
+    return this.http.get<BillsForOwner[]>(url);
+  }
+
+  getBillsDetailOwner(bill_id : string): Observable<BillDetailProductItem[]> {
+    const url = `${this.apiUrl}/bills/bills/${bill_id}/products/`;
+    return this.http.get<BillDetailProductItem[]>(url);
   }
 
   getBillDetail(bill_id: string): Observable<CartItem[]> {

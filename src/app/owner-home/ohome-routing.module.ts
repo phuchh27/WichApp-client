@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { AuthGuard } from "../auth/auth.guard";
 import { StoreComComponent } from "../shop/store-com.component";
 import { CreateStoreComponent } from "../shop/create-store/create-store.component";
+import { HomeComponent } from "./home/home.component";
 
 const routes : Routes =[
     {
@@ -11,6 +12,10 @@ const routes : Routes =[
         component: OwnerHomeComponent,
         canActivate: [AuthGuard],
         children : [
+            {
+                path: '',
+                component : HomeComponent
+            },
             {
                 path: 'store',
                 loadChildren: () => import('../shop/store.module').then(m => m.StoreComModule)

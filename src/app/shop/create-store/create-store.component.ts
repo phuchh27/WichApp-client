@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, map } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
@@ -22,11 +22,14 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
   subscriptionPayment: Subscription | undefined;
   paymentRequired$: Observable<boolean> | undefined;
   paymentLink$ = this.store.select(selectPaymentLink);
+  paymentLink: any = '';
+  showpolicy: boolean = false;
 
   constructor(
     private categoryService: CategoryService,
     private store: Store<fromApp.AppState>,
-    private router: Router
+    private router: Router,
+    private _formBuilder: FormBuilder
   ) {}
   ngOnInit(): void {
     this.store.dispatch(CactegoryActrions.fetchCategories());
@@ -69,11 +72,19 @@ export class CreateStoreComponent implements OnInit, OnDestroy {
           category: category,
         };
         localStorage.setItem('store402', JSON.stringify(storeData));
-        console.log('Payment Link: log from component', paymentLink);
-        window.location.href = paymentLink; // Navigate to payment page
+        // window.location.href = paymentLink;
+        this.paymentLink = paymentLink;
+        this.showpolicy = true;
       }
     });
   }
+
+  acceptPolicy(formData: any) {
+    const paymentLink = this.paymentLink;
+    window.location.href = paymentLink;
+    console.log('paymentLink');
+  }
+
   ngOnDestroy() {
     this.subscription?.unsubscribe();
     this.subscriptionPayment?.unsubscribe();

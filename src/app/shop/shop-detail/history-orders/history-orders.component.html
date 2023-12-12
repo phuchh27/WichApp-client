@@ -1,0 +1,49 @@
+<section class="history_order">
+    <div class="history_order-start">
+
+    </div>
+    <div class="body">
+        <div class="body_left">
+            <div class="content">
+                <div *ngIf="$listbillDetail | async as billDetails ; else null_detail_content " class="content_content">
+                    <div *ngFor="let product of products" class="item">{{product.quantity}} {{product.product.name}}</div>
+                </div>
+                <div class="content_tool">
+                    <button class="btn" [matMenuTriggerFor]="aboveMenu"><img
+                            width="30" height="30"
+                            src="https://img.icons8.com/stickers/100/menu-2.png"
+                            alt="menu-2" /></button>
+                    <mat-menu #aboveMenu="matMenu" yPosition="above"
+                        xPosition="before">
+                        <button mat-menu-item>Refunt</button>
+                        <button mat-menu-item>Item 2</button>
+                    </mat-menu>
+                </div>
+            </div>
+            <ng-template #null_detail_content>
+                <div class="null_content">
+                    Please select a bill to see details
+                </div>
+            </ng-template>
+        </div>
+        <div class="body_right">
+            <div *ngIf="$listbill | async as bills; else null_content"
+                class="list_bill">
+                <div *ngFor="let bill of bills" class="bill">
+                    <div (click)="onDetail(bill.bill_id)" class="bill_info">
+                        <h4>Bill: {{ bill.bill_id }}</h4>
+                        <h4>{{bill.employee_name}}</h4>
+                    </div>
+                    <div class="bill_profit">
+                        <h4>Profit: {{ bill.total_profit }}</h4>
+                    </div>
+                </div>
+            </div>
+            <ng-template #null_content>
+                <div class="null_content">
+                    Please select a bill to see details
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</section>

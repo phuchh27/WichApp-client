@@ -89,6 +89,18 @@ export class AuthEffects {
     )
   );
 
+  signupStart$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.signupStart),
+      switchMap(action =>
+        this.authService.signup(action.email, action.username, action.phone, action.password).pipe(
+          map(response => AuthActions.signupSuccess()),
+          catchError(error => of(AuthActions.signupFailure({ error })))
+        )
+      )
+    )
+  );
+
 
   socialSignin$ = createEffect(() =>
     this.actions$.pipe(
@@ -144,10 +156,19 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.authenticateSuccess),
         tap((action) => {
-          if (action.is_staff) {
-            this.router.navigate(['/staff-page']);
-          } else if (action.is_owner) {
-            this.router.navigate(['/ohome']);
+          const hasStore402 = localStorage.getItem('store402') !== null;
+  
+          if (hasStore402) {
+            // Do something specific if 'store402' is present in local storage
+            console.log('Store 402 is present in local storage');
+            // You may want to perform some action or not navigate at all
+          } else {
+            // Normal redirection based on user role
+            if (action.is_staff) {
+              this.router.navigate(['/staff-page']);
+            } else if (action.is_owner) {
+              this.router.navigate(['/ohome']);
+            }
           }
         })
       ),

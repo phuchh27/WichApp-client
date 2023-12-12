@@ -1,41 +1,107 @@
-<section class="">
+<section class="create_new_store">
     <div class="flex bg-bluegray-50 h-full ">
         <div class="hidden col-6  md:inline-block border-0 ">
-            <img src="../../../assets/images/108166.jpg" class="w-full grid h-screen block create-bg" alt="store image">
+            <img src="../../../assets/images/108166.jpg"
+                class="w-full grid h-screen block create-bg" alt="store image">
         </div>
-        <div class="col col-12 mx-2 md:col-6 text-center mt-8 max-w-30rem md:mx-auto ">
+        <div
+            class="col col-12 mx-2 md:col-6 text-center mt-8 max-w-30rem md:mx-auto ">
             <h2>Create new store</h2>
             <p>pôppo pôppo pôppo pôppo pôppo pôppop ôpp</p>
             <form #storeForm="ngForm" (ngSubmit)="onSubmit(storeForm)"
-                class="">
+                class>
                 <span class="p-float-label my-5">
-                    <input pInputText type="text" id="shopname" ngModel class="py-3 px-3 w-full border-1 border-bluegray-100 border-round"
+                    <input pInputText type="text" id="shopname" ngModel
+                        class="py-3 px-3 w-full border-1 border-bluegray-100 border-round"
                         name="shopname" required shopname />
                     <label htmlFor="shopname">Shop name</label>
                 </span>
 
-                <textarea name="description" id="description" cols="40" ngModel class="w-full border-1 border-bluegray-100 border-round"
+                <textarea name="description" id="description" cols="40" ngModel
+                    class="w-full border-1 border-bluegray-100 border-round"
                     rows="5"
                     description>Description</textarea>
                 <span class="p-float-label my-5">
-                    <input pInputText type="text" id="phone" ngModel class="py-3 px-3 w-full border-1 border-bluegray-100 border-round"
+                    <input pInputText type="text" id="phone" ngModel
+                        class="py-3 px-3 w-full border-1 border-bluegray-100 border-round"
                         name="phone" required phone />
                     <label htmlFor="shopname">Shop phone</label>
                 </span>
                 <span class="p-float-label">
-                    <input pInputText type="text" id="address" ngModel class="py-3 px-3 w-full border-1 border-bluegray-100 border-round"
+                    <input pInputText type="text" id="address" ngModel
+                        class="py-3 px-3 w-full border-1 border-bluegray-100 border-round"
                         name="address" required shopaddress />
                     <label htmlFor="shopname">Shop address</label>
                 </span>
 
                 <div class="mt-5">
-                    <select id="category" name="category" category  ngModel class="col col-12 py-3 px-3 w-full border-1 border-bluegray-100 border-round text-lg">
-                        <option  *ngFor="let category of categories" class="text-blue-600  text-lg"
+                    <select id="category" name="category" category ngModel
+                        class="col col-12 py-3 px-3 w-full border-1 border-bluegray-100 border-round text-lg">
+                        <option *ngFor="let category of categories"
+                            class="text-blue-600  text-lg"
                             [value]="category.id">{{ category.name }}</option>
                     </select>
                 </div>
-                <button [disabled]="!storeForm.valid" type="submit" class="w-full border-round bg-bluegray-800 text-white px-8 py-3 mt-5 hover:bg-bluegray-600 button-dis">Submit</button>
+                <button [disabled]="!storeForm.valid" type="submit"
+                    class="w-full border-round bg-bluegray-800 text-white px-8 py-3 mt-5 hover:bg-bluegray-600 button-dis">Submit</button>
             </form>
         </div>
     </div>
+    <div *ngIf="showpolicy" class="payment_policy">
+        <div class="policy">
+            <div class="policy-container">
+                <h2>Credit Card Payment Policy for New Stores</h2>
+
+                <p>Welcome to our community! In order to facilitate a convenient
+                    shopping experience for our customers and to meet the
+                    increasing demand for convenient payments, we are pleased to
+                    announce the Credit Card Payment Policy for your new store.</p>
+
+                <h3>1. Payment Methods:</h3>
+                <p>We accept credit card payments from all major payment service
+                    providers such as Visa, MasterCard, American Express, and
+                    Discover. You can comfortably choose a payment method that
+                    suits your personal needs.</p>
+
+                <h3>2. Safety and Security:</h3>
+                <p>We are committed to protecting the payment information of our
+                    customers. All transactions will be processed through secure
+                    channels and encrypted to ensure absolute safety for
+                    personal data.</p>
+
+                <h3>3. Special Offers:</h3>
+                <p>To encourage customers to use credit cards, we will regularly
+                    apply special offers, discounts, or rewards for transactions
+                    made with cards.</p>
+
+                <h3>Important Notice:</h3>
+                <p>If you have recently opened a new store, please inform your
+                    customers about the acceptance of credit card payments. You
+                    can use communication channels such as store signage, your
+                    website, and social media to share this information.</p>
+
+                <div class="contact-info">
+                    <h3>Contact:</h3>
+                    <p>If you have any questions or need assistance related to
+                        the credit card payment policy, please contact us via
+                        email at <a href="mailto:support@store.com">support@store.com</a>
+                        or through the hotline at <a href="tel:0123456789">0123
+                            456 789</a>.</p>
+                </div>
+            </div>
+
+            <form class="acceptPolicyForm" #acceptPolicyForm="ngForm"
+                (ngSubmit)="acceptPolicy(acceptPolicyForm.value)">
+                <label class="acceptPolicyForm_label">
+                    <input class="acceptPolicyForm_check" type="checkbox"
+                        name="acceptPolicy" ngModel required>
+                    I accept the policy
+                </label>
+                <button class="acceptPolicyForm_btn" type="submit"
+                    [disabled]="!acceptPolicyForm.valid">Submit</button>
+            </form>
+        </div>
+
+    </div>
+
 </section>

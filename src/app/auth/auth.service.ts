@@ -40,39 +40,59 @@ export class AuthService {
         if (refreshData) {
           this.store.dispatch(AuthActions.logout(refreshData));
         } else {
-          console.log('Refresh token not available.');
+          // console.log('Refresh token not available.');
         }
       } else {
         const refreshData = this.getRefresh();
-        console.log('from RF' ,refreshData)
+        // console.log('from RF', refreshData);
         if (typeof refreshData === 'string') {
-          this.store.dispatch(AuthActions.refreshTokenStart({ refresh: refreshData }));
+          this.store.dispatch(
+            AuthActions.refreshTokenStart({ refresh: refreshData })
+          );
         } else {
-          console.log('Refresh token not available.');
+          // console.log('Refresh token not available.');
         }
       }
     }
   }
 
   refreshAccessToken(refreshToken: string): Observable<any> {
-    console.log('do refresh',refreshToken );
     return this.http.post<any>(this.apiUrl, { refresh: refreshToken });
   }
 
   replaceAccessToken(accessToken: string): void {
+    // Get user data from local storage
     const userDataString = localStorage.getItem('userData');
+
+    // Parse user data
     const userData = JSON.parse(userDataString || '{}');
-    const tokensObject = userData._tokens || {};
-    tokensObject.access = accessToken;
-    const newUserData = { ...userData, _tokens: tokensObject };
-    
-    const currentTime = new Date();
-    const gracePeriodTime = userData.expiresIn; 
-    const gracePeriodMilliseconds = gracePeriodTime * 1000; 
-    this.logoutTime = new Date(currentTime.getTime() + gracePeriodMilliseconds);
-    
-    localStorage.setItem('userData', JSON.stringify(newUserData));
-    console.log(newUserData);
+
+    // Update the 'access' token in the '_tokens' property
+    if (userData._tokens && typeof userData._tokens === 'string') {
+      try {
+        // Attempt to parse the _tokens string as JSON
+        const tokensObject = JSON.parse(userData._tokens);
+
+        // Check if the parsed value is an object
+        if (tokensObject && typeof tokensObject === 'object') {
+          tokensObject.access = accessToken;
+
+          // Convert the object back to a string and update _tokens
+          userData._tokens = JSON.stringify(tokensObject);
+        }
+      } catch (error) {
+        console.error('Error parsing _tokens as JSON:', error);
+        console.log('_tokens value:', userData._tokens);
+      }
+    }
+
+    // Convert the updated user data back to a string
+    const updatedUserDataString = JSON.stringify(userData);
+
+    // Save the updated user data back to local storage
+    localStorage.setItem('userData', updatedUserDataString);
+
+    console.log('Updated Userdata', userData);
   }
 
   getAccess(): { access: string } | null {
@@ -109,6 +129,12 @@ export class AuthService {
 
     console.log(refresh);
     return refresh;
+  }
+
+  signup(email: string, username: string, phone: string, password: string): Observable<any> {
+    const signupData = { email, username, phone, password };
+    const apiUrl = 'http://127.0.0.1:8000/'
+    return this.http.post(`${apiUrl}/auth/register/`, signupData);
   }
 }
 

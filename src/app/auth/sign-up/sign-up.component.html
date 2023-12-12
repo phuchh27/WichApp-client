@@ -8,12 +8,12 @@
             (ngSubmit)="onSubmit(authForm)">
             <div class="gap-3 mt-5 max-w-full md:flex ">
                 <span class="p-float-label">
-                    <input pInputText type="text" id="username"
+                    <input pInputText type="text" id="username" username name="username" [ngModel]
                         class="text-base text-color surface-overlay p-3 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
                     <label htmlFor="username">Username</label>
                 </span>
                 <span class="p-float-label mt-5 md:mt-0">
-                    <input pInputText type="text" id="phone"
+                    <input pInputText type="text" id="phone" name="phone" phone [ngModel]
                         class="text-base text-color surface-overlay p-3 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
                     <label htmlFor="username">Phone</label>
                 </span>
@@ -32,7 +32,7 @@
 
             <div class="   gap-3 mt-5 max-w-full md:flex">
                 <span class="p-float-label  ">
-                    <input pInputText type="password"  class="text-base text-color surface-overlay p-3 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full  md:col-6"/>
+                    <input pInputText type="password" [ngModel] name="password" class="text-base text-color surface-overlay p-3 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full  md:col-6"/>
                    
                     <label htmlFor="password"> Password</label>
                 </span>
@@ -43,8 +43,7 @@
 
             </div>
             <div class="submit max-w-28rem">
-                <button type="submit" class="btn" [disabled]="!authForm.valid">Log
-                    in</button>
+                <button type="submit" class="btn" [disabled]="!authForm.valid">Submit</button>
             </div>
         </form>
         <div class="max-w-30rem mx-auto mt-3">

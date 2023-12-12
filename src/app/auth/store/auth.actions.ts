@@ -4,9 +4,20 @@ export const signupStart = createAction(
   '[Auth] Signup Start',
   props<{
     email: string;
+    username: string;
+    phone: string;
     password: string;
   }>()
 );
+
+export const signupSuccess = createAction(
+  '[Auth] Signup Success',
+);
+
+export const signupFailure = createAction(
+  '[Auth] Signup Failure',
+  props<{ error: any }>() // Replace 'any' with your error type
+)
 
 export const loginStart = createAction(
   '[AUTH] Login Start',

@@ -5,6 +5,7 @@ import * as fromApp from '../store/app.reducer';
 import * as PaymentActions from '../store/payment/payment.actions';
 import {Router } from '@angular/router';
 import {PaidStoreData } from '../models/store.model';
+import * as StoreActions from '../store/store/store.actions';
 
 
 
@@ -23,9 +24,7 @@ export class PaymentsComponent implements OnInit {
   PaidStoreData: any;
 
   ngOnInit(): void {
-    // ... other code
     this.getPayments();
-    
   }
 
   getPayments() {
@@ -43,7 +42,6 @@ export class PaymentsComponent implements OnInit {
     const regex = /session_id=%7B([^%]+)%7D/;
     const match = url.match(regex);
     const sessionId = match ? match[1] : null;
-    console.log(sessionId)
     
     const storeDataa :PaidStoreData = {
       shopname: this.PaidStoreData.shopname,
@@ -53,12 +51,13 @@ export class PaymentsComponent implements OnInit {
       category: this.PaidStoreData.category,
       verify_code: sessionId,
     };
-    console.log(storeDataa);
     this.store.dispatch(
       PaymentActions.startPaymentCreateStore({
         storeData : storeDataa,
       })
     );
-    // this.router.navigate(['/ohome/store']);
+    localStorage.removeItem('store402');
+    this.store.dispatch(StoreActions.fetchUserStores());
+    this.router.navigate(['/ohome/store']);
   }
 }

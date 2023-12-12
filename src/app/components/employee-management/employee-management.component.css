@@ -1,5 +1,6 @@
 .employee_page{
-
+    min-height: 100vh;
+    height: auto;
 }
 
 .employee_page-header{

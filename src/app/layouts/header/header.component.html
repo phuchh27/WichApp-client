@@ -1,10 +1,14 @@
-<div class="card">
-    <p-menubar [model]="items">
-        <ng-template pTemplate="start">
-            <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" height="40" class="mr-2" />
-        </ng-template>
-        <ng-template pTemplate="end">
-            <input type="text" pInputText placeholder="Search" class="w-full" />
-        </ng-template>
-    </p-menubar>
-</div>
+<section class="header">
+    <div class="start">
+        <a href="">Home</a>
+        <a href="">About</a>
+        <a href="">Contact</a>
+    </div>
+    <div class="brand"><h1>Wich App</h1></div>
+    <div class="end">
+        <a class="username">Welcome: {{username}}</a>
+        <a *ngIf="is_owner" class="role ower">Owner</a>
+        <a *ngIf="is_staff" class="role staff">Staff</a>
+        <a class="Logout" (click)="handleLogout()" >Logout</a>
+    </div>
+</section>
